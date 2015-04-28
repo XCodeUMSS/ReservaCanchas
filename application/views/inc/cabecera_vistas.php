@@ -12,7 +12,7 @@
             <a href="#" class="btn" style="padding-top: 14px;">XCodeRC</a>
         </div>
 
-        <div id="navbarCollapse" class="collapse navbar-collapse">
+        <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio</a></li>
                 <li><a href="#">Canchas</a></li>

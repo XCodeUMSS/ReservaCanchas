@@ -9,25 +9,32 @@
     <body>
         <?php require_once 'inc/cabecera_vistas.php';?>
 
-        <div class="container">
-            <h1>XCode Agregar Cancha Deportiva</h1><br>
+        <div class="container well">
+            <h2>XCode Agregar Cancha Deportiva</h2><br>
             <div class="row">
                 <div class="col-sm-6">
-                    <img class="img-rounded" src="<?php base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
+                    <img class="img-rounded img-responsive" src="<?php base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
                 </div>
-                <div class="clearfix visible-xs visible-sm"></div>
+                
                 <div class="col-sm-6">
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nombre_cancha" placeholder="Nombre de la cancha">
+                                <input type="text" required class="form-control" id="nombre_cancha" placeholder="Nombre de la cancha">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">Imagen:</label>
                             <div class="col-sm-9">
-                                <input type="file" style="padding-left: 0px;"class="btn" id="imagen_archivo">
+                                <input type="file" required style="padding-left: 0px;"class="btn" id="imagen_archivo">
+                            </div>
+                        </div>
+						
+						<div class="form-group">
+                            <label class="control-label col-sm-3">Precio/Hora:</label>
+                            <div class="col-sm-9">
+                                <input type="number" required class="form-control" id="precio_hora">
                             </div>
                         </div>
                         
@@ -57,27 +64,51 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Horario Inicio:</label>
                             <div class="col-sm-3">
-                                <input type="time" class="form-control" id="horario_inicio">
+                                <input type="time" required class="form-control" id="horario_inicio">
                             </div>
                             <label class="control-label col-sm-3">Horario Fin:</label>
                             <div class="col-sm-3">
-                                <input type="time" class="form-control" id="horario_fin">
+                                <input type="time" required class="form-control" id="horario_fin">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <input type="submit" class="btn btn-primary" value="Agregar">
-                                <input type="reset" class="btn btn-default" value="Cancelar">
+                                <input type="reset" class="btn btn-default" value="Limpiar">
                             </div>
                         </div>
                     </form>
                 </div>
-                </div>
             </div>
-
-
+			
+			<div class="col-md-12">
+                    <h2>Lista de Canchas</h2>
+					<div class="table-responsive">
+						<table id="tabla_canchas" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Archivo Imagen</th>
+                                <th>Precio/Hora</th>
+                                <th>Tipo Cancha</th> 
+								<th>Tipo de Suelo</th>
+                                <th>Hora Inicio</th>
+								<th>Hora Fin</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="cuerpo-tabla-canchas">
+                            
+                        </tbody>
+                    </table>
+					</div>
+                    
+                </div>
         </div>
+
+			
+        
 
 
        <?php require_once 'inc/inclucion_jquery.php'; ?>
