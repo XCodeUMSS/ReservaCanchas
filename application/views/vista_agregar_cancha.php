@@ -13,7 +13,7 @@
             <h2>XCode Agregar Cancha Deportiva</h2><br>
             <div class="row">
                 <div class="col-sm-6">
-                    <img class="img-rounded img-responsive" src="<?php base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
+                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
                 </div>
                 
                 <div class="col-sm-6">
