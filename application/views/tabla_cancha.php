@@ -17,7 +17,7 @@
                 <?php foreach ($canchas as $cancha):?>
                 <tr>
                     <td><?php echo $cancha->nombre; ?></td>
-                    <td><?php echo imagecreatefromstring(pg_unescape_bytea($cancha->imagen));?></td>
+                    <td><img height="100" width="100" src="<?php echo (base_url().$cancha->imagen); ?>"/></td>
                     <td><?php echo $cancha->precio; ?></td>
                     <td><?php echo $cancha->tipoCancha; ?></td>
                     <td><?php echo $cancha->tipoSuelo; ?></td>
