@@ -37,13 +37,17 @@ class Welcome extends CI_Controller {
         $nombre =$this->input->post('nombre_cancha');
         
         if($this->datosValidos($nombre, $horaInicio, $horaFin)){
-            $rutaTemporal = $_FILES["imagen"]["tmp_name"];
-            $archivo = fopen($rutaTemporal, 'r');
-            $imagen = fread($archivo, filesize($rutaTemporal));
-            fclose($archivo);
+            $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
+            $ruta = "./imagenes/".$nombre.".".$extension;
+            if(is_uploaded_file($_FILES["imagen"]["tmp_name"])){
+                move_uploaded_file ($_FILES["imagen"]["tmp_name"], $ruta);
+            }
+            else{
+                echo "<script>alert ('Error imagen');</script>";
+            }
             $campo = array(
                 'Nombre' => $nombre,
-                'Foto' => pg_escape_bytea($imagen),
+                'RutaFoto' => $ruta,
                 'PrecioMinimo' => $this->input->post('precio_hora'),
                 'IdTipoCancha' => $this->input->post('tipo_cancha'),
                 'IdTipoSuelo' => $this->input->post('tipo_suelo')

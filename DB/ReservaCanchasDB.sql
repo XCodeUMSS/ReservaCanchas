@@ -99,7 +99,7 @@ CREATE TABLE "CampoDeportivo" (
     "IdCampoDeportivo" integer DEFAULT nextval('seqidcampodeportivo'::regclass) NOT NULL,
     "Nombre" character varying NOT NULL,
     "PrecioMinimo" money NOT NULL,
-    "Foto" bytea,
+    "RutaFoto" character varying,
     "IdTipoCancha" integer NOT NULL,
     "IdTipoSuelo" integer NOT NULL
 );

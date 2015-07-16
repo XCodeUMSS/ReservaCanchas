@@ -36,7 +36,7 @@ class Consultas extends CI_Model{
     
     public function getCamposRegistrados() {
         $this->db->select('c.Nombre AS nombre,  c.PrecioMinimo AS precio, 
-        c.Foto AS imagen, tc.Nombre AS tipoCancha, ts.Nombre AS tipoSuelo, 
+        c.RutaFoto AS imagen, tc.Nombre AS tipoCancha, ts.Nombre AS tipoSuelo, 
         h.HoraInicio AS horaInicio, h.HoraFin AS horaFin');
         $this->db->from('CampoDeportivo AS c, TipoCancha AS tc,
         TipoSuelo AS ts, HorarioAtencion AS h');
