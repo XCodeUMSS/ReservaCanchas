@@ -20,9 +20,6 @@ class Consultas extends CI_Model{
         $consulta = $this->db->get();
         return $consulta->num_rows() > 0;
     }
-    public function insertarCancha($cancha) {
-        $this->db->insert("Cancha", $cancha);
-    }
     
     public function getTiposCancha() {
         $consulta = $this->db->query('SELECT * FROM "TipoCancha"');
