@@ -38,12 +38,12 @@ class Welcome extends CI_Controller {
         
         if($this->datosValidos($nombre, $horaInicio, $horaFin)){
             $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
-            $ruta = "./imagenes/".$nombre.".".$extension;
+            $ruta = "./assets/img/".$nombre.".".$extension;
             if(is_uploaded_file($_FILES["imagen"]["tmp_name"])){
                 move_uploaded_file ($_FILES["imagen"]["tmp_name"], $ruta);
             }
             else{
-                echo "<script>alert ('Error imagen');</script>";
+                $ruta = "./assets/img/default.png";
             }
             $campo = array(
                 'Nombre' => $nombre,

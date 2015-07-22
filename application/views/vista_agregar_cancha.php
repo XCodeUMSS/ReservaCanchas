@@ -27,14 +27,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Imagen:</label>
                             <div class="col-sm-9">
-                                <input type="file" accept="image/*" required style="padding-left: 0px;"class="btn" name="imagen" id="imagen">
+                                <input type="file" accept="image/*" style="padding-left: 0px;"class="btn" name="imagen" id="imagen">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-sm-3">Precio/Hora:</label>
                             <div class="col-sm-9">
-                                <input type="number" required class="form-control" name="precio_hora" id="precio_hora">
+                                <input type="number" min="10" required class="form-control" name="precio_hora" id="precio_hora">
                             </div>
                         </div>
 
