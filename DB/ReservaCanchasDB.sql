@@ -98,7 +98,7 @@ SET default_with_oids = false;
 CREATE TABLE "CampoDeportivo" (
     "IdCampoDeportivo" integer DEFAULT nextval('seqidcampodeportivo'::regclass) NOT NULL,
     "Nombre" character varying NOT NULL,
-    "PrecioMinimo" money NOT NULL,
+    "PrecioPorHora" smallint NOT NULL,
     "RutaFoto" character varying,
     "IdTipoCancha" integer NOT NULL,
     "IdTipoSuelo" integer NOT NULL
@@ -211,7 +211,8 @@ ALTER TABLE seqidtipocancha OWNER TO postgres;
 
 CREATE TABLE "TipoCancha" (
     "IdTipoCancha" integer DEFAULT nextval('seqidtipocancha'::regclass) NOT NULL,
-    "Nombre" character varying NOT NULL
+    "Nombre" character varying NOT NULL,
+    "PrecioMinimo" smallint NOT NULL
 );
 
 
@@ -275,10 +276,10 @@ ALTER TABLE "TipoSuelo" OWNER TO postgres;
 -- Data for Name: TipoCancha; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre") VALUES (1, 'Tenis');
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre") VALUES (2, 'Futbol de Salon');
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre") VALUES (3, 'Futbol');
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre") VALUES (4, 'Basquet');
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (1, 'Tenis', 50);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (2, 'Futbol de Salon', 50);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (3, 'Futbol', 10);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (4, 'Basquet', 10);
 
 
 --
