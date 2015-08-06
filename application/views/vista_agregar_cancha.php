@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Precio/Hora:</label>
                             <div class="col-sm-9">
-                                <input type="number" min="10" required class="form-control" name="precio_hora" id="precio_hora">
+                                <input type="number" required class="form-control" name="precio_hora" id="precio_hora">
                             </div>
                         </div>
 
@@ -42,7 +42,7 @@
                             <label class="control-label col-sm-3">Tipo de Cancha</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="tipo_cancha">
-                                    <?php foreach ($tiposCancha as $tipoCancha): ?>
+                                    <?php foreach ($tiposCancha as $tipoCancha):?>
                                     <option value="<?php echo $tipoCancha->IdTipoCancha; ?>"><?php echo $tipoCancha->Nombre; ?></option>
                                     <?php endforeach;?>
                                 </select>

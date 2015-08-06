@@ -35,21 +35,19 @@ class Welcome extends CI_Controller {
         $horaInicio = $this->input->post('hora_inicio');
         $horaFin = $this->input->post('hora_fin');
         $nombre =$this->input->post('nombre_cancha');
+        $precioMinimo = $this->input->post('precio_hora');
+        $idTipoCancha = $this->input->post('tipo_cancha');
         
-        if($this->datosValidos($nombre, $horaInicio, $horaFin)){
-            $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
-            $ruta = "./assets/img/".$nombre.".".$extension;
-            if(is_uploaded_file($_FILES["imagen"]["tmp_name"])){
-                move_uploaded_file ($_FILES["imagen"]["tmp_name"], $ruta);
-            }
-            else{
-                $ruta = "./assets/img/default.png";
-            }
+        if($this->datosValidos($nombre, $horaInicio, $horaFin, $precioMinimo, 
+                $idTipoCancha)){
+            include(APPPATH.'controllers/ManejadorImagen.php');
+            $manejador = new ManejadorImagen();
+            $ruta = $manejador->cargarImagen($nombre);
             $campo = array(
                 'Nombre' => $nombre,
                 'RutaFoto' => $ruta,
-                'PrecioMinimo' => $this->input->post('precio_hora'),
-                'IdTipoCancha' => $this->input->post('tipo_cancha'),
+                'PrecioPorHora' => $precioMinimo,
+                'IdTipoCancha' => $idTipoCancha,
                 'IdTipoSuelo' => $this->input->post('tipo_suelo')
             );
             $this->consultas->registrarCampo($campo, $horaInicio, $horaFin);
@@ -57,16 +55,27 @@ class Welcome extends CI_Controller {
         $this->index();
     }
 
-    public function datosValidos($nombre, $horaInicio, $horaFin) {
+    public function datosValidos($nombre, $horaInicio, $horaFin, $precio, 
+            $idTipo) {
         $valido = true;
+        $mensaje = "";
         if($this->consultas->existeNombre($nombre)){
-            echo "<script>alert ('Este nombre ya existe');</script>";
+            $mensaje .= "- Este nombre ya existe. ";
             $valido = false; 
-        } else{
-            if ($horaInicio >= $horaFin) {
-                echo "<script>alert ('Los horarios no son validos');</script>";
-                $valido = false;
-            }
+        }
+        if ($horaInicio >= $horaFin) {
+            $mensaje .= "- Los horarios no son validos. ";
+            $valido = false;
+        }
+        
+        $precioMinimo = $this->consultas->getPrecio($idTipo);
+        if($precio < $precioMinimo){
+            $mensaje .= "- El precio minimo es ".$precioMinimo.".";
+            $valido = false;
+        }
+        
+        if(!$valido){
+            echo '<script>alert("'.$mensaje.'");</script>';
         }
         return $valido;
     }

@@ -31,8 +31,17 @@ class Consultas extends CI_Model{
         return $consulta->result();
     }
     
+    public function getPrecio($idTipo){
+        $this->db->select('PrecioMinimo');
+        $this->db->from('TipoCancha');
+        $this->db->where('IdTipoCancha',$idTipo);
+        $consulta = $this->db->get();
+        return $consulta->first_row()->PrecioMinimo;
+    }
+
+
     public function getCamposRegistrados() {
-        $this->db->select('c.Nombre AS nombre,  c.PrecioMinimo AS precio, 
+        $this->db->select('c.Nombre AS nombre,  c.PrecioPorHora AS precio, 
         c.RutaFoto AS imagen, tc.Nombre AS tipoCancha, ts.Nombre AS tipoSuelo, 
         h.HoraInicio AS horaInicio, h.HoraFin AS horaFin');
         $this->db->from('CampoDeportivo AS c, TipoCancha AS tc,
