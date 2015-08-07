@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url();?>index.php/Welcome/agregarCampo">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/Welcome/agregarCampo">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">
@@ -42,9 +42,9 @@
                             <label class="control-label col-sm-3">Tipo de Cancha</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="tipo_cancha">
-                                    <?php foreach ($tiposCancha as $tipoCancha):?>
-                                    <option value="<?php echo $tipoCancha->IdTipoCancha; ?>"><?php echo $tipoCancha->Nombre; ?></option>
-                                    <?php endforeach;?>
+                                    <?php foreach ($tiposCancha as $tipoCancha): ?>
+                                        <option value="<?php echo $tipoCancha->IdTipoCancha; ?>"><?php echo $tipoCancha->Nombre; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -54,8 +54,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="tipo_suelo">
                                     <?php foreach ($tiposSuelo as $tipoSuelo): ?>
-                                    <option value="<?php echo $tipoSuelo->IdTipoSuelo; ?>"><?php echo $tipoSuelo->Nombre; ?></option>
-                                    <?php endforeach;?>
+                                        <option value="<?php echo $tipoSuelo->IdTipoSuelo; ?>"><?php echo $tipoSuelo->Nombre; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -63,11 +63,13 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Horario Inicio:</label>
                             <div class="col-sm-3">
-                                <input type="time" required class="form-control" name="hora_inicio" id="horario_inicio">
+                                <div class="bfh-timepicker" data-name="hora_inicio" data-time="08:00" id="horario_inicio">
+                                </div>
                             </div>
                             <label class="control-label col-sm-3">Horario Fin:</label>
                             <div class="col-sm-3">
-                                <input type="time" required class="form-control" name="hora_fin" id="horario_fin">
+                                <div class="bfh-timepicker" data-name="hora_fin" data-time="09:00" id="horario_fin" data-align='right'>
+                                </div>
                             </div>
                         </div>
 
