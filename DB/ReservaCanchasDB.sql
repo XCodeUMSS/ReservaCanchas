@@ -175,15 +175,15 @@ ALTER TABLE seqidreserva OWNER TO postgres;
 -- Name: Reserva; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE "Reserva" (
-    "IdReserva" integer DEFAULT nextval('seqidreserva'::regclass) NOT NULL,
-    "IdUsuario" integer NOT NULL,
-    "IdAdmin" integer NOT NULL,
-    "Fecha" date NOT NULL,
-    "IdCampoDeportivo" integer NOT NULL,
-    "HoraInicio" time without time zone NOT NULL,
-    "HoraFin" time without time zone NOT NULL,
-    "Confirmado" boolean DEFAULT false NOT NULL
+CREATE TABLE "Reserva"(
+  "IdReserva" integer NOT NULL DEFAULT nextval('seqidreserva'::regclass),
+  "Fecha" date NOT NULL,
+  "IdCampoDeportivo" integer NOT NULL,
+  "HoraInicio" time without time zone NOT NULL,
+  "HoraFin" time without time zone NOT NULL,
+  "Precio" integer NOT NULL,
+  "NombreCliente" character varying NOT NULL,
+  "TelefonoReferencia" integer NOT NULL
 );
 
 

@@ -41,7 +41,7 @@ class Consultas extends CI_Model{
 
 
     public function getCamposRegistrados() {
-        $this->db->select('c.Nombre AS nombre,  c.PrecioPorHora AS precio, 
+        $this->db->select('c.IdCampoDeportivo AS id, c.Nombre AS nombre,  c.PrecioPorHora AS precio, 
         c.RutaFoto AS imagen, tc.Nombre AS tipoCancha, ts.Nombre AS tipoSuelo, 
         h.HoraInicio AS horaInicio, h.HoraFin AS horaFin');
         $this->db->from('CampoDeportivo AS c, TipoCancha AS tc,
@@ -63,6 +63,48 @@ class Consultas extends CI_Model{
             'IdCampoDeportivo' => $idCampo
         );
         $this->db->insert("HorarioAtencion", $horarioAtencion);
+    }
+    
+    public function registrarReserva($reserva) {
+        $this->db->insert("Reserva", $reserva);  
+    }
+    
+    public function horarios($idCampo) {
+        $this->db->select('HoraInicio, HoraFin');
+        $this->db->from('HorarioAtencion');
+        $this->db->where('IdCampoDeportivo',$idCampo);
+        $consulta = $this->db->get();
+        return $consulta->first_row();
+    }
+    
+    public function existeReserva($idCampo, $fecha, $horaInicio, $horaFin) {
+        $this->db->select('IdReserva');
+        $this->db->from('Reserva');
+        $this->db->where("IdCampoDeportivo = '".$idCampo."' AND Fecha = '"
+                .$fecha."' AND (HoraInicio < '".$horaFin."' AND HoraInicio >= '"
+                .$horaInicio."' OR HoraFin > '".$horaInicio."' AND HoraFin <= '"
+                .$horaFin."')");
+        $consulta = $this->db->get();
+        return $consulta->num_rows() > 0;
+    }
+    
+    public function getPrecioCampo($idCampo) {
+        $this->db->select('PrecioPorHora');
+        $this->db->from('CampoDeportivo');
+        $this->db->where('IdCampoDeportivo',$idCampo);
+        $consulta = $this->db->get();
+        return $consulta->first_row()->PrecioPorHora;
+    }
+    
+    public function getReservasRegistradas() {
+        $this->db->select('r.NombreCliente AS nombre, '
+                . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
+                . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
+                . 'c.Nombre AS campo');
+        $this->db->from('Reserva AS r, CampoDeportivo as c');
+        $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo');
+        $consulta = $this->db->get();
+        return $consulta->result();
     }
 }
 

@@ -13,14 +13,16 @@
                 </tr>
             </thead>
             <tbody id="cuerpo-tabla-reservas">
+                <?php foreach ($reservas as $reserva):?>
                 <tr>
-                    <td>Algun Nombre</td>
-                    <td>Algun telefono</td>
-                    <td>Algun campo</td>
-                    <td>Alguna fecha</td>
-                    <td>Alguna hora</td>
-                    <td>Alguna Hora</td>
+                    <td><?php echo $reserva->nombre; ?></td>
+                    <td><?php echo $reserva->telefono; ?></td>
+                    <td><?php echo $reserva->campo; ?></td>
+                    <td><?php echo $reserva->fecha; ?></td>
+                    <td><?php echo $reserva->horaInicio; ?></td>
+                    <td><?php echo $reserva->horaFin; ?></td>
                 </tr>
+                <?php endforeach;?>
             </tbody>
         </table>
     </div>

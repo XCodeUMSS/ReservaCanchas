@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
-                                <input type="text" required class="form-control" name="nombre_reserva" id="nombre_reserva" placeholder="Nombre de reserva">
+                                <input type="text" pattern="[a-z A-Z ]+" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Telefono Ref.:</label>
                             <div class="col-sm-9">
-                                <input type="number" required class="form-control" name="telefono_referencia" id="telefono_referencia">
+                                <input type="number" pattern="\b[4,6,7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
                             </div>
                         </div>
 
@@ -37,7 +37,9 @@
                             <label class="control-label col-sm-3">Cancha :</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="campo_deportivo">
-                                    <option value="campo_deportivo">Alguna cancha</option>
+                                    <?php foreach ($canchas as $cancha): ?>
+                                        <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
