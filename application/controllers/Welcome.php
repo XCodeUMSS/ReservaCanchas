@@ -19,9 +19,17 @@ class Welcome extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
+    
+    private $manejador;
+    private $validador;
+    
     public function __construct() {
         parent::__construct();
         $this->load->model('consultas');
+        include(APPPATH.'controllers/ManejadorImagen.php');
+        include(APPPATH.'controllers/ValidadorDatos.php');
+        $this->manejador = new ManejadorImagen();
+        $this->validador = new ValidadorDatos();
     }
 
     public function index() {
@@ -38,11 +46,9 @@ class Welcome extends CI_Controller {
         $precioMinimo = $this->input->post('precio_hora');
         $idTipoCancha = $this->input->post('tipo_cancha');
         
-        if($this->datosValidos($nombre, $horaInicio, $horaFin, $precioMinimo, 
-                $idTipoCancha)){
-            include(APPPATH.'controllers/ManejadorImagen.php');
-            $manejador = new ManejadorImagen();
-            $ruta = $manejador->cargarImagen($nombre);
+        if($this->registrarCampo($nombre, $horaInicio, $horaFin, 
+                $precioMinimo, $idTipoCancha)){
+            $ruta = $this->manejador->cargarImagen($nombre);
             $campo = array(
                 'Nombre' => $nombre,
                 'RutaFoto' => $ruta,
@@ -55,25 +61,17 @@ class Welcome extends CI_Controller {
         $this->index();
     }
 
-    public function datosValidos($nombre, $horaInicio, $horaFin, $precio, 
+    public function registrarCampo($nombre, $horaInicio, $horaFin, $precio, 
             $idTipo) {
-        $valido = true;
         $mensaje = "";
+        $precioMinimo = $this->consultas->getPrecio($idTipo);
         if($this->consultas->existeNombre($nombre)){
             $mensaje .= "- Este nombre ya existe. ";
-            $valido = false; 
         }
-        if ($horaInicio >= $horaFin) {
-            $mensaje .= "- Los horarios no son validos. ";
-            $valido = false;
-        }
+        $mensaje .= $this->validador->datosValidosCampo($nombre, $horaInicio, 
+                $horaFin, $precioMinimo, $precio);
         
-        $precioMinimo = $this->consultas->getPrecio($idTipo);
-        if($precio < $precioMinimo){
-            $mensaje .= "- El precio minimo es ".$precioMinimo.".";
-            $valido = false;
-        }
-        
+        $valido = $mensaje == "";
         if(!$valido){
             echo '<script>alert("'.$mensaje.'");</script>';
         }
