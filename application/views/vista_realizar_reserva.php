@@ -13,7 +13,7 @@
             <h2>XCode Realizar Reserva</h2><br>
             <div class="row">
                 <div class="col-sm-6">
-                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
+                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">
                 </div>
 
                 <div class="col-sm-6">
@@ -71,6 +71,7 @@
                     </form>
                 </div>
             </div>
+            <?php require_once '/tabla_reserva.php'; ?>
         </div>
         <?php require_once 'inc/inclucion_jquery.php'; ?>
     </body>
