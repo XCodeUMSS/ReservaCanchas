@@ -7,25 +7,30 @@
  */
 
 /**
- * Description of ManejadorImagen
- *
- * @author Alison
+ * Esta clase realizara todo lo relacionado con cargar imagen
+ * @version: 1.0
+ * @modificado: 10 de Agosto del 2015
+ * @author: Alison
  */
-class ManejadorImagen extends CI_Controller{
-    
+class ManejadorImagen extends CI_Controller {
+
     public function __construct() {
         parent::__construct();
     }
-    
-    public function cargarImagen($nombre) {
+
+    /*
+     * Funcion que guarda una imagen en la carpeta ./assets/img/
+     */
+
+    public function guardar_imagen($nombre) {
         $extension = pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION);
-        $ruta = "./assets/img/".$nombre.".".$extension;
-        if(is_uploaded_file($_FILES["imagen"]["tmp_name"])){
-            move_uploaded_file ($_FILES["imagen"]["tmp_name"], $ruta);
-        }
-        else{
-            $ruta = "./assets/img/default.png";
+        $ruta = './assets/img/' . $nombre . '.' . $extension;
+        if (is_uploaded_file($_FILES["imagen"]["tmp_name"])) {
+            move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
+        } else {
+            $ruta = './assets/img/default.png';
         }
         return $ruta;
     }
+
 }

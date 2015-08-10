@@ -75,6 +75,6 @@
             </div>
             <?php require_once '/tabla_reserva.php'; ?>
         </div>
-        <?php require_once 'inc/inclucion_jquery.php'; ?>
+        <?php require_once 'inc/inclusion_jquery.php'; ?>
     </body>
 </html>

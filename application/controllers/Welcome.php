@@ -19,62 +19,83 @@ class Welcome extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    
     private $manejador;
     private $validador;
-    
+
+    /*
+     * Constructor de la clase en el cual se carga el modelo consultas
+     * El controlador ValidadorDatos y ManejadorImagen.
+     */
+
     public function __construct() {
         parent::__construct();
         $this->load->model('consultas');
-        include(APPPATH.'controllers/ManejadorImagen.php');
-        include(APPPATH.'controllers/ValidadorDatos.php');
+        include(APPPATH . 'controllers/ManejadorImagen.php');
+        include(APPPATH . 'controllers/ValidadorDatos.php');
         $this->manejador = new ManejadorImagen();
         $this->validador = new ValidadorDatos();
     }
 
+    /*
+     * Funcion que carga la vista para registrar campos deportivos y recupera
+     * los campos registrados, los tipos de cancha y los tipos de suelo.
+     */
+
     public function index() {
-        $datos['canchas'] = $this->consultas->getCamposRegistrados();
-        $datos['tiposCancha'] = $this->consultas->getTiposCancha();
-        $datos['tiposSuelo'] = $this->consultas->getTiposSuelo();
+        $datos['canchas'] = $this->consultas->campos_registrados();
+        $datos['tiposCancha'] = $this->consultas->tipos_cancha();
+        $datos['tiposSuelo'] = $this->consultas->tipos_suelo();
         $this->load->view('vista_agregar_cancha', $datos);
     }
 
-    public function agregarCampo() {
-        $horaInicio = $this->input->post('hora_inicio');
-        $horaFin = $this->input->post('hora_fin');
-        $nombre =$this->input->post('nombre_cancha');
-        $precioMinimo = $this->input->post('precio_hora');
-        $idTipoCancha = $this->input->post('tipo_cancha');
-        
-        if($this->registrarCampo($nombre, $horaInicio, $horaFin, 
-                $precioMinimo, $idTipoCancha)){
-            $ruta = $this->manejador->cargarImagen($nombre);
+    /*
+     * Funcion que recupera los datos del formulario y si se puede realizar
+     * el registro, registrar el campo deportivo, sino informa al usuario 
+     * porque no se pudo registrar.
+     */
+
+    public function agregar_campo() {
+        $hora_inicio = $this->input->post('hora_inicio');
+        $hora_fin = $this->input->post('hora_fin');
+        $nombre = $this->input->post('nombre_cancha');
+        $precio_minimo = $this->input->post('precio_hora');
+        $id_tipo_cancha = $this->input->post('tipo_cancha');
+
+        if ($this->realizar_registro($nombre, $hora_inicio, $hora_fin, 
+                $precio_minimo, $id_tipo_cancha)) {
+            $ruta = $this->manejador->guardar_imagen($nombre);
             $campo = array(
                 'Nombre' => $nombre,
                 'RutaFoto' => $ruta,
-                'PrecioPorHora' => $precioMinimo,
-                'IdTipoCancha' => $idTipoCancha,
+                'PrecioPorHora' => $precio_minimo,
+                'IdTipoCancha' => $id_tipo_cancha,
                 'IdTipoSuelo' => $this->input->post('tipo_suelo')
             );
-            $this->consultas->registrarCampo($campo, $horaInicio, $horaFin);
+            $this->consultas->registrar_campo($campo, $hora_inicio, $hora_fin);
         }
         $this->index();
     }
 
-    public function registrarCampo($nombre, $horaInicio, $horaFin, $precio, 
-            $idTipo) {
-        $mensaje = "";
-        $precioMinimo = $this->consultas->getPrecio($idTipo);
-        if($this->consultas->existeNombre($nombre)){
-            $mensaje .= "- Este nombre ya existe. ";
+    /*
+     * Funcion que verifica si existe ya el campo deportivo y si los datos son
+     * validos.
+     */
+
+    public function realizar_registro($nombre, $hora_inicio, $hora_fin, 
+            $precio, $id_tipo) {
+        $mensaje = '';
+        $precio_minimo = $this->consultas->precio_tipo_cancha($id_tipo);
+        if ($this->consultas->existe_nombre($nombre)) {
+            $mensaje .= '- Este nombre ya existe. ';
         }
-        $mensaje .= $this->validador->datosValidosCampo($nombre, $horaInicio, 
-                $horaFin, $precioMinimo, $precio);
-        
-        $valido = $mensaje == "";
-        if(!$valido){
-            echo '<script>alert("'.$mensaje.'");</script>';
+        $mensaje .= $this->validador->datos_validos_campo($nombre, 
+                $hora_inicio, $hora_fin, $precio_minimo, $precio);
+
+        $valido = $mensaje == '';
+        if (!$valido) {
+            echo '<script>alert("' . $mensaje . '");</script>';
         }
         return $valido;
     }
+
 }
