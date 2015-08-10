@@ -43,8 +43,8 @@ class Welcome extends CI_Controller {
 
     public function index() {
         $datos['canchas'] = $this->consultas->campos_registrados();
-        $datos['tiposCancha'] = $this->consultas->tipos_cancha();
-        $datos['tiposSuelo'] = $this->consultas->tipos_suelo();
+        $datos['tipos_cancha'] = $this->consultas->tipos_cancha();
+        $datos['tipos_suelo'] = $this->consultas->tipos_suelo();
         $this->load->view('vista_agregar_cancha', $datos);
     }
 
