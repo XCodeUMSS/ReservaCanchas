@@ -42,8 +42,8 @@
                             <label class="control-label col-sm-3">Tipo de Cancha</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="tipo_cancha">
-                                    <?php foreach ($tiposCancha as $tipoCancha): ?>
-                                        <option value="<?php echo $tipoCancha->IdTipoCancha; ?>"><?php echo $tipoCancha->Nombre; ?></option>
+                                    <?php foreach ($tipos_cancha as $tipo_cancha): ?>
+                                        <option value="<?php echo $tipo_cancha->IdTipoCancha; ?>"><?php echo $tipo_cancha->Nombre; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -53,8 +53,8 @@
                             <label class="control-label col-sm-3">Tipo de Suelo</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="tipo_suelo">
-                                    <?php foreach ($tiposSuelo as $tipoSuelo): ?>
-                                        <option value="<?php echo $tipoSuelo->IdTipoSuelo; ?>"><?php echo $tipoSuelo->Nombre; ?></option>
+                                    <?php foreach ($tipos_suelo as $tipo_suelo): ?>
+                                        <option value="<?php echo $tipo_suelo->IdTipoSuelo; ?>"><?php echo $tipo_suelo->Nombre; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -84,6 +84,6 @@
             </div>
             <?php require_once '/tabla_cancha.php'; ?>
         </div>
-        <?php require_once 'inc/inclucion_jquery.php'; ?>
+        <?php require_once 'inc/inclusion_jquery.php'; ?>
     </body>
 </html>
