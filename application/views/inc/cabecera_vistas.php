@@ -17,7 +17,7 @@
                 <li class="active"><a href="#">Inicio</a></li>
                 <li><a href="<?php echo base_url();?>index.php/Welcome/index">Canchas</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
-                <li><a href="#">Agregar</a></li>
+                <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
             </ul>
         </div>
     </div>
