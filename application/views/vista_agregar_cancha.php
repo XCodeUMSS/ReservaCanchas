@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">
-                                <input type="text" pattern="[a-z A-Z 0-9]" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
+                                <input type="text" pattern="[a-z A-Z 0-9]+" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
                             </div>
                         </div>
                         <div class="form-group">
