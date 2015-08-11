@@ -48,6 +48,15 @@ class Consultas extends CI_Model {
      * Funcion que devuelve todos los tipos de suelo.
      */
 
+    public function tipos_evento() {
+        $consulta = $this->db->query('SELECT * FROM "TipoEvento"');
+        return $consulta->result();
+    }
+
+    /*
+     * Funcion que devuelve todos los tipos de suelo.
+     */
+
     public function tipos_suelo() {
         $consulta = $this->db->query('SELECT * FROM "TipoSuelo"');
         return $consulta->result();

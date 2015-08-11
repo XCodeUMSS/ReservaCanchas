@@ -3,17 +3,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Esta clase realizara todo lo relacionado con las reservas
+ * Clase encargada de las de Reservas Especiales Basada en la Clase Controlador
+ * Reserva
  * @version: 1.0
- * @modificado: 10 de Agosto del 2015
- * @author: Beimar & Alison & Walter
+ * @modificado: 11 de Agosto del 2015
+ * @author: Walter
  */
-class ControladorReserva extends CI_Controller {
+class ControladorReservaEspecial extends CI_Controller {
 
     private $validador;
 
     //Constantes a ser usadas como valores por defecto en los campos necesarios
-    const RESERVA_ESPECIAL = false;
+    const TELEFONO_EVENTO = 0;
+    const PRECIO_EVENTO = 0;
+    const RESERVA_ESPECIAL = true;
+    
     /*
      * Constructor de la clase en el cual se carga el modelo consultas
      * Y el controlador ValidadorDatos.
@@ -33,9 +37,10 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function index() {
+        $datos['eventos'] = $this->consultas->tipos_evento();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();
-        $this->load->view('vista_realizar_reserva', $datos);
+        $this->load->view('vista_realizar_reserva_especial', $datos);
     }
 
     /*
@@ -45,18 +50,18 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function reservar() {
-        $nombre = $this->input->post('nombre_cliente');
-        $telefono = $this->input->post('telefono_referencia');
+        $nombre_evento = $this->input->post('nombre_evento');
+        $telefono = self::TELEFONO_EVENTO;
         $id_campo = $this->input->post('campo_deportivo');
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
         $hora_inicio = $this->input->post('hora_inicio') . ':00';
         $hora_fin = $this->input->post('hora_fin') . ':00';
 
-        if ($this->realizar_reserva($nombre, $id_campo, $fecha, $hora_inicio, 
+        if ($this->realizar_reserva($nombre_evento, $id_campo, $fecha, $hora_inicio, 
                 $hora_fin)) {
-            $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
+            $precio = self::PRECIO_EVENTO;
             $reserva = array(
-                'NombreCliente' => $nombre,
+                'NombreCliente' => $nombre_evento,
                 'TelefonoReferencia' => $telefono,
                 'Precio' => $precio,
                 'IdCampoDeportivo' => $id_campo,
@@ -81,8 +86,6 @@ class ControladorReserva extends CI_Controller {
                                     $hora_inicio, $hora_fin);
         $mensaje .= $this->existe_reserva($id_campo, $fecha, $hora_inicio, 
                         $hora_fin);
-        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
-                        $hora_fin);
 
         $valido = $mensaje == '';
 
@@ -90,27 +93,6 @@ class ControladorReserva extends CI_Controller {
             echo '<script>alert("' . $mensaje . '");</script>';
         }
         return $valido;
-    }
-
-    /*
-     * Funcion que verifica si las horas de la reserva se encuentran dentro del
-     * horario de atencion del campo. Si la reserva esta fuera del horario de
-     * atencion se retorna un mensaje con el aviso.
-     */
-
-    public function dentro_horarios_atencion($campo, $hora_inicio, $hora_fin) {
-        $horarios = $this->consultas->horarios($campo);
-        $horario_inicio = $horarios->HoraInicio;
-        $horario_fin = $horarios->HoraFin;
-        $mensajeAlerta = '- Las horas no estan dentro de los horarios de'
-                . ' atencion.';
-
-        if ($hora_inicio >= $horario_inicio && $hora_inicio < $horario_fin &&
-                $hora_fin > $horario_inicio && $hora_fin <= $horario_fin) {
-            $mensajeAlerta = '';
-        }
-
-        return $mensajeAlerta;
     }
 
     /*
@@ -127,22 +109,6 @@ class ControladorReserva extends CI_Controller {
         }
 
         return $mensajeAlerta;
-    }
-
-    /*
-     * Funcion que calcula el precio de la reserva de acuerdo al precio por 
-     * hora del campo
-     */
-
-    public function calcular_precio($id_campo, $hora_inicio, $hora_fin) {
-        $precio_hora = $this->consultas->precio_campo($id_campo);
-        $tiempo_inicio = explode(":", $hora_inicio);
-        $tiempo_fin = explode(":", $hora_fin);
-        $minutos_inicio = $tiempo_inicio[0] * 60 + $tiempo_inicio[1];
-        $minutos_fin = $tiempo_fin[0] * 60 + $tiempo_fin[1];
-        $diferencia = $minutos_fin - $minutos_inicio;
-        $precio = $precio_hora * $diferencia / 60;
-        return $precio;
     }
 
     /*
