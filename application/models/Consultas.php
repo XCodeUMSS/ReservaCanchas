@@ -49,7 +49,10 @@ class Consultas extends CI_Model {
      */
 
     public function tipos_evento() {
-        $consulta = $this->db->query('SELECT * FROM "TipoEvento"');
+        $this->db->select('e.IdEvento AS id, 
+                           e.Nombre AS nombre');
+        $this->db->from('TipoEvento AS e');
+        $consulta = $this->db->get();
         return $consulta->result();
     }
 
