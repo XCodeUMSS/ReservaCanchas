@@ -125,7 +125,7 @@ class Consultas extends CI_Model {
      * hora_inicio y  hora_fin.
      */
 
-    public function existeReserva($id_campo, $fecha, $hora_inicio, $hora_fin) {
+    public function existe_reserva($id_campo, $fecha, $hora_inicio, $hora_fin) {
         $this->db->select('IdReserva');
         $this->db->from('Reserva');
         $this->db->where("IdCampoDeportivo = '" . $id_campo . 

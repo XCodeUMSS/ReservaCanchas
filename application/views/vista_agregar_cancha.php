@@ -17,11 +17,11 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/Welcome/agregarCampo">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/Welcome/agregar_campo">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">
-                                <input type="text" pattern="[a-z A-Z 0-9]+" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
+                                <input type="text" pattern="[a-z A-Z 0-9]" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
                             </div>
                         </div>
                         <div class="form-group">
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Precio/Hora:</label>
                             <div class="col-sm-9">
-                                <input type="number" required class="form-control" name="precio_hora" id="precio_hora">
+                                <input type="number" max="1000" required class="form-control" name="precio_hora" id="precio_hora">
                             </div>
                         </div>
 
