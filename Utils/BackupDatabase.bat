@@ -1,1 +1,1 @@
-pg_dump.exe --host localhost --port 5432 --username "postgres" --no-password  --format custom --blobs --inserts --column-inserts --verbose --file "%~d0%~p0..\DB\ReservaCanchasDB.sql" "ReservaCanchasDB"
+pg_dump.exe --username "postgres" --no-password --host localhost ReservaCanchasDB > "%~d0%~p0..\DB\ReservaCanchasDB.sql"
