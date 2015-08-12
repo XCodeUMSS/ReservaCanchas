@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
-                                <input type="text" pattern="[a-z A-Z ]+" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
+                                <input type="text" pattern="[a-zA-Z ]{3,}" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
                             </div>
                         </div>
 
