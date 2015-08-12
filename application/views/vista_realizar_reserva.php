@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
-                                <input type="text" pattern="[a-zA-Z ]{3,}" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
+                                <input type="text" pattern="^[a-zA-Z][a-zA-Z ]{1,}[a-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Telefono Ref.:</label>
                             <div class="col-sm-9">
-                                <input type="number" pattern="\b[4,6,7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
+                                <input type="text" pattern="^[4|6|7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
                             </div>
                         </div>
 
