@@ -22,7 +22,9 @@
                             <label class="control-label col-sm-3">Evento :</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="nombre_evento">
-                                    <option value="algunEvento">Algun Evento</option>
+                                    <?php foreach ($eventos as $evento): ?>
+                                        <option value="<?php echo $evento->id; ?>"><?php echo $evento->nombre; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
