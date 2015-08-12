@@ -45,7 +45,7 @@ class Consultas extends CI_Model {
     }
 
     /*
-     * Funcion que devuelve todos los tipos de evento.
+     * Funcion que devuelve todos los tipos de eventos.
      */
 
     public function tipos_evento() {
@@ -54,6 +54,18 @@ class Consultas extends CI_Model {
         $this->db->from('TipoEvento AS e');
         $consulta = $this->db->get();
         return $consulta->result();
+    }
+
+    /*
+     * Funcion que devuelve el nombre de  evento basado en su ID.
+     */
+
+    public function nombre_evento($idEvento) {
+        $this->db->select('Nombre');
+        $this->db->from('TipoEvento');
+        $this->db->where('IdEvento', $idEvento);
+        $consulta = $this->db->get();
+        return $consulta->first_row()->Nombre;
     }
 
     /*

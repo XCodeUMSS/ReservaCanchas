@@ -50,12 +50,14 @@ class ControladorReservaEspecial extends CI_Controller {
      */
 
     public function reservar() {
-        $nombre_evento = $this->input->post('nombre_evento');
+        $id_nombre_evento = $this->input->post('nombre_evento');
         $telefono = self::TELEFONO_EVENTO;
         $id_campo = $this->input->post('campo_deportivo');
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
         $hora_inicio = $this->input->post('hora_inicio') . ':00';
         $hora_fin = $this->input->post('hora_fin') . ':00';
+        
+        $nombre_evento = $this->consultas->nombre_evento($id_nombre_evento);
 
         if ($this->realizar_reserva($nombre_evento, $id_campo, $fecha, $hora_inicio, 
                 $hora_fin)) {
