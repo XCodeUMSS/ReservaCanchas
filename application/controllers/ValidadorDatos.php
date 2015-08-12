@@ -76,7 +76,7 @@ class ValidadorDatos extends CI_Controller {
      */
 
     public function validar_nombre($nombre) {
-        $mensaje .= '- El nombre no es valido.';
+        $mensaje = '- El nombre no es valido.';
         return trim($nombre) == '' ? $mensaje : '';
     }
 
