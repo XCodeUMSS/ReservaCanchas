@@ -76,14 +76,8 @@ class ValidadorDatos extends CI_Controller {
      */
 
     public function validar_nombre($nombre) {
-        $mensaje = '';
-        if(trim($nombre) == ''){
-            $mensaje .= '- El nombre no es valido.';
-        }
-        if(strlen($nombre) < 3){
-            $mensaje .= '- El nombre debe tener una longitud minima de 3.';
-        }
-        return $mensaje;
+        $mensaje .= '- El nombre no es valido.';
+        return trim($nombre) == '' ? $mensaje : '';
     }
 
     /*

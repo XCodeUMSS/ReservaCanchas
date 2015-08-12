@@ -45,7 +45,7 @@ class Consultas extends CI_Model {
     }
 
     /*
-     * Funcion que devuelve todos los tipos de suelo.
+     * Funcion que devuelve todos los tipos de evento.
      */
 
     public function tipos_evento() {
