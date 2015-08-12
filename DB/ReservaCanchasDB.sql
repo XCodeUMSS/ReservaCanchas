@@ -2,6 +2,30 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.3.6
+-- Dumped by pg_dump version 9.3.6
+-- Started on 2015-08-12 10:23:32
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+DROP DATABASE "ReservaCanchasDB";
+--
+-- TOC entry 2008 (class 1262 OID 49491)
+-- Name: ReservaCanchasDB; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "ReservaCanchasDB" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Bolivia.1252' LC_CTYPE = 'Spanish_Bolivia.1252';
+
+
+ALTER DATABASE "ReservaCanchasDB" OWNER TO postgres;
+
+\connect "ReservaCanchasDB"
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -10,6 +34,26 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
+-- TOC entry 6 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- TOC entry 2009 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- TOC entry 182 (class 3079 OID 11750)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -17,6 +61,8 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
+-- TOC entry 2011 (class 0 OID 0)
+-- Dependencies: 182
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -26,6 +72,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
+-- TOC entry 170 (class 1259 OID 49492)
 -- Name: seqidcampodeportivo; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -44,6 +91,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- TOC entry 171 (class 1259 OID 49494)
 -- Name: CampoDeportivo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -60,13 +108,14 @@ CREATE TABLE "CampoDeportivo" (
 ALTER TABLE public."CampoDeportivo" OWNER TO postgres;
 
 --
+-- TOC entry 172 (class 1259 OID 49501)
 -- Name: seqidhorarioatencion; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE seqidhorarioatencion
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
+    MINVALUE 0
     NO MAXVALUE
     CACHE 1;
 
@@ -74,6 +123,7 @@ CREATE SEQUENCE seqidhorarioatencion
 ALTER TABLE public.seqidhorarioatencion OWNER TO postgres;
 
 --
+-- TOC entry 173 (class 1259 OID 49503)
 -- Name: HorarioAtencion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -90,6 +140,8 @@ ALTER TABLE ONLY "HorarioAtencion" ALTER COLUMN "Dia" SET STORAGE PLAIN;
 ALTER TABLE public."HorarioAtencion" OWNER TO postgres;
 
 --
+-- TOC entry 2012 (class 0 OID 0)
+-- Dependencies: 173
 -- Name: COLUMN "HorarioAtencion"."Dia"; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -104,13 +156,14 @@ COMMENT ON COLUMN "HorarioAtencion"."Dia" IS 'Podría ser:
 
 
 --
+-- TOC entry 174 (class 1259 OID 49507)
 -- Name: seqidreserva; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE seqidreserva
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
+    MINVALUE 0
     NO MAXVALUE
     CACHE 1;
 
@@ -118,6 +171,7 @@ CREATE SEQUENCE seqidreserva
 ALTER TABLE public.seqidreserva OWNER TO postgres;
 
 --
+-- TOC entry 175 (class 1259 OID 49509)
 -- Name: Reserva; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -137,13 +191,14 @@ CREATE TABLE "Reserva" (
 ALTER TABLE public."Reserva" OWNER TO postgres;
 
 --
+-- TOC entry 176 (class 1259 OID 49516)
 -- Name: seqidtipocancha; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE seqidtipocancha
     START WITH 1
     INCREMENT BY 1
-    NO MINVALUE
+    MINVALUE 0
     NO MAXVALUE
     CACHE 1;
 
@@ -151,6 +206,7 @@ CREATE SEQUENCE seqidtipocancha
 ALTER TABLE public.seqidtipocancha OWNER TO postgres;
 
 --
+-- TOC entry 177 (class 1259 OID 49518)
 -- Name: TipoCancha; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -164,6 +220,7 @@ CREATE TABLE "TipoCancha" (
 ALTER TABLE public."TipoCancha" OWNER TO postgres;
 
 --
+-- TOC entry 180 (class 1259 OID 49571)
 -- Name: seqidtipoevento; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -178,6 +235,7 @@ CREATE SEQUENCE seqidtipoevento
 ALTER TABLE public.seqidtipoevento OWNER TO postgres;
 
 --
+-- TOC entry 181 (class 1259 OID 49573)
 -- Name: TipoEvento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -190,6 +248,7 @@ CREATE TABLE "TipoEvento" (
 ALTER TABLE public."TipoEvento" OWNER TO postgres;
 
 --
+-- TOC entry 178 (class 1259 OID 49525)
 -- Name: seqidtiposuelo; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -204,6 +263,7 @@ CREATE SEQUENCE seqidtiposuelo
 ALTER TABLE public.seqidtiposuelo OWNER TO postgres;
 
 --
+-- TOC entry 179 (class 1259 OID 49527)
 -- Name: TipoSuelo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -216,86 +276,94 @@ CREATE TABLE "TipoSuelo" (
 ALTER TABLE public."TipoSuelo" OWNER TO postgres;
 
 --
+-- TOC entry 1993 (class 0 OID 49494)
+-- Dependencies: 171
 -- Data for Name: CampoDeportivo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") FROM stdin;
-\.
 
 
 --
+-- TOC entry 1995 (class 0 OID 49503)
+-- Dependencies: 173
 -- Data for Name: HorarioAtencion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "HorarioAtencion" ("IdHorario", "HoraInicio", "HoraFin", "Dia", "IdCampoDeportivo") FROM stdin;
-\.
 
 
 --
+-- TOC entry 1997 (class 0 OID 49509)
+-- Dependencies: 175
 -- Data for Name: Reserva; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "Reserva" ("IdReserva", "Fecha", "IdCampoDeportivo", "HoraInicio", "HoraFin", "Precio", "NombreCliente", "TelefonoReferencia", "ReservaEspecial") FROM stdin;
-\.
 
 
 --
+-- TOC entry 1999 (class 0 OID 49518)
+-- Dependencies: 177
 -- Data for Name: TipoCancha; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") FROM stdin;
-1	Tenis	50
-2	Futbol de Salon	50
-3	Futbol	10
-4	Basquet	10
-\.
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (1, 'Tenis', 50);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (2, 'Futbol de Salon', 50);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (3, 'Futbol', 10);
+INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (4, 'Basquet', 10);
 
 
 --
+-- TOC entry 2003 (class 0 OID 49573)
+-- Dependencies: 181
 -- Data for Name: TipoEvento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "TipoEvento" ("IdEvento", "Nombre") FROM stdin;
-1	Mantenimiento de Cancha
-2	Evento Especial
-3	Feriado
-4	Paro
-\.
+INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (1, 'Mantenimiento de Cancha');
+INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (2, 'Evento Especial');
+INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (3, 'Feriado');
+INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (4, 'Paro');
 
 
 --
+-- TOC entry 2001 (class 0 OID 49527)
+-- Dependencies: 179
 -- Data for Name: TipoSuelo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "TipoSuelo" ("IdTipoSuelo", "Nombre") FROM stdin;
-1	Cesped
-2	Pavimento
-3	Madera
-\.
+INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (1, 'Cesped');
+INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (2, 'Pavimento');
+INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (3, 'Madera');
 
 
 --
+-- TOC entry 2013 (class 0 OID 0)
+-- Dependencies: 170
 -- Name: seqidcampodeportivo; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidcampodeportivo', 2, true);
+SELECT pg_catalog.setval('seqidcampodeportivo', 0, true);
 
 
 --
+-- TOC entry 2014 (class 0 OID 0)
+-- Dependencies: 172
 -- Name: seqidhorarioatencion; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidhorarioatencion', 2, true);
+SELECT pg_catalog.setval('seqidhorarioatencion', 0, true);
 
 
 --
+-- TOC entry 2015 (class 0 OID 0)
+-- Dependencies: 174
 -- Name: seqidreserva; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidreserva', 1, false);
+SELECT pg_catalog.setval('seqidreserva', 0, true);
 
 
 --
+-- TOC entry 2016 (class 0 OID 0)
+-- Dependencies: 176
 -- Name: seqidtipocancha; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -303,13 +371,17 @@ SELECT pg_catalog.setval('seqidtipocancha', 4, true);
 
 
 --
+-- TOC entry 2017 (class 0 OID 0)
+-- Dependencies: 180
 -- Name: seqidtipoevento; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidtipoevento', 1, false);
+SELECT pg_catalog.setval('seqidtipoevento', 4, true);
 
 
 --
+-- TOC entry 2018 (class 0 OID 0)
+-- Dependencies: 178
 -- Name: seqidtiposuelo; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -317,6 +389,7 @@ SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
 
 
 --
+-- TOC entry 1866 (class 2606 OID 49535)
 -- Name: IdCampoDeportivo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -325,6 +398,7 @@ ALTER TABLE ONLY "CampoDeportivo"
 
 
 --
+-- TOC entry 1880 (class 2606 OID 49581)
 -- Name: IdEvento; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -333,6 +407,7 @@ ALTER TABLE ONLY "TipoEvento"
 
 
 --
+-- TOC entry 1873 (class 2606 OID 49537)
 -- Name: IdReserva; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -341,6 +416,7 @@ ALTER TABLE ONLY "Reserva"
 
 
 --
+-- TOC entry 1876 (class 2606 OID 49539)
 -- Name: IdTipoCancha; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -349,6 +425,7 @@ ALTER TABLE ONLY "TipoCancha"
 
 
 --
+-- TOC entry 1878 (class 2606 OID 49541)
 -- Name: IdTipoSuelo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -357,6 +434,7 @@ ALTER TABLE ONLY "TipoSuelo"
 
 
 --
+-- TOC entry 1871 (class 2606 OID 49543)
 -- Name: idHorario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -365,6 +443,7 @@ ALTER TABLE ONLY "HorarioAtencion"
 
 
 --
+-- TOC entry 1867 (class 1259 OID 49544)
 -- Name: fki_IDTipoSuelo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -372,6 +451,7 @@ CREATE INDEX "fki_IDTipoSuelo" ON "CampoDeportivo" USING btree ("IdTipoSuelo");
 
 
 --
+-- TOC entry 1869 (class 1259 OID 49545)
 -- Name: fki_IdCampoDeportivo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -379,6 +459,7 @@ CREATE INDEX "fki_IdCampoDeportivo" ON "HorarioAtencion" USING btree ("IdCampoDe
 
 
 --
+-- TOC entry 1868 (class 1259 OID 49546)
 -- Name: fki_IdTipoCancha; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -386,6 +467,7 @@ CREATE INDEX "fki_IdTipoCancha" ON "CampoDeportivo" USING btree ("IdTipoCancha")
 
 
 --
+-- TOC entry 1874 (class 1259 OID 49547)
 -- Name: fki_Reserva_CampoDeportivo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -393,6 +475,7 @@ CREATE INDEX "fki_Reserva_CampoDeportivo" ON "Reserva" USING btree ("IdCampoDepo
 
 
 --
+-- TOC entry 1881 (class 2606 OID 49548)
 -- Name: CampoDeportivo-TipoCancha; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -401,6 +484,7 @@ ALTER TABLE ONLY "CampoDeportivo"
 
 
 --
+-- TOC entry 1882 (class 2606 OID 49553)
 -- Name: CampoDeportivo-TipoSuelo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -409,6 +493,7 @@ ALTER TABLE ONLY "CampoDeportivo"
 
 
 --
+-- TOC entry 1883 (class 2606 OID 49558)
 -- Name: HorarioAtencion-CampoDeportivo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -417,6 +502,7 @@ ALTER TABLE ONLY "HorarioAtencion"
 
 
 --
+-- TOC entry 1884 (class 2606 OID 49563)
 -- Name: Reserva-CampoDeportivo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -425,6 +511,8 @@ ALTER TABLE ONLY "Reserva"
 
 
 --
+-- TOC entry 2010 (class 0 OID 0)
+-- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
@@ -433,6 +521,8 @@ REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
+
+-- Completed on 2015-08-12 10:23:32
 
 --
 -- PostgreSQL database dump complete

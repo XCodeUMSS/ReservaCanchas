@@ -1,1 +1,1 @@
-pg_dump.exe --username "postgres" --no-password --host localhost ReservaCanchasDB > "%~d0%~p0..\DB\ReservaCanchasDB.sql"
+pg_dump.exe --username "postgres" --no-password --host localhost --clean --create --encoding UTF8 --inserts --column-inserts --verbose ReservaCanchasDB > "%~d0%~p0..\DB\ReservaCanchasDB.sql"
