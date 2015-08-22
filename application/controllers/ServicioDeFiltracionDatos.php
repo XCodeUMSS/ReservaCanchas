@@ -25,12 +25,31 @@ class ServicioDeFiltracionDatos extends CI_Controller {
     public function procesarPeticionAjax() {
         $id_campo_deportivo = $this->input->post('id_campo_deportivo');
         $fecha_reserva = $this->input->post('fecha_reserva');
+        $datos['reservas'] = null;
         
-        $datos['reservas'] = $this->obtenerDatos($id_campo_deportivo);
+        if($fecha_reserva) {
+            $datos['reservas'] = $this->obtenerDatosFecha($fecha_reserva);
         
-      
-        $this->enviarDatos($datos);
+            $this->enviarDatos($datos);
+        }
+        
+        if($id_campo_deportivo) {
+            $datos['reservas'] = $this->obtenerDatos($id_campo_deportivo);
+        
+            $this->enviarDatos($datos);
+        }
+        
+        
     }
+    /**
+     * Obtiene los datos del modelo del servicio
+     * @param type $fecha_reserva
+     * @return void
+     */
+    public function obtenerDatosFecha($fecha_reserva) {
+        return $this->modeloFiltracionDatos->fechas_registradas($fecha_reserva);
+    }
+    
     
     /**
      * Obtiene los datos del modelo del servicio

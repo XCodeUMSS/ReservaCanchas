@@ -6,10 +6,10 @@
 ?>
 
 <?php foreach ($reservas as $reserva): ?>
-    <tr>
+    <tr class="success">
         <td><?php echo $reserva->nombre; ?></td>
         <td><?php echo $reserva->telefono; ?></td>
-        <td class="success"><?php echo $reserva->campo; ?></td>
+        <td><?php echo $reserva->campo; ?></td>
         <td><?php echo $reserva->fecha; ?></td>
         <td><?php echo $reserva->horaInicio; ?></td>
         <td><?php echo $reserva->horaFin; ?></td>

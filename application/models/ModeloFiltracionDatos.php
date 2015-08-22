@@ -18,7 +18,29 @@ class ModeloFiltracionDatos extends CI_Model {
     }
     
     /*
-     * Realiza la filtracin deacuerdo al campo y fecha de reserva y retorna los resultados
+     * Realiza la filtracin deacuerdo a la fecha de reserva y retorna los resultados
+     * como un array asociativo.
+     */
+    
+    public function fechas_registradas($fecha_reserva) {
+        $fecha = $this->formatear_fecha($fecha_reserva);
+        
+        $this->db->select('r.NombreCliente AS nombre, '
+                . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
+                . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
+                . 'c.Nombre AS campo');
+        $this->db->from('Reserva AS r, CampoDeportivo as c');
+        $this->db->where("r.IdCampoDeportivo = c.IdCampoDeportivo".
+                "AND r.Fecha = '".$fecha."'");
+        $consulta = $this->db->get();
+        
+        
+        
+        return $consulta->result();
+    }
+    
+    /*
+     * Realiza la filtracin deacuerdo al campo y retorna los resultados
      * como un array asociativo.
      */
     
