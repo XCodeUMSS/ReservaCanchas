@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Cancha :</label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="campo_deportivo">
+                                <select class="form-control" name="campo_deportivo" id="campo_deportivo">
                                     <?php foreach ($canchas as $cancha): ?>
                                         <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
                                     <?php endforeach; ?>
@@ -76,5 +76,6 @@
             <?php require_once '/tabla_reserva.php'; ?>
         </div>
         <?php require_once 'inc/inclusion_jquery.php'; ?>
+        <script src="<?php echo base_url(); ?>assets/js/peticiones_reservas.js"></script>
     </body>
 </html>
