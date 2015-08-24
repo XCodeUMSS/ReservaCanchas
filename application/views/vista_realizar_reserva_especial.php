@@ -23,7 +23,17 @@
                             <div class="col-sm-9">
                                 <select class="form-control" name="nombre_evento">
                                     <?php foreach ($eventos as $evento): ?>
-                                        <option value="<?php echo $evento->id; ?>"><?php echo $evento->nombre; ?></option>
+                                        <option value="<?php echo $evento->nombre; ?>"><?php echo $evento->nombre; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Repetir :</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="repeticion" id="repeticion">
+                                    <?php foreach ($repeticiones as $repeticion): ?>
+                                        <option value="<?php echo $repeticion->IdRepeticion; ?>"><?php echo $repeticion->Nombre; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

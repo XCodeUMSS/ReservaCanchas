@@ -32,6 +32,17 @@
                                 <input type="text" pattern="^[4|6|7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Repetir :</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="repeticion" id="repeticion">
+                                    <?php foreach ($repeticiones as $repeticion): ?>
+                                        <option value="<?php echo $repeticion->IdRepeticion; ?>"><?php echo $repeticion->Nombre; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-sm-3">Cancha :</label>

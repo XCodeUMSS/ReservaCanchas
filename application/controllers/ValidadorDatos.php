@@ -98,6 +98,8 @@ class ValidadorDatos extends CI_Controller {
         date_default_timezone_set('America/La_Paz');
         $fecha_actual = date('d/m/Y');
         $hora_actual = date('H:i:s');
+        $fecha_actual = DateTime::createFromFormat("d/m/Y", $fecha_actual);
+        $fecha = DateTime::createFromFormat("d/m/Y", $fecha);
         if ($fecha < $fecha_actual) {
             $mensajeAlerta = '- La fecha ya paso.';
         } else {

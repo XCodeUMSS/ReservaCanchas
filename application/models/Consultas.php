@@ -43,7 +43,7 @@ class Consultas extends CI_Model {
         $consulta = $this->db->query('SELECT * FROM "TipoCancha"');
         return $consulta->result();
     }
-
+    
     /*
      * Funcion que devuelve todos los tipos de eventos.
      */
@@ -57,15 +57,12 @@ class Consultas extends CI_Model {
     }
 
     /*
-     * Funcion que devuelve el nombre de  evento basado en su ID.
+     * Funcion que devuelve los tipos de repeticion registradas.
      */
 
-    public function nombre_evento($idEvento) {
-        $this->db->select('Nombre');
-        $this->db->from('TipoEvento');
-        $this->db->where('IdEvento', $idEvento);
-        $consulta = $this->db->get();
-        return $consulta->first_row()->Nombre;
+    public function tipos_repeticion() {
+        $consulta = $this->db->query('SELECT * FROM "TipoRepeticion"');
+        return $consulta->result();
     }
 
     /*
@@ -143,23 +140,23 @@ class Consultas extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->first_row();
     }
-
+    
     /*
-     * Funcion que verifica si existe una reserva dado: id_campo, fecha,
-     * hora_inicio y  hora_fin.
+     * Funcion que verifica si existe una reserva dado: id_campo, hora_inicio 
+     * y  hora_fin.
      */
 
-    public function existe_reserva($id_campo, $fecha, $hora_inicio, $hora_fin) {
-        $this->db->select('IdReserva');
+    public function existe_reservas($id_campo, $hora_inicio, 
+            $hora_fin) {
+        $this->db->select('Fecha, Repeticion, FechaFinal');
         $this->db->from('Reserva');
-        $this->db->where("IdCampoDeportivo = '" . $id_campo . 
-                "' AND Fecha = '" . $fecha . 
+        $this->db->where("IdCampoDeportivo = '" . $id_campo .
                 "' AND (HoraInicio < '" . $hora_fin . 
                 "' AND HoraInicio >= '". $hora_inicio . 
                 "' OR HoraFin > '" . $hora_inicio . 
                 "' AND HoraFin <= '". $hora_fin . "')");
         $consulta = $this->db->get();
-        return $consulta->num_rows() > 0;
+        return $consulta->result();
     }
 
     /*
