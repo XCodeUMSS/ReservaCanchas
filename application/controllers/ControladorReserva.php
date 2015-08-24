@@ -11,9 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ControladorReserva extends CI_Controller {
 
     private $validador;
+    private $manejadorRepeticion;
 
     //Constantes a ser usadas como valores por defecto en los campos necesarios
     const RESERVA_ESPECIAL = false;
+    const REPETICION_NINGUNA = 1;
     /*
      * Constructor de la clase en el cual se carga el modelo consultas
      * Y el controlador ValidadorDatos.
@@ -24,6 +26,8 @@ class ControladorReserva extends CI_Controller {
         $this->load->model('consultas');
         include(APPPATH . 'controllers/ValidadorDatos.php');
         $this->validador = new ValidadorDatos();
+        include(APPPATH . 'controllers/ManejadorRepeticion.php');
+        $this->manejadorRepeticion = new ManejadorRepeticion();
     }
 
     /*
@@ -35,6 +39,7 @@ class ControladorReserva extends CI_Controller {
     public function index() {
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();
+        $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $this->load->view('vista_realizar_reserva', $datos);
     }
 
@@ -51,9 +56,14 @@ class ControladorReserva extends CI_Controller {
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
         $hora_inicio = $this->input->post('hora_inicio') . ':00';
         $hora_fin = $this->input->post('hora_fin') . ':00';
+        $repeticion = $this->input->post('repeticion');
+        $fecha_fin_repeticion = date_add(DateTime::createFromFormat("d/m/Y", $fecha), 
+                new DateInterval('P5M'));
+        $fecha_final = $repeticion == self::REPETICION_NINGUNA ? $fecha :
+                $fecha_fin_repeticion->format("d/m/Y");
 
         if ($this->realizar_reserva($nombre, $id_campo, $fecha, $hora_inicio, 
-                $hora_fin)) {
+                $hora_fin, $repeticion)) {
             $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
             $reserva = array(
                 'NombreCliente' => $nombre,
@@ -63,6 +73,8 @@ class ControladorReserva extends CI_Controller {
                 'Fecha' => $fecha,
                 'HoraInicio' => $hora_inicio,
                 'HoraFin' => $hora_fin,
+                'Repeticion' => $repeticion,
+                'FechaFinal' => $fecha_final,
                 'ReservaEspecial' => self::RESERVA_ESPECIAL
             );
             $this->consultas->registrar_reserva($reserva);
@@ -75,17 +87,18 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function realizar_reserva($nombre, $id_campo, $fecha, $hora_inicio, 
-            $hora_fin) {
+            $hora_fin, $repeticion) {
+        
         $mensaje = '';
         $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, 
                                     $hora_inicio, $hora_fin);
-        $mensaje .= $this->existe_reserva($id_campo, $fecha, $hora_inicio, 
-                        $hora_fin);
         $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
                         $hora_fin);
+        $mensaje .= $this->manejadorRepeticion->realizar($id_campo, $fecha, 
+                $hora_inicio, $hora_fin, $repeticion);
 
         $valido = $mensaje == '';
-
+            
         if (!$valido) {
             echo '<script>alert("' . $mensaje . '");</script>';
         }
@@ -102,31 +115,15 @@ class ControladorReserva extends CI_Controller {
         $horarios = $this->consultas->horarios($campo);
         $horario_inicio = $horarios->HoraInicio;
         $horario_fin = $horarios->HoraFin;
-        $mensajeAlerta = '- Las horas no estan dentro de los horarios de'
+        $mensaje_alerta = '- Las horas no estan dentro de los horarios de'
                 . ' atencion.';
 
         if ($hora_inicio >= $horario_inicio && $hora_inicio < $horario_fin &&
                 $hora_fin > $horario_inicio && $hora_fin <= $horario_fin) {
-            $mensajeAlerta = '';
+            $mensaje_alerta = '';
         }
 
-        return $mensajeAlerta;
-    }
-
-    /*
-     * Funcion que verifica si existe una reserva para el campo deseado, el
-     * mismo dia y horas deseadas. Si ya existe reserva, se retorna un mensaje
-     * con el aviso.
-     */
-
-    public function existe_reserva($id_campo, $fecha, $hora_inicio, $hora_fin) {
-        $mensajeAlerta = '';
-        if ($this->consultas->existe_reserva($id_campo, $fecha, $hora_inicio, 
-                $hora_fin)) {
-            $mensajeAlerta = '- Existe una reserva.';
-        }
-
-        return $mensajeAlerta;
+        return $mensaje_alerta;
     }
 
     /*
