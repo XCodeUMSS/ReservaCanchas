@@ -176,19 +176,19 @@
  -- Name: Reserva; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
  --
  
- CREATE TABLE "Reserva" (
-     "IdReserva" integer DEFAULT nextval('seqidreserva'::regclass) NOT NULL,
-     "Fecha" date NOT NULL,
-	"FechaFinal" date NOT NULL,
-     "IdCampoDeportivo" integer NOT NULL,
-	"Repeticion" integer NOT NULL,
-     "HoraInicio" time without time zone NOT NULL,
-     "HoraFin" time without time zone NOT NULL,
-     "Precio" integer NOT NULL,
-     "NombreCliente" character varying NOT NULL,
-     "TelefonoReferencia" integer NOT NULL,
-     "ReservaEspecial" boolean DEFAULT false NOT NULL
- );
+CREATE TABLE "Reserva" (
+    "IdReserva" integer DEFAULT nextval('seqidreserva'::regclass) NOT NULL,
+    "Fecha" date NOT NULL,
+    "IdCampoDeportivo" integer NOT NULL,
+    "HoraInicio" time without time zone NOT NULL,
+    "HoraFin" time without time zone NOT NULL,
+    "Precio" integer NOT NULL,
+    "NombreCliente" character varying NOT NULL,
+    "TelefonoReferencia" integer NOT NULL,
+    "ReservaEspecial" boolean DEFAULT false NOT NULL,
+    "FechaFinal" date NOT NULL,
+    "Repeticion" integer NOT NULL
+);
  
  
  ALTER TABLE public."Reserva" OWNER TO postgres;
@@ -250,29 +250,35 @@
  
  ALTER TABLE public."TipoEvento" OWNER TO postgres;
  
+--
+-- TOC entry 182 (class 1259 OID 49525)
+-- Name: seqidtiporepeticion; Type: SEQUENCE; Schema: public; Owner: postgres
+--
 
 CREATE SEQUENCE seqidtiporepeticion
-     START WITH 1
-     INCREMENT BY 1
-     MINVALUE 0
-     NO MAXVALUE
-     CACHE 1;
- 
- 
- ALTER TABLE public.seqidtiporepeticion OWNER TO postgres;
- 
- --
- -- TOC entry 181 (class 1259 OID 49573)
- -- Name: TipoRepeticion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
- --
- 
- CREATE TABLE "TipoRepeticion" (
-     "IdRepeticion" integer DEFAULT nextval('seqidtiporepeticion'::regclass) NOT NULL,
-     "Nombre" character varying NOT NULL
- );
- 
- 
- ALTER TABLE public."TipoRepeticion" OWNER TO postgres;
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seqidtiporepeticion OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 49527)
+-- Name: TipoRepeticion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "TipoRepeticion" (
+    "IdRepeticion" integer DEFAULT nextval('seqidtiporepeticion'::regclass) NOT NULL,
+    "Nombre" character varying NOT NULL
+);
+
+
+ALTER TABLE public."TipoRepeticion" OWNER TO postgres;
+
+
  --
  -- TOC entry 178 (class 1259 OID 49525)
  -- Name: seqidtiposuelo; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -414,6 +420,13 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
  
  SELECT pg_catalog.setval('seqidtipoevento', 4, true);
  
+--
+-- TOC entry 2027 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: seqidtiporepeticion; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seqidtiporepeticion', 1, false);
  
  --
  -- TOC entry 2018 (class 0 OID 0)
@@ -544,11 +557,6 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
  
  ALTER TABLE ONLY "Reserva"
      ADD CONSTRAINT "Reserva-CampoDeportivo" FOREIGN KEY ("IdCampoDeportivo") REFERENCES "CampoDeportivo"("IdCampoDeportivo");
-
-ALTER TABLE ONLY "Reserva"
-     ADD CONSTRAINT "Reserva-Repeticion" FOREIGN KEY ("Repeticion") REFERENCES "TipoRepeticion"("IdRepeticion");
-
- 
  
  --
  -- TOC entry 2010 (class 0 OID 0)
