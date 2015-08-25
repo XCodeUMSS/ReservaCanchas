@@ -68,7 +68,7 @@ class ManejadorRepeticion extends CI_Controller{
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_siguiente = date_add($fecha_formato, new DateInterval($intervalo));
         $mensaje = '';
-        while($fecha_siguiente < $fecha_limite && $mensaje == ''){
+        while($fecha_siguiente <= $fecha_limite && $mensaje == ''){
             $mensaje = $this->existe_reserva($id_campo, 
                     $fecha_siguiente->format("d/m/Y"), $hora_inicio, $hora_fin);
             $fecha_siguiente = date_add($fecha_siguiente, 

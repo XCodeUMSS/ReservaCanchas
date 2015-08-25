@@ -179,9 +179,11 @@ class Consultas extends CI_Model {
         $this->db->select('r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
-                . 'c.Nombre AS campo');
-        $this->db->from('Reserva AS r, CampoDeportivo as c');
-        $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo');
+                . 'c.Nombre AS campo, t.Nombre AS repeticion, '
+                . 'r.FechaFinal AS fechaFinal');
+        $this->db->from('Reserva AS r, CampoDeportivo as c, TipoRepeticion as t');
+        $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo AND '
+                . 'r.Repeticion = t.IdRepeticion');
         $consulta = $this->db->get();
         return $consulta->result();
     }
