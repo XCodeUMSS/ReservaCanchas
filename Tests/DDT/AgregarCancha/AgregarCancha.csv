@@ -1,0 +1,3 @@
+TestCaseName,NombreCancha,PathImagen,PrecioHora,TipoCancha,TipoSuelo,HoraInicio,HoraFin,Resultado
+Agregar Cancha Con Imagen,Cancha con foto,Utils//Imagenes//FotoA.jpg,20,Futbol,Cesped,08:00,20:00,Agregado
+Agregar Cancha Sin Imagen,Cancha sin foto,,20,Futbol,Cesped,08:00,20:00,Agregado

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Default Values</comment>
+<entry key="browser.name">firefox</entry>
+<entry key="sahi.userDataDir">C:/sahi/userdata</entry>
+<entry key="browser.port">9999</entry>
+<entry key="sahi.basePath">C:/sahi</entry>
+<entry key="browser.host">localhost</entry>
+<entry key="server.url">localhost/ReservaCanchas/index.php</entry>
+</properties>
