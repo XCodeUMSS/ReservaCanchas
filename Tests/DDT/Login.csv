@@ -1,7 +1,0 @@
-FILTER_COLUMN,TCID,user,password,success,comments,key
-10.220.9.1,TC21933,SP1\\administrator,control*88,TRUE,Test a success Loggin,
-10.220.9.1,TC21934,SP1\\badUser,control*88,FALSE,Test a failed login on incorrect user name,
-10.220.9.1,TC21936,SP1\\administrator,password,FALSE,Test a failed login on incorrect password,
-10.220.9.1,TC25009,,,,,VERIFY_COPYRIGHT_LINK
-10.220.9.1,TC23808,,,,,LISCESING_LINK_APPEARS_WITH_DEFAULT_LICENSE
-10.220.9.1,TC22619,SP1\\administrator,control*88,TRUE,Test a success Loggin,LOGIN_NOT_CASE_SENSITIVE_TEST

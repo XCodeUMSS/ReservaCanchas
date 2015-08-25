@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BVT" parallel="false">
+<suite name="Tests" parallel="false">
   <test name="Tests">
-    <groups>
-      <run>
-        <include name="Configuration"/>
-		<include name="Basic"/>
-		<include name="Medium"/>
-		<include name="Hard"/>
-      </run>
-      <dependencies>
-        <group name="Medium" depends-on="Basic" />
-        <group name="Hard" depends-on="Basic Medium" />
-        <group name="SQL" depends-on="Hard" />
-      </dependencies>
-    </groups>
-  
     <classes>
-      <class name="ReservaCanchas.suites.Login.AuthenticationTest"/>
+      <class name="reservaCanchas.suites.agregarCancha.AgregarCanchaTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
