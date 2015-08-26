@@ -99,7 +99,7 @@ public class AgregarCanchaFeature {
         setTipoSuelo(tipoSuelo);
         setHoraInicio(horaInicio);
         setHoraFin(horaFin);
-        //Agregar();
+        Agregar();
         AgregarCanchaAsserts.assertCanchaAgregada(browser, this, nombre, "",precioHora,
                 tipoCancha, tipoSuelo, horaInicio, horaFin);
     }
@@ -113,7 +113,7 @@ public class AgregarCanchaFeature {
         setTipoSuelo(tipoSuelo);
         setHoraInicio(horaInicio);
         setHoraFin(horaFin);
-        //Agregar();
+        Agregar();
         AgregarCanchaAsserts.assertCanchaAgregada(browser, this, nombre, pathImagen,
                 precioHora, tipoCancha, tipoSuelo, horaInicio, horaFin);
     }
