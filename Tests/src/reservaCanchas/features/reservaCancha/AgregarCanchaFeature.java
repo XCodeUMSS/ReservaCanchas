@@ -1,14 +1,9 @@
 package reservaCanchas.features.reservaCancha;
 
-//import ReservaCanchas.Common.Browser;
-import java.awt.AWTException;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import reservaCanchas.asserts.agregarCancha.AgregarCanchaAsserts;
-import reservaCanchas.common.Functions;
 
 /**
  * @date 16/08/2015
@@ -19,27 +14,27 @@ public class AgregarCanchaFeature {
      * Instancia de la clase Browser, utilizada  identificar los objetos
      */
 
-    private Browser browser;
+    private final Browser browser;
 
     //elementos del ui
-    private ElementStub txt_nombre;
-    private ElementStub btn_imagen;
-    private ElementStub txt_precioHora;
-    private ElementStub cbo_tipoCancha;
-    private ElementStub cbo_tipoSuelo;
-    private ElementStub txt_horaInicio;
-    private ElementStub txt_horaFin;
+    private final ElementStub txt_nombre;
+    private final ElementStub btn_imagen;
+    private final ElementStub txt_precioHora;
+    private final ElementStub cbo_tipoCancha;
+    private final ElementStub cbo_tipoSuelo;
+    private final ElementStub txt_horaInicio;
+    private final ElementStub txt_horaFin;
 
-    private ElementStub lbl_nombre;
-    private ElementStub lbl_imagen;
-    private ElementStub lbl_precioHora;
-    private ElementStub lbl_tipoCancha;
-    private ElementStub lbl_tipoSuelo;
-    private ElementStub lbl_horaInicio;
-    private ElementStub lbl_horaFin;
+    private final ElementStub lbl_nombre;
+    private final ElementStub lbl_imagen;
+    private final ElementStub lbl_precioHora;
+    private final ElementStub lbl_tipoCancha;
+    private final ElementStub lbl_tipoSuelo;
+    private final ElementStub lbl_horaInicio;
+    private final ElementStub lbl_horaFin;
 
-    private ElementStub btn_agregar;
-    private ElementStub btn_limpiar;
+    private final ElementStub btn_agregar;
+    private final ElementStub btn_limpiar;
 
     public AgregarCanchaFeature(Browser b) {
         this.browser = b;
