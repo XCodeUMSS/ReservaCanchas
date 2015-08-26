@@ -2,3 +2,6 @@
 /Tests/build/
 /Tests/dist/
 /Tests/nbproject/private/
+/Tests/debugLogs/debugLogs.log
+/Tests/temp.log
+/Tests/test-output

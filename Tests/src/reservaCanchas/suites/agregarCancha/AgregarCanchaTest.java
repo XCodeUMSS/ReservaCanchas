@@ -32,7 +32,6 @@ public class AgregarCanchaTest {
             else
                 agregarCancha.agregarCancha(nombreCancha, pathImagen, precioHora,
                     tipoCancha, tipoSuelo, horaInicio, horaFin);
-
         }
     }
 
