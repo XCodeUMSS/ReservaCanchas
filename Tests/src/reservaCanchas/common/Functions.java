@@ -25,7 +25,7 @@ import net.sf.sahi.client.ElementStub;
 
 /**
  *
- * @author Administrator
+ * @author Khronos
  */
 public class Functions {
     /*

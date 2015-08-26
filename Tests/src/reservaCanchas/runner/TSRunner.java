@@ -25,8 +25,8 @@ import java.util.Arrays;
 /**
  * Class designed to run testNG suites and test cases from Command line
  *
- * @date 9/25/2013
- * @author Walter Ramirez
+ * @date 26/08/2015
+ * @author Khronos
  *
  */
 public class TSRunner {

@@ -4,8 +4,8 @@ import net.sf.sahi.client.Browser;
 
 /**
  * 
- * @date 10/28/2013
- * @author Walter Ramirez
+ * @date 26/08/2015
+ * @author Khronos
  */
 public class AssertsTemplate {
 	/**
