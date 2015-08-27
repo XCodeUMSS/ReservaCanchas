@@ -77,4 +77,9 @@ public class AgregarCanchaAsserts {
         Assert.assertEquals(agregarCancha.getTxt_horaFin().getValue(),horaFin,
                 "La Hora del fin de funcionamiento de la cancha no fue seleccionado correctamente");
     }
+
+    public static void verificarMensajeError(Browser browser, AgregarCanchaFeature agregarCancha, String minima_longitud_de_3) {
+        /*Assert.assertTrue(browser.lastAlert().contains(minima_longitud_de_3),
+                "El mensaje de error no se mostro correctamente");*/
+    }
 }
