@@ -35,7 +35,7 @@ public class AgregarCanchaFeature {
 
     private final ElementStub btn_agregar;
     private final ElementStub btn_limpiar;
-
+    
     public AgregarCanchaFeature(Browser b) {
         this.browser = b;
         //Creando intancias para lso objetos del UI
@@ -57,7 +57,7 @@ public class AgregarCanchaFeature {
         lbl_horaInicio = browser.tableHeader("Hora Inicio");
         lbl_horaFin = browser.tableHeader("Hora Fin");
         //Creando refecias a mensajes del UI
-        //disableWarning = browser.cell("Disable Policy");
+        txt_nombre.getAttribute("validationMessage=Ajústese al formato solicitado: Debe empezar con letra y contener solo letras o numeros, minima longitud de 3.");
     }
 
     public ElementStub getLbl_nombre() {
@@ -207,5 +207,9 @@ public class AgregarCanchaFeature {
 
     public ElementStub getBtn_limpiar() {
         return btn_limpiar;
+    }
+
+    public void verifyAlert(String resultado) {
+        AgregarCanchaAsserts.verificarMensajeError(browser, this, resultado);
     }
 }

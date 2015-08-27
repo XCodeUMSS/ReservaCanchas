@@ -31,7 +31,8 @@ public class DDT {
             List<String[]> complete = csvReader.readAll();
             complete.remove(0);
             for( String[] row : complete){
-            	resp.add(row);
+                if(!row[0].startsWith("//"))
+                    resp.add(row);
             }
             Object[][] arrayResp = new Object[resp.size()][];
             for(int i = 0; i < resp.size(); i++){
