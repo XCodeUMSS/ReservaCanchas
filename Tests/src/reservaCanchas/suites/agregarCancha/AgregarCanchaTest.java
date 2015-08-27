@@ -20,18 +20,27 @@ public class AgregarCanchaTest {
 
     private Browser browser;
     private AgregarCanchaFeature agregarCancha;
-    
+
     @Test(dataProvider = "agregarCancha")
     public void AgregarCanchaTest(String nombreTestCase, String nombreCancha,
             String pathImagen, String precioHora, String tipoCancha,
             String tipoSuelo, String horaInicio, String horaFin, String resultado) {
         if (resultado.equalsIgnoreCase("Agregado")) {
-            if(pathImagen.isEmpty())
+            if (pathImagen.isEmpty()) {
                 agregarCancha.agregarCancha(nombreCancha, precioHora,
-                    tipoCancha, tipoSuelo, horaInicio, horaFin);
-            else
+                        tipoCancha, tipoSuelo, horaInicio, horaFin);
+            } else {
                 agregarCancha.agregarCancha(nombreCancha, pathImagen, precioHora,
-                    tipoCancha, tipoSuelo, horaInicio, horaFin);
+                        tipoCancha, tipoSuelo, horaInicio, horaFin);
+            }
+        } else {
+            switch (resultado) {
+                case "minima longitud de 3":
+                    agregarCancha.setNombre(nombreCancha);
+                    agregarCancha.setPrecioHora(precioHora);
+                    agregarCancha.Agregar();
+                    agregarCancha.verifyAlert(resultado);
+            }
         }
     }
 
