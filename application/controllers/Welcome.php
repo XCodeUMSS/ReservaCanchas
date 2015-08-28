@@ -21,6 +21,7 @@ class Welcome extends CI_Controller {
      */
     private $manejador;
     private $validador;
+    var $mensaje;
 
     /*
      * Constructor de la clase en el cual se carga el modelo consultas
@@ -34,6 +35,7 @@ class Welcome extends CI_Controller {
         include(APPPATH . 'controllers/ValidadorDatos.php');
         $this->manejador = new ManejadorImagen();
         $this->validador = new ValidadorDatos();
+        $this->mensaje = '';
     }
 
     /*
@@ -45,6 +47,7 @@ class Welcome extends CI_Controller {
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['tipos_cancha'] = $this->consultas->tipos_cancha();
         $datos['tipos_suelo'] = $this->consultas->tipos_suelo();
+        $datos['mensaje'] = $this->mensaje;
         $this->load->view('vista_agregar_cancha', $datos);
     }
 
@@ -92,9 +95,7 @@ class Welcome extends CI_Controller {
                 $hora_inicio, $hora_fin, $precio_minimo, $precio);
 
         $valido = $mensaje == '';
-        if (!$valido) {
-            echo '<script>alert("' . $mensaje . '");</script>';
-        }
+        $this->mensaje = $mensaje;
         return $valido;
     }
 
