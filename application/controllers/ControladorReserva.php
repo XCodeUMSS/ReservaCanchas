@@ -11,11 +11,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ControladorReserva extends CI_Controller {
 
     private $validador;
-    private $manejadorRepeticion;
+    var $reservas;
+    var $mensaje;
 
     //Constantes a ser usadas como valores por defecto en los campos necesarios
     const RESERVA_ESPECIAL = false;
     const REPETICION_NINGUNA = 1;
+    const REPETICION_DIARIA = 2;
+    const REPETICION_SEMANAL = 3;
+    const REPETICION_MENSUAL = 4;
+
     /*
      * Constructor de la clase en el cual se carga el modelo consultas
      * Y el controlador ValidadorDatos.
@@ -24,10 +29,10 @@ class ControladorReserva extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('consultas');
+        $this->load->model('Reserva');
         include(APPPATH . 'controllers/ValidadorDatos.php');
         $this->validador = new ValidadorDatos();
-        include(APPPATH . 'controllers/ManejadorRepeticion.php');
-        $this->manejadorRepeticion = new ManejadorRepeticion();
+        $this->mensaje = '';
     }
 
     /*
@@ -40,16 +45,31 @@ class ControladorReserva extends CI_Controller {
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
+        $datos['mensaje'] = $this->mensaje;
         $this->load->view('vista_realizar_reserva', $datos);
     }
 
     /*
-     * Funcion que recupera datos del formulario, en caso de que se pueda 
-     * realizar la reserva, registra la reserva, caso contrario informa al
-     * usuario porque no se registra la reserva.
+     * Funcion que registra las reservas en caso de que sus datos sean validos,
+     * no existan colisiones con las reservas ya registradas.
      */
 
     public function reservar() {
+        $this->reservas = new ArrayObject(array());
+        if ($this->realizar_reserva()) {
+            for ($i = 0; $i < count($this->reservas); $i++) {
+                $this->consultas->registrar_reserva($this->reservas[$i]->datos());
+            }
+        }
+        $this->index();
+    }
+
+    /*
+     * Funcion que recupera los datos del formulario y 
+     * determina si se puede realizar una reserva con los datos.
+     */
+
+    public function realizar_reserva() {
         $nombre = $this->input->post('nombre_cliente');
         $telefono = $this->input->post('telefono_referencia');
         $id_campo = $this->input->post('campo_deportivo');
@@ -57,52 +77,83 @@ class ControladorReserva extends CI_Controller {
         $hora_inicio = $this->input->post('hora_inicio') . ':00';
         $hora_fin = $this->input->post('hora_fin') . ':00';
         $repeticion = $this->input->post('repeticion');
-        $fecha_fin_repeticion = date_add(DateTime::createFromFormat("d/m/Y", $fecha), 
-                new DateInterval('P5M'));
-        $fecha_final = $repeticion == self::REPETICION_NINGUNA ? $fecha :
-                $fecha_fin_repeticion->format("d/m/Y");
+        $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
 
-        if ($this->realizar_reserva($nombre, $id_campo, $fecha, $hora_inicio, 
-                $hora_fin, $repeticion)) {
-            $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
-            $reserva = array(
-                'NombreCliente' => $nombre,
-                'TelefonoReferencia' => $telefono,
-                'Precio' => $precio,
-                'IdCampoDeportivo' => $id_campo,
-                'Fecha' => $fecha,
-                'HoraInicio' => $hora_inicio,
-                'HoraFin' => $hora_fin,
-                'Repeticion' => $repeticion,
-                'FechaFinal' => $fecha_final,
-                'ReservaEspecial' => self::RESERVA_ESPECIAL
-            );
-            $this->consultas->registrar_reserva($reserva);
-        }
-        $this->index();
+        $mensaje = '';
+        $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, 
+                $hora_inicio, $hora_fin);
+        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
+                $hora_fin);
+        $mensaje .= $this->realizar($nombre, $telefono, $id_campo, $fecha, 
+                $hora_inicio, $hora_fin, $precio, $repeticion);
+
+        $valido = $mensaje == '';
+        $this->mensaje = $mensaje;
+        return $valido;
     }
 
     /*
-     * Funcion que determina si se puede realizar una reserva con los datos.
+     * Funcion que verifica si existe colision entre reserva que se desea
+     * registrar y sus repeticiones.
      */
 
-    public function realizar_reserva($nombre, $id_campo, $fecha, $hora_inicio, 
-            $hora_fin, $repeticion) {
-        
-        $mensaje = '';
-        $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, 
-                                    $hora_inicio, $hora_fin);
-        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
-                        $hora_fin);
-        $mensaje .= $this->manejadorRepeticion->realizar($id_campo, $fecha, 
-                $hora_inicio, $hora_fin, $repeticion);
+    public function realizar($nombre, $telefono, $id_campo, $fecha, 
+            $hora_inicio, $hora_fin, $precio, $repeticion) {
 
-        $valido = $mensaje == '';
-            
-        if (!$valido) {
-            echo '<script>alert("' . $mensaje . '");</script>';
+        $mensaje = '';
+        $reserva = new Reserva();
+        $reserva->actualizar($nombre, $telefono, $id_campo, $fecha, 
+                $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
+        $this->reservas->append($reserva);
+        $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
+        $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
+        switch ($repeticion) {
+            case self::REPETICION_DIARIA:
+                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                        $precio, $id_campo, $fecha, $fecha_limite, 'P1D', 
+                        $hora_inicio, $hora_fin);
+                break;
+            case self::REPETICION_SEMANAL:
+                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                        $precio, $id_campo, $fecha, $fecha_limite, 'P7D', 
+                        $hora_inicio, $hora_fin);
+                break;
+            case self::REPETICION_MENSUAL:
+                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                        $precio, $id_campo, $fecha, $fecha_limite, 'P1M', 
+                        $hora_inicio, $hora_fin);
+                break;
         }
-        return $valido;
+        return $mensaje;
+    }
+
+    /*
+     * Funcion que verifica si las repeticiones colisionan con las reservas ya
+     * registradas.
+     */
+
+    public function realizar_repeticion($nombre, $telefono, $precio, $id_campo, 
+            $fecha, $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
+
+        $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
+        $fecha_siguiente = date_add($fecha_formato, new DateInterval($intervalo));
+        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, 
+                $hora_inicio, $hora_fin) ? '- Existe una reserva.' : '';
+        
+        while ($fecha_siguiente <= $fecha_limite && $mensaje == '') {
+            $mensaje = $this->consultas->existe_reserva($id_campo, 
+                    $fecha_siguiente->format("d/m/Y"), $hora_inicio, 
+                    $hora_fin) ? '- Existe una reserva.' : '';
+            $reserva_otra = new Reserva();
+            $reserva_otra->actualizar($nombre, $telefono, $id_campo, $fecha,
+                    $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
+            $reserva_otra->cambiar_fecha($fecha_siguiente->format("d/m/Y"));
+            $this->reservas->append($reserva_otra);
+            $fecha_siguiente = date_add($fecha_siguiente, 
+                    new DateInterval($intervalo));
+        }
+
+        return $mensaje;
     }
 
     /*
@@ -127,12 +178,11 @@ class ControladorReserva extends CI_Controller {
     }
 
     /*
-     * Funcion que calcula el precio de la reserva de acuerdo al precio por 
-     * hora del campo
+     * Funcion que calcula el precio de la reserva, dados los horarios
      */
 
-    public function calcular_precio($id_campo, $hora_inicio, $hora_fin) {
-        $precio_hora = $this->consultas->precio_campo($id_campo);
+    public function calcular_precio($campo, $hora_inicio, $hora_fin) {
+        $precio_hora = $this->consultas->precio_campo($campo);
         $tiempo_inicio = explode(":", $hora_inicio);
         $tiempo_fin = explode(":", $hora_fin);
         $minutos_inicio = $tiempo_inicio[0] * 60 + $tiempo_inicio[1];

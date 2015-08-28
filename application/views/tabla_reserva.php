@@ -10,7 +10,6 @@
                     <th>Fecha Reserva</th> 
                     <th>Hora Inicio</th>
                     <th>Hora Fin</th>
-                    <th>Repeticion</th>
                 </tr>
             </thead>
             <tbody id="cuerpo-tabla-reservas">
@@ -21,8 +20,7 @@
                     <td><?php echo $reserva->campo; ?></td>
                     <td><?php echo $reserva->fecha; ?></td>
                     <td><?php echo $reserva->horaInicio; ?></td>
-                    <td><?php echo $reserva->horaFin; ?></td>
-                    <td><?php echo "$reserva->repeticion hasta el $reserva->fechaFinal"; ?></td>
+                    <td><?php echo $reserva->horaFin; ?></td>                    
                 </tr>
                 <?php endforeach;?>
             </tbody>

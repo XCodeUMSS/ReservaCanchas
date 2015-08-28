@@ -31,7 +31,7 @@ class ValidadorDatos extends CI_Controller {
             $mensaje .= $mensaje_horas;
         }
         if ($hora_fin - $hora_inicio <= 0) {
-            $mensaje .= "- La reserva debe ser minimamente de una hora. ";
+            $mensaje .= "- La reserva debe ser minimamente de una hora.";
         }
         return $mensaje;
     }

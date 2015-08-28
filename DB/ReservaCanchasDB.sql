@@ -185,9 +185,7 @@ CREATE TABLE "Reserva" (
     "Precio" integer NOT NULL,
     "NombreCliente" character varying NOT NULL,
     "TelefonoReferencia" integer NOT NULL,
-    "ReservaEspecial" boolean DEFAULT false NOT NULL,
-    "FechaFinal" date NOT NULL,
-    "Repeticion" integer NOT NULL
+    "ReservaEspecial" boolean DEFAULT false NOT NULL
 );
  
  
@@ -365,6 +363,7 @@ ALTER TABLE public."TipoRepeticion" OWNER TO postgres;
 INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (3, 'Semanal');
 INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
  
+
  --
  -- TOC entry 2001 (class 0 OID 49527)
  -- Dependencies: 179
@@ -419,7 +418,7 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
  --
  
  SELECT pg_catalog.setval('seqidtipoevento', 4, true);
- 
+
 --
 -- TOC entry 2027 (class 0 OID 0)
 -- Dependencies: 182
@@ -428,6 +427,7 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
 
 SELECT pg_catalog.setval('seqidtiporepeticion', 1, false);
  
+
  --
  -- TOC entry 2018 (class 0 OID 0)
  -- Dependencies: 178

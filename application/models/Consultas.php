@@ -146,17 +146,18 @@ class Consultas extends CI_Model {
      * y  hora_fin.
      */
 
-    public function existe_reservas($id_campo, $hora_inicio, 
+    public function existe_reserva($id_campo, $fecha, $hora_inicio, 
             $hora_fin) {
-        $this->db->select('Fecha, Repeticion, FechaFinal');
+        $this->db->select('IdReserva');
         $this->db->from('Reserva');
         $this->db->where("IdCampoDeportivo = '" . $id_campo .
+                "' AND Fecha = '" . $fecha . 
                 "' AND (HoraInicio < '" . $hora_fin . 
                 "' AND HoraInicio >= '". $hora_inicio . 
                 "' OR HoraFin > '" . $hora_inicio . 
                 "' AND HoraFin <= '". $hora_fin . "')");
         $consulta = $this->db->get();
-        return $consulta->result();
+        return $consulta->num_rows() > 0;
     }
 
     /*
@@ -179,11 +180,9 @@ class Consultas extends CI_Model {
         $this->db->select('r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
-                . 'c.Nombre AS campo, t.Nombre AS repeticion, '
-                . 'r.FechaFinal AS fechaFinal');
-        $this->db->from('Reserva AS r, CampoDeportivo as c, TipoRepeticion as t');
-        $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo AND '
-                . 'r.Repeticion = t.IdRepeticion');
+                . 'c.Nombre AS campo');
+        $this->db->from('Reserva AS r, CampoDeportivo as c');
+        $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo');
         $consulta = $this->db->get();
         return $consulta->result();
     }

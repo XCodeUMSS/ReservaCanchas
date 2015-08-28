@@ -15,7 +15,7 @@
                 <div class="col-sm-6">
                     <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">
                 </div>
-
+                <?php require_once 'inc/mensaje_alerta.php';?>
                 <div class="col-sm-6">
                     <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorReservaEspecial/reservar">
                         <div class="form-group">
