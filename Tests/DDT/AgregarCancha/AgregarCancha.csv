@@ -1,4 +1,19 @@
 TestCaseName,NombreCancha,PathImagen,PrecioHora,TipoCancha,TipoSuelo,HoraInicio,HoraFin,Resultado
-Agregar Cancha Con Imagen,Cancha con foto,Utils//Imagenes//FotoA.jpg,20,Futbol,Cesped,08:00,20:00,Agregado
-Agregar Cancha Sin Imagen,Cancha sin foto,,20,Futbol,Cesped,08:00,20:00,Agregado
-Minima longitud de 3 Nombre,as,,50,Futbol,Cesped,08:00,20:00,minima longitud de 3
+Nombre - No Caracteres Especiales,"@!%&%",,20,Futbol,Cesped,08:00,20:00,sin caracteres especiales
+Nombre - Filtrar Espacios al inicio o Fin,   Cancha con espacios extra   ,,20,Futbol,Cesped,08:00,20:00,con espacios extra
+Nombre - Nombre Repetido,Cancha con Nombre Repetido,,20,Futbol,Cesped,08:00,20:00,con nombre repetido
+Nombre - Nombre Blanco,,,20,Futbol,Cesped,08:00,20:00,con nombre en blanco
+Imagen - Agregar Cancha Sin Imagen,Cancha sin foto,,20,Futbol,Cesped,08:00,20:00,Agregado
+Imagen - Agregar Cancha Con Imagen 4K,Cancha con foto 4K,Utils//Imagenes//4K.jpg,20,Futbol,Cesped,08:00,20:00,Agregado
+Precio/Hora - Precio/Hora Blanco,Precio Hora Blanco,,,Futbol,Cesped,08:00,20:00,precio hora blanco
+Precio/Hora - Precio/Hora no numeral,Precio Hora No Numeral,,NoNumbers!,Futbol,Cesped,08:00,20:00,precio hora no numeral
+Precio/Hora - Precio/Hora futbol !< 10,Precio Hora No Menos de 10 Futbol,,5,Futbol,Cesped,08:00,20:00,precio hora !< 10 Futbol
+Precio/Hora - Precio/Hora basquet !< 10,Precio Hora No Menos de 10 Basquet,,5,Basquet,Cesped,08:00,20:00,precio hora !< 10 Basquet
+Precio/Hora - Precio/Hora Tenis !< 50,Precio Hora No Menos de 50 Tenis,,40,Tenis,Cesped,08:00,20:00,precio hora !< 50 Tenis
+Precio/Hora - Precio/Hora Futbol de Salon !< 50,Precio Hora No Menos de 50 Futbol de salon,,40,Futbol de Salon,Cesped,08:00,20:00,precio hora !< 50 Futbol de Salon
+Precio/Hora - Precio/Hora !> 1000,Precio Hora No Mas de 1000,,1001,Futbol,Cesped,08:00,20:00,precio hora !> 1000
+Tipo Cancha - No editable,Tipo Cancha no edicion,,100,Futbol,Cesped,08:00,20:00,tipo cancha no editable
+Tipo Suelo - No editable,Tipo Suelo no edicion,,100,Futbol,Cesped,08:00,20:00,tipo suelo no editable
+Hora Inicio/Fin - No deben ser igual,Hora no soportada,,20,Futbol,Cesped,20:00,20:00,Hora inicio/fin no debe ser Igual
+Hora Inicio - No deben ser menor,Hora no soportada,,20,Futbol,Cesped,20:00,08:00,Hora inicio no debe ser Menor
+Limpiar - Boton Limpiar debe resetear campos,LimpiarCampos,,20,Futbol,Madera,08:00,20:00,Limpiar debe resetear campos
