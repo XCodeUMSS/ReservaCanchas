@@ -1,9 +1,13 @@
 package reservaCanchas.features.reservaCancha;
 
+import java.awt.AWTException;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import reservaCanchas.asserts.agregarCancha.AgregarCanchaAsserts;
+import reservaCanchas.common.Functions;
 
 /**
  * @date 16/08/2015
@@ -35,6 +39,7 @@ public class AgregarCanchaFeature {
 
     private final ElementStub btn_agregar;
     private final ElementStub btn_limpiar;
+    private final ElementStub lbl_ErrorMessages;
     
     public AgregarCanchaFeature(Browser b) {
         this.browser = b;
@@ -57,7 +62,7 @@ public class AgregarCanchaFeature {
         lbl_horaInicio = browser.tableHeader("Hora Inicio");
         lbl_horaFin = browser.tableHeader("Hora Fin");
         //Creando refecias a mensajes del UI
-        txt_nombre.getAttribute("validationMessage=Ajústese al formato solicitado: Debe empezar con letra y contener solo letras o numeros, minima longitud de 3.");
+        lbl_ErrorMessages = browser.paragraph("/.*/");
     }
 
     public ElementStub getLbl_nombre() {
@@ -88,11 +93,12 @@ public class AgregarCanchaFeature {
         return lbl_horaFin;
     }
 
-    public Browser getBrowser() {
-        return browser;
+    public ElementStub getLbl_ErrorMessages() {
+        return lbl_ErrorMessages;
     }
 
-    public void agregarCancha(String nombre, String precioHora, String tipoCancha, String tipoSuelo, String horaInicio, String horaFin) {
+    public void agregarCancha(String nombre, String precioHora, String tipoCancha,
+            String tipoSuelo, String horaInicio, String horaFin) {
         setNombre(nombre);
         setPrecioHora(precioHora);
         setTipoCancha(tipoCancha);
@@ -150,8 +156,13 @@ public class AgregarCanchaFeature {
     }
 
     public void setPrecioHora(String precioHora) {
-        txt_precioHora.setValue(precioHora);
-        AgregarCanchaAsserts.assertSetPrecioHora(this, precioHora);
+        try{
+            Integer.parseInt(precioHora);
+            txt_precioHora.setValue(precioHora);
+            AgregarCanchaAsserts.assertSetPrecioHora(this, precioHora);
+        }catch(NumberFormatException nfe){
+            AgregarCanchaAsserts.assertSetPrecioHora(this, "");
+        }
     }
 
     public ElementStub getCbo_tipoCancha() {
@@ -209,7 +220,36 @@ public class AgregarCanchaFeature {
         return btn_limpiar;
     }
 
-    public void verifyAlert(String resultado) {
-        AgregarCanchaAsserts.verificarMensajeError(browser, this, resultado);
+    public void verificarNoAgregado(String nombre) {
+        AgregarCanchaAsserts.verificarNoAgregado(browser, this, nombre);
+    }
+
+    public void verificarTipoCanchaNoAgregado(String tipoCancha) {
+        AgregarCanchaAsserts.verificarNuevoTipoCanchaNoAgregado(browser, this, tipoCancha);
+    }
+
+    public void verificarTipoSueloNoAgregado(String tipoSuelo) {
+        AgregarCanchaAsserts.verificarNuevoTipoSueloNoAgregado(browser, this, tipoSuelo);
+    }
+
+    public void verificarAgregado(String nombre, String precioHora,
+            String tipoCancha, String tipoSuelo, String horaInicio, String horaFin) {
+        AgregarCanchaAsserts.assertCanchaAgregada(browser, this, nombre, "",
+                precioHora, tipoCancha, tipoSuelo, horaInicio, horaFin);
+    }
+
+    public void verificarMensajeDeError(String mensaje) {
+        AgregarCanchaAsserts.assertMensajeDeError(this, mensaje);
+    }
+
+    public void verificarCampos(String defaultNombre, String defaultPrecioHora,
+            String defaultTipoCancha, String defaultTipoSuelo,
+            String defaultHoraInicio, String defaultHoraFin) {
+        AgregarCanchaAsserts.assertSetNombre(this, defaultNombre);
+        AgregarCanchaAsserts.assertSetPrecioHora(this, defaultPrecioHora);
+        AgregarCanchaAsserts.assertSetTipoCancha(this, defaultTipoCancha);
+        AgregarCanchaAsserts.assertSetTipoSuelo(this, defaultTipoSuelo);
+        AgregarCanchaAsserts.assertSetHoraInicio(this, defaultHoraInicio);
+        AgregarCanchaAsserts.assertSetHoraFin(this, defaultHoraFin);
     }
 }

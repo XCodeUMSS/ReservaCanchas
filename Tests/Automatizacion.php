@@ -9,6 +9,8 @@
            . "\r\n**********************\r\n\r\n";
         chdir("C:\\sahi\\userdata\\bin\\");
         $sahi = "taskkill /f /fi \"WINDOWTITLE eq C:\Windows\system32\cmd.exe - start_dashboard.bat\""
+			  . "& taskkill /f /fi \"WINDOWTITLE eq Start Sahi\""
+			  . "& taskkill /f /fi \"WINDOWTITLE eq Sahi Dashboard\""
               . " & start /I /MIN start_dashboard.bat";
 	try{
 		echo "COMMAND: \r\n\t{$sahi}\r\n";
