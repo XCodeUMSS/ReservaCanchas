@@ -15,6 +15,9 @@ public class AgregarCanchaAsserts {
     public static void assertCanchaAgregada(Browser browser,
             AgregarCanchaFeature agregarCancha,String nombre, String pathImagen,
             String precioHora,String tipoCancha, String tipoSuelo, String horaInicio, String horaFin) {
+        Assert.assertEquals(agregarCancha.getLbl_ErrorMessages().getText(), "", 
+                "No se puede agregar la nueva cancha por las siguientes razones: "
+                        + agregarCancha.getLbl_ErrorMessages().getText());
         Assert.assertNotNull(browser.cell(nombre).under(agregarCancha.getLbl_nombre()),
                 "La cancha \"" + nombre + "\" no fue agregada correctamente");
         Assert.assertNotNull(browser.cell(precioHora).rightOf(browser.cell(nombre)),
@@ -43,7 +46,7 @@ public class AgregarCanchaAsserts {
     }
 
     public static void assertSetNombre(AgregarCanchaFeature agregarCancha, String nombre) {
-        Assert.assertEquals(agregarCancha.getTxt_nombre().getValue(),nombre,
+        Assert.assertEquals(agregarCancha.getTxt_nombre().getText(),nombre,
                 "El nombre de la cancha no fue agregado correctamente");
     }
 
@@ -69,17 +72,32 @@ public class AgregarCanchaAsserts {
     }
 
     public static void assertSetHoraInicio(AgregarCanchaFeature agregarCancha, String horaInicio) {
-        Assert.assertEquals(agregarCancha.getTxt_horaInicio().getValue(),horaInicio,
+        Assert.assertEquals(agregarCancha.getTxt_horaInicio().getText(),horaInicio,
                 "La Hora del inicio de funcionamiento de la cancha no fue seleccionado correctamente");
     }
 
     public static void assertSetHoraFin(AgregarCanchaFeature agregarCancha, String horaFin) {
-        Assert.assertEquals(agregarCancha.getTxt_horaFin().getValue(),horaFin,
+        Assert.assertEquals(agregarCancha.getTxt_horaFin().getText(),horaFin,
                 "La Hora del fin de funcionamiento de la cancha no fue seleccionado correctamente");
     }
 
-    public static void verificarMensajeError(Browser browser, AgregarCanchaFeature agregarCancha, String minima_longitud_de_3) {
-        /*Assert.assertTrue(browser.lastAlert().contains(minima_longitud_de_3),
-                "El mensaje de error no se mostro correctamente");*/
+    public static void verificarNoAgregado(Browser browser, AgregarCanchaFeature agregarCancha, String nombre) {
+        Assert.assertFalse(browser.cell(nombre).under(agregarCancha.getLbl_nombre()).exists(),
+                "La cancha \"" + nombre + "\" fue agregada correctamente");
+    }
+
+    public static void verificarNuevoTipoCanchaNoAgregado(Browser browser, AgregarCanchaFeature agregarCancha, String tipoCancha) {
+        Assert.assertFalse(browser.cell(tipoCancha).under(agregarCancha.getLbl_tipoCancha()).exists(),
+                "El tipo de cancha \"" + tipoCancha + "\" fue agregado correctamente");
+    }
+
+    public static void verificarNuevoTipoSueloNoAgregado(Browser browser, AgregarCanchaFeature agregarCancha, String tipoSuelo) {
+        Assert.assertFalse(browser.cell(tipoSuelo).under(agregarCancha.getLbl_tipoSuelo()).exists(),
+                "El tipo de suelo \"" + tipoSuelo + "\" fue agregado correctamente");
+    }
+
+    public static void assertMensajeDeError(AgregarCanchaFeature agregarCancha, String mensaje) {
+        Assert.assertTrue(agregarCancha.getLbl_ErrorMessages().getText().contains(mensaje), 
+                "El mensaje \"" + mensaje + "\" no fue desplegado correctamente");
     }
 }

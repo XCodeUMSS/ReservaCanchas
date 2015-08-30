@@ -57,4 +57,8 @@ class Reserva extends CI_Model{
     public function cambiar_fecha($fecha){
         $this->fecha = $fecha;
     }
+    
+    public function fecha() {
+        return $this->fecha;
+    }
 }

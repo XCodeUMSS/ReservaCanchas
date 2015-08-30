@@ -75,17 +75,18 @@ public class Functions {
     private void loadAutoIT() {
         try {
             File jacobDLL, autoITXDLL;
-			 // Get the bit mode of jre using property "sun.arch.data.model". We might not be using Sun's java.
+            // Get the bit mode of jre using property "sun.arch.data.model". We might not be using Sun's java.
             // In that case, use "os.arch" to determine if jre is 32 bit or 64 bit
-            int jreBitMode = ((System.getProperty("sun.arch.data.model") == "32") || (System.getProperty("os.arch") != null
+            int jreBitMode = (("32".equals(System.getProperty("sun.arch.data.model")))
+                    || (System.getProperty("os.arch") != null
                     && System.getProperty("os.arch").contains("86"))) ? 32 : 64;
             if (jreBitMode == 64) {
                 logger.debug(" >>>Loading x64 libs");
-                jacobDLL = new File("lib", "jacob-1.17-x64.dll");
+                jacobDLL = new File("lib", "jacob-1.18-x64.dll");
                 autoITXDLL = new File("lib", "AutoItX3_x64.dll");
             } else {
                 logger.debug(" >>>Loading x86 libs");
-                jacobDLL = new File("lib", "jacob-1.17-x86.dll");
+                jacobDLL = new File("lib", "jacob-1.18-x86.dll");
                 autoITXDLL = new File("lib", "AutoItX3.dll");
             }
             //Registering the JACOB and AutoITX DLL Libraries
@@ -94,6 +95,24 @@ public class Functions {
             p.waitFor();
         } catch (Exception e) {
             logger.error(e.fillInStackTrace());
+        }
+    }
+
+    public void sendKeysAction(Browser browser, ElementStub component,
+            String value) throws AWTException{
+        //Loading Jacob and AutoITX3 DLL Libraries
+        loadAutoIT();
+        //Loading AutoITX Library
+        AutoItX x = new AutoItX();
+
+        if (browser.isFF()) {
+            String browserWindow = "[REGEXPTITLE:XCode.*]";
+            if (x.winWait(browserWindow, "", 10)) {
+                x.winActivate(browserWindow);
+                component.focus();
+                x.send(value);
+                x.sleep(3000);
+            }
         }
     }
 

@@ -60,6 +60,7 @@ class ControladorReserva extends CI_Controller {
             for ($i = 0; $i < count($this->reservas); $i++) {
                 $this->consultas->registrar_reserva($this->reservas[$i]->datos());
             }
+            $this->mensaje = "Su reserva fue exitosamente registrada.";
         }
         $this->index();
     }
@@ -100,29 +101,32 @@ class ControladorReserva extends CI_Controller {
     public function realizar($nombre, $telefono, $id_campo, $fecha, 
             $hora_inicio, $hora_fin, $precio, $repeticion) {
 
-        $mensaje = '';
+        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, 
+                $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
         $reserva = new Reserva();
         $reserva->actualizar($nombre, $telefono, $id_campo, $fecha, 
                 $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
         $this->reservas->append($reserva);
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
-        switch ($repeticion) {
-            case self::REPETICION_DIARIA:
-                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                        $precio, $id_campo, $fecha, $fecha_limite, 'P1D', 
-                        $hora_inicio, $hora_fin);
-                break;
-            case self::REPETICION_SEMANAL:
-                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                        $precio, $id_campo, $fecha, $fecha_limite, 'P7D', 
-                        $hora_inicio, $hora_fin);
-                break;
-            case self::REPETICION_MENSUAL:
-                $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                        $precio, $id_campo, $fecha, $fecha_limite, 'P1M', 
-                        $hora_inicio, $hora_fin);
-                break;
+        if($mensaje == '' && $repeticion != self::REPETICION_NINGUNA){
+            switch ($repeticion) {
+                case self::REPETICION_DIARIA:
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                            $precio, $id_campo, $fecha, $fecha_limite, 'P1D', 
+                            $hora_inicio, $hora_fin);
+                    break;
+                case self::REPETICION_SEMANAL:
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                            $precio, $id_campo, $fecha, $fecha_limite, 'P7D', 
+                            $hora_inicio, $hora_fin);
+                    break;
+                case self::REPETICION_MENSUAL:
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
+                            $precio, $id_campo, $fecha, $fecha_limite, 'P1M', 
+                            $hora_inicio, $hora_fin);
+                    break;
+            }
         }
         return $mensaje;
     }
@@ -135,15 +139,14 @@ class ControladorReserva extends CI_Controller {
     public function realizar_repeticion($nombre, $telefono, $precio, $id_campo, 
             $fecha, $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
 
+        $mensaje = '';
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_siguiente = date_add($fecha_formato, new DateInterval($intervalo));
-        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, 
-                $hora_inicio, $hora_fin) ? '- Existe una reserva.' : '';
-        
         while ($fecha_siguiente <= $fecha_limite && $mensaje == '') {
             $mensaje = $this->consultas->existe_reserva($id_campo, 
                     $fecha_siguiente->format("d/m/Y"), $hora_inicio, 
-                    $hora_fin) ? '- Existe una reserva.' : '';
+                    $hora_fin) ? "- En la repeticion: fecha " . 
+                    $fecha_siguiente->format("Y/m/d"). ' existe una reserva.': '';
             $reserva_otra = new Reserva();
             $reserva_otra->actualizar($nombre, $telefono, $id_campo, $fecha,
                     $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);

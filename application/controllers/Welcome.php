@@ -75,6 +75,7 @@ class Welcome extends CI_Controller {
                 'IdTipoSuelo' => $this->input->post('tipo_suelo')
             );
             $this->consultas->registrar_campo($campo, $hora_inicio, $hora_fin);
+            $this->mensaje = "Se registro exitosamente el campo deportivo: $nombre";
         }
         $this->index();
     }
