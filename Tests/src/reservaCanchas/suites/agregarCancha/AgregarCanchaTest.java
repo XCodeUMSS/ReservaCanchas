@@ -108,8 +108,7 @@ public class AgregarCanchaTest {
 
     @DataProvider(name = "agregarCancha")
     public static Object[][] data() {
-        //return DDT.DDTReaderFull("DDT/AgregarCancha/AgregarCancha.csv");
-        return DDT.DDTReaderFull("DDT/AgregarCancha/Canchas.csv");
+        return DDT.DDTReaderFull("DDT/AgregarCancha/AgregarCancha.csv");
     }
 
     @BeforeMethod
