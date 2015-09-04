@@ -1,0 +1,4 @@
+TestCaseName,NombreCliente,Telefono,Repetir,Cancha,Fecha,HoraInicio,HoraFin,Resultado
+CrearReserva,Walter Ramirez,72771005,Ninguno,Hambre y Goles,08/15/2020,11:00,13:00,Creado
+CrearReserva,Walter Ramirez,72771005,Ninguno,Hambre y Goles,09/15/2015,11:00,13:00,Creado
+CrearReserva,Walter Ramirez,72771005,Ninguno,Hambre y Goles,12/15/2015,11:00,13:00,Creado
