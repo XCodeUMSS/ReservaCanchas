@@ -3,7 +3,7 @@ package reservaCanchas.asserts.agregarCancha;
 import net.sf.sahi.client.Browser;
 
 import org.testng.Assert;
-import reservaCanchas.features.reservaCancha.AgregarCanchaFeature;
+import reservaCanchas.features.agregarCancha.AgregarCanchaFeature;
 
 /**
  * Asserciones para verificar cuando se agrega una cancha
@@ -15,7 +15,8 @@ public class AgregarCanchaAsserts {
     public static void assertCanchaAgregada(Browser browser,
             AgregarCanchaFeature agregarCancha,String nombre, String pathImagen,
             String precioHora,String tipoCancha, String tipoSuelo, String horaInicio, String horaFin) {
-        Assert.assertEquals(agregarCancha.getLbl_ErrorMessages().getText(), "", 
+        Assert.assertEquals(agregarCancha.getLbl_ErrorMessages().getText(),
+                "Se registro exitosamente el campo deportivo: " + nombre, 
                 "No se puede agregar la nueva cancha por las siguientes razones: "
                         + agregarCancha.getLbl_ErrorMessages().getText());
         Assert.assertNotNull(browser.cell(nombre).under(agregarCancha.getLbl_nombre()),

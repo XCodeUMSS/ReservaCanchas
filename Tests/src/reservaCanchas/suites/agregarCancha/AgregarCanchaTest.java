@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 import reservaCanchas.common.Config;
 import reservaCanchas.common.DDT;
 import reservaCanchas.features.menu.TopMenuFeature;
-import reservaCanchas.features.reservaCancha.AgregarCanchaFeature;
+import reservaCanchas.features.agregarCancha.AgregarCanchaFeature;
 
 /**
  *
@@ -108,7 +108,8 @@ public class AgregarCanchaTest {
 
     @DataProvider(name = "agregarCancha")
     public static Object[][] data() {
-        return DDT.DDTReaderFull("DDT/AgregarCancha/AgregarCancha.csv");
+        //return DDT.DDTReaderFull("DDT/AgregarCancha/AgregarCancha.csv");
+        return DDT.DDTReaderFull("DDT/AgregarCancha/Canchas.csv");
     }
 
     @BeforeMethod
@@ -120,6 +121,6 @@ public class AgregarCanchaTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        browser.close();
+        //browser.close();
     }
 }

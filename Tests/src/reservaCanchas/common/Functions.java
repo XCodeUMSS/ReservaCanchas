@@ -34,6 +34,23 @@ public class Functions {
 
     private final static Logger logger = Logger.getRootLogger();
 
+    public void maximizeWindow(Browser browser) {//Loading Jacob and AutoITX3 DLL Libraries
+        loadAutoIT();
+        //Loading AutoITX Library
+        AutoItX x = new AutoItX();
+
+        if (browser.isFF()) {
+            String browserWindow = "[REGEXPTITLE:XCode.*]";
+            if (x.winWait(browserWindow, "", 10)) {
+                x.winActivate(browserWindow);
+                x.controlSend(browserWindow, "", "", "{ALTDOWN}{SPACE}{ALTUP}");
+                x.sleep(2000);
+                x.controlSend(browserWindow, "", "", "{x}");
+                x.sleep(2000);
+            }
+        }
+    }
+
     /**
      * Add a file in order to upload it to the browser
      *
@@ -182,7 +199,7 @@ public class Functions {
                     logger.warn("Unknown Browser Name:\"" + browserName + "\"");
                     searchProcessCommand = "error";
             }
-            logger.debug("Java_Common - Search process command: " + searchProcessCommand);
+            logger.debug("Search process command: " + searchProcessCommand);
             p = Runtime.getRuntime().exec(searchProcessCommand);
             p.waitFor();
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -195,7 +212,7 @@ public class Functions {
                 }
                 currentLine = in.readLine();
             }
-            logger.debug("Java_Common - List process response: " + response);
+            logger.debug("List process response: " + response);
             if (!response.isEmpty() && !response.contains("No tasks are running which match the specified criteria")) {
                 switch (browserName) {
                     case "firefox":
@@ -217,9 +234,9 @@ public class Functions {
                     default:
                         logger.warn("Unknown Browser Name:\"" + browserName + "\"");
                 }
-                logger.debug("Java_Common - Kill process command: " + killProcessCommand);
+                logger.debug("Kill process command: " + killProcessCommand);
                 p = Runtime.getRuntime().exec(killProcessCommand);
-                logger.debug("Java_Common - Exit code for the close browser process: " + p.waitFor());
+                logger.debug("Exit code for the close browser process: " + p.waitFor());
             }
         } catch (IOException | InterruptedException ex) {
             logger.error(ex);

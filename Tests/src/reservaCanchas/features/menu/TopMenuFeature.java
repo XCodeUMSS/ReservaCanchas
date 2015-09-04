@@ -1,9 +1,10 @@
 package reservaCanchas.features.menu;
 
-import reservaCanchas.features.reservaCancha.AgregarCanchaFeature;
+import reservaCanchas.features.agregarCancha.AgregarCanchaFeature;
 
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
+import reservaCanchas.features.reservaCancha.ReservarCanchaFeature;
 
 /**
  * @date 16/08/2015
@@ -13,13 +14,13 @@ public class TopMenuFeature {
 	/*
 	 * Instancia de la clase Browser, utilizada  identificar los objetos
 	 */
-	private Browser browser;
+	private final Browser browser;
 	
         //elementos del ui
-	private ElementStub btn_inicio;
-	private ElementStub btn_canchas;
-	private ElementStub btn_reserva;
-	private ElementStub btn_reservaEspecial;
+	private final ElementStub btn_inicio;
+	private final ElementStub btn_canchas;
+	private final ElementStub btn_reserva;
+	private final ElementStub btn_reservaEspecial;
 	
 	public TopMenuFeature(Browser b){
 		this.browser = b;
@@ -28,10 +29,6 @@ public class TopMenuFeature {
                 btn_canchas = browser.link("Canchas");
                 btn_reserva = browser.link("Reservar");
                 btn_reservaEspecial = browser.link("Reserva Especial");
-		
-		//Creando refecias a mensajes del UI
-		//disableWarning = browser.cell("Disable");
-		
 	}
 
     //TODO Añadir retorno
@@ -45,8 +42,9 @@ public class TopMenuFeature {
     }
 
     //TODO Añadir retorno
-    public void gotoReserva(){
+    public ReservarCanchaFeature gotoReserva(){
         btn_reserva.click();
+        return new ReservarCanchaFeature(browser);
     }
 
     //TODO Añadir retorno

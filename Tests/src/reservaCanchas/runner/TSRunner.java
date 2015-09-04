@@ -38,9 +38,9 @@ public class TSRunner {
 
     public static void main(String[] args) throws Exception {
         args = new String[]{
-            //"-ts","testng.xml"};/**/
+            "-ts","testng.xml"};/**/
             //"-ts","testng.xml,src/mySuite.xml"};/**/
-            "-tc", "AgregarCanchaTest"};/**/
+            //"-tc", "AgregarCanchaTest"};/**/
 
         if (args.length % 2 == 1) {
             showHelp("Help");
