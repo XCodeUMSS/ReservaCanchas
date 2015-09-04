@@ -103,7 +103,7 @@ public class ReservarCanchaTest {
 
     @DataProvider(name = "reservarCancha")
     public static Object[][] data() {
-        return DDT.DDTReaderFull("DDT/AgregarCancha/ReservarCancha.csv");
+        return DDT.DDTReaderFull("DDT/ReservarCancha/ReservarCancha.csv");
     }
 
     @BeforeMethod
