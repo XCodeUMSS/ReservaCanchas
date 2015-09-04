@@ -12,10 +12,14 @@
         <div class="container well">
             <h2>XCode Realizar Reserva</h2><br>
             <div class="row">
-                <div class="col-sm-6">
-                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">
+                <div id="campo-disponible" class="col-sm-6">
+                    <!--<img class="img-rounded img-responsive" id="imagen" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">-->
+                    <ul class="list-group">
+                        <li class="list-group-item active">Horarios Disponibles</li>
+                        <li class="list-group-item">Debe Seleccionar un campo Deportivo</li>
+                    </ul>
                 </div>
-                <?php require_once 'inc/mensaje_alerta.php';?>
+                <?php require_once 'inc/mensaje_alerta.php'; ?>
                 <div class="col-sm-6">
                     <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorReserva/reservar">
                         <div class="form-group">
@@ -32,7 +36,7 @@
                                 <input type="text" title="Debe empezar con 4, 6 o 7 y contener solo numeros, minima longitud de 6 o 7" pattern="^[4|6|7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label col-sm-3">Repetir :</label>
                             <div class="col-sm-9">
@@ -48,6 +52,7 @@
                             <label class="control-label col-sm-3">Cancha :</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="campo_deportivo" id="campo_deportivo">
+                                    <option value="nulo">seleccione cancha</option>
                                     <?php foreach ($canchas as $cancha): ?>
                                         <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
                                     <?php endforeach; ?>

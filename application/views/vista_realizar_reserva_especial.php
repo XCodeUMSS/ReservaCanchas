@@ -12,8 +12,12 @@
         <div class="container well">
             <h2>XCode Realizar Reserva Especial</h2><br>
             <div class="row">
-                <div class="col-sm-6">
-                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">
+                <div id="campo-disponible" class="col-sm-6">
+                    <!--<img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">-->
+                    <ul class="list-group">
+                        <li class="list-group-item active">Horarios Disponibles</li>
+                        <li class="list-group-item">Debe Seleccionar un campo Deportivo</li>
+                    </ul>
                 </div>
                 <?php require_once 'inc/mensaje_alerta.php';?>
                 <div class="col-sm-6">
@@ -42,6 +46,7 @@
                             <label class="control-label col-sm-3">Cancha :</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="campo_deportivo" id="campo_deportivo">
+                                    <option value="seleccion">seleccione cancha</option>
                                     <?php foreach ($canchas as $cancha): ?>
                                         <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
                                     <?php endforeach; ?>
