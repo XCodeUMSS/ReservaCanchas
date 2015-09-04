@@ -1,7 +1,5 @@
 package reservaCanchas.common.testResults;
 
-import java.text.DecimalFormat;
-
 import org.apache.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -51,38 +49,38 @@ public class TestResults extends TestListenerAdapter {
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        updateRally(tr, status.PASS);
+        showResults(tr, status.PASS);
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        updateRally(tr, status.FAIL);
+        showResults(tr, status.FAIL);
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
-        updateRally(tr, status.BLOCKED);
+        showResults(tr, status.BLOCKED);
         super.onTestSkipped(tr);
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult tr) {
-        updateRally(tr, status.PERCENTFAIL);
+        showResults(tr, status.PERCENTFAIL);
         super.onTestFailedButWithinSuccessPercentage(tr);
     }
 
     @Override
     public void onConfigurationFailure(ITestResult tr) {
-        updateRally(tr, status.ERROR);
+        showResults(tr, status.ERROR);
         super.onConfigurationFailure(tr);
     }
     /*
      * Update Rally using the Test Case results and the returned status
      */
 
-    private void updateRally(ITestResult tr, status stat) {
+    private void showResults(ITestResult tr, status stat) {
         //Ensure to the test script executed has a related test case
         if (tr.getParameters().length > 1) {
             //Get the duration time in Milliseconds and convert it to Hours and a time format
@@ -92,13 +90,11 @@ public class TestResults extends TestListenerAdapter {
             long minutes = (time / (60 * 1000)) % 60;
             long hours = (time / (60 * 60 * 1000)) % 24;
             String duration = hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-            DecimalFormat df = new DecimalFormat("###.##");
-            double hoursDuration = Double.valueOf(df.format(time / 3600000.0));
             String notes;
             String verdict;
             notes = compileTestResults(stat, tr, duration);
             verdict = getVeredict(stat);
-            logTestCaseResult(verdict, tr.getParameters()[0].toString(), duration, hoursDuration, notes);
+            logTestCaseResult(verdict, tr.getParameters()[0].toString(), duration, notes);
         } else {
             logExceptions(tr, stat);
         }
@@ -158,11 +154,10 @@ public class TestResults extends TestListenerAdapter {
      * @param verdict, is the final status of the execution
      * @param testCase, is the rally test case ID
      * @param duration, is the execution time in 'hh:MM:ss.mmmm' format
-     * @param hoursDuration, is the execution time in hours
      * @param notes, is the execution message
      */
     private void logTestCaseResult(String verdict, String testCase,
-            String duration, double hoursDuration, String notes) {
+            String duration, String notes) {
         System.out.println("------------------" + verdict + "------------------");
         logger.info("RESULTADO: " + verdict);
         System.out.println("RESULTADO: " + verdict);
@@ -172,8 +167,6 @@ public class TestResults extends TestListenerAdapter {
         System.out.println("NOTAS: " + notes);
         logger.info("DURACION: " + duration);
         System.out.println("DURACION: " + duration);
-        logger.info("DURACION EN HORAS: " + hoursDuration);
-        System.out.println("DURACION EN HORAS: " + hoursDuration);
         System.out.println("------------------" + verdict + "------------------");
     }
     /*

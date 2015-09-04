@@ -4,6 +4,7 @@
   <test name="Tests">
     <classes>
       <class name="reservaCanchas.suites.agregarCancha.AgregarCanchaTest"/>
+      <class name="reservaCanchas.suites.reservarCancha.ReservarCanchaTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

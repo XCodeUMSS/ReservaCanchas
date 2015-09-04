@@ -1,13 +1,9 @@
-package reservaCanchas.features.reservaCancha;
+package reservaCanchas.features.agregarCancha;
 
-import java.awt.AWTException;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import reservaCanchas.asserts.agregarCancha.AgregarCanchaAsserts;
-import reservaCanchas.common.Functions;
 
 /**
  * @date 16/08/2015
@@ -39,6 +35,7 @@ public class AgregarCanchaFeature {
 
     private final ElementStub btn_agregar;
     private final ElementStub btn_limpiar;
+    
     private final ElementStub lbl_ErrorMessages;
     
     public AgregarCanchaFeature(Browser b) {

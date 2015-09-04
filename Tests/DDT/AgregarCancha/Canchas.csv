@@ -1,0 +1,53 @@
+TestCaseName,NombreCancha,PathImagen,PrecioHora,TipoCancha,TipoSuelo,HoraInicio,HoraFin,Resultado
+Agregar Cancha,El Balon,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,FastBall,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Los Balones,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Ositos,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Panchito,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Pentachampion,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Pies y Tacos,Utils//Imagenes//basquetMadera.jpg,20,Basquet,Madera,07:00,22:00,Agregado
+Agregar Cancha,Pollitos,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Ronaldinho,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Sierra Nevada,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,SpeedBall,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,UEFA,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Zinedine,Utils//Imagenes//basquetPavimento.jpg,10,Basquet,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Gol Presente,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Goles de Fuego,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Gran Penalty,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Hambre y Goles,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Heidelbergen Sokker,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Joga Futebol,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Penalty,Utils//Imagenes//futbolCesped.jpg,15,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Porteria Grande,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Real Madrid Soccer,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Soccer y Taco,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,SoccerFive,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Soccer Match,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Tiro de Esquina,Utils//Imagenes//futbolCesped.jpg,10,Futbol,Cesped,08:00,18:00,Agregado
+Agregar Cancha,Balon de Oro,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Campo Futbolero,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Diversoccer,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Eat and Run Soccer,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,El Rey del Gol,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,FIFA Soccer,Utils//Imagenes//futbolPavimento.jpg,55,Futbol de Salon,Pavimento,08:00,22:00,Agregado
+Agregar Cancha,Firesoccer,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,Futbol de a Varo,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,Futbol y Taco,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,Futboleros Comelones,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,FutbolFive,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,Futbolorama 2000,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,Gol de Oro,Utils//Imagenes//futbolMadera.jpg,75,Futbol de Salon,Madera,08:00,22:00,Agregado
+Agregar Cancha,America 4 Ever,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Balones Ponchados,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Campo del Balon,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Campo Alto,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Contrapuntos y Balones,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Diverball,Utils//Imagenes//tenisPavimento.jpg,65,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,El balonsito,Utils//Imagenes//tenisPavimento.jpg,50,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,El rinconsito del balon,Utils//Imagenes//tenisPavimento.jpg,50,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Fireball,Utils//Imagenes//tenisPavimento.jpg,50,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,General Zaragoza,Utils//Imagenes//tenisPavimento.jpg,55,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Joga Bonito,Utils//Imagenes//tenisPavimento.jpg,55,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Joga Feito,Utils//Imagenes//tenisPavimento.jpg,55,Tenis,Pavimento,09:00,18:00,Agregado
+Agregar Cancha,Miguel Hidalgo y Costilla,Utils//Imagenes//tenisPavimento.jpg,70,Tenis,Pavimento,09:00,18:00,Agregado
