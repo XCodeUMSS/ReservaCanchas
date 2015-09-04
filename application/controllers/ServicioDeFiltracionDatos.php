@@ -38,9 +38,23 @@ class ServicioDeFiltracionDatos extends CI_Controller {
         
             $this->enviarDatos($datos);
         }
-        
-        
     }
+    
+    public function procesarHorarios() {
+        $id_campo_deportivo = $this->input->post('id_campo_deportivo');
+        $fecha_reserva = $this->input->post('fecha_reserva');
+        $datos = null;
+        
+        if($id_campo_deportivo && $fecha_reserva) {
+            
+            $datos['horarios'] = $this->modeloFiltracionDatos->obtenerFechas($id_campo_deportivo, $fecha_reserva);
+            $datos['horariosAtencion']  = $this->modeloFiltracionDatos->obetenerHorariosAtencion($id_campo_deportivo);
+            
+            echo json_encode($datos);
+        }
+    }
+
+
     /**
      * Obtiene los datos del modelo del servicio
      * @param type $fecha_reserva

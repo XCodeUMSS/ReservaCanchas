@@ -78,17 +78,20 @@ class ControladorReserva extends CI_Controller {
         $hora_inicio = $this->input->post('hora_inicio') . ':00';
         $hora_fin = $this->input->post('hora_fin') . ':00';
         $repeticion = $this->input->post('repeticion');
-        $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
+        $valido = false;
+        if ($id_campo != 'nulo') {
+            $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
 
-        $mensaje = '';
-        $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, 
-                $hora_inicio, $hora_fin);
-        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
-                $hora_fin);
-        $mensaje .= $this->realizar($nombre, $telefono, $id_campo, $fecha, 
-                $hora_inicio, $hora_fin, $precio, $repeticion);
+            $mensaje = '';
+            $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, $hora_inicio, $hora_fin);
+            $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, $hora_fin);
+            $mensaje .= $this->realizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, $repeticion);
 
-        $valido = $mensaje == '';
+            $valido = $mensaje == '';
+        } else {
+            $mensaje = '- Debe seleccionar un campo deportivo para realizar una reserva';
+        }
+
         $this->mensaje = $mensaje;
         return $valido;
     }
@@ -98,33 +101,24 @@ class ControladorReserva extends CI_Controller {
      * registrar y sus repeticiones.
      */
 
-    public function realizar($nombre, $telefono, $id_campo, $fecha, 
-            $hora_inicio, $hora_fin, $precio, $repeticion) {
+    public function realizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, $repeticion) {
 
-        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, 
-                $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
+        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
         $reserva = new Reserva();
-        $reserva->actualizar($nombre, $telefono, $id_campo, $fecha, 
-                $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
+        $reserva->actualizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
         $this->reservas->append($reserva);
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
-        if($mensaje == '' && $repeticion != self::REPETICION_NINGUNA){
+        if ($mensaje == '' && $repeticion != self::REPETICION_NINGUNA) {
             switch ($repeticion) {
                 case self::REPETICION_DIARIA:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                            $precio, $id_campo, $fecha, $fecha_limite, 'P1D', 
-                            $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P1D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_SEMANAL:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                            $precio, $id_campo, $fecha, $fecha_limite, 'P7D', 
-                            $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P7D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_MENSUAL:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, 
-                            $precio, $id_campo, $fecha, $fecha_limite, 'P1M', 
-                            $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P1M', $hora_inicio, $hora_fin);
                     break;
             }
         }
@@ -136,24 +130,19 @@ class ControladorReserva extends CI_Controller {
      * registradas.
      */
 
-    public function realizar_repeticion($nombre, $telefono, $precio, $id_campo, 
-            $fecha, $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
+    public function realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
 
         $mensaje = '';
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_siguiente = date_add($fecha_formato, new DateInterval($intervalo));
         while ($fecha_siguiente <= $fecha_limite && $mensaje == '') {
-            $mensaje = $this->consultas->existe_reserva($id_campo, 
-                    $fecha_siguiente->format("d/m/Y"), $hora_inicio, 
-                    $hora_fin) ? "- En la repeticion: fecha " . 
-                    $fecha_siguiente->format("Y/m/d"). ' existe una reserva.': '';
+            $mensaje = $this->consultas->existe_reserva($id_campo, $fecha_siguiente->format("d/m/Y"), $hora_inicio, $hora_fin) ? "- En la repeticion: fecha " .
+                    $fecha_siguiente->format("Y/m/d") . ' existe una reserva.' : '';
             $reserva_otra = new Reserva();
-            $reserva_otra->actualizar($nombre, $telefono, $id_campo, $fecha,
-                    $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
+            $reserva_otra->actualizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
             $reserva_otra->cambiar_fecha($fecha_siguiente->format("d/m/Y"));
             $this->reservas->append($reserva_otra);
-            $fecha_siguiente = date_add($fecha_siguiente, 
-                    new DateInterval($intervalo));
+            $fecha_siguiente = date_add($fecha_siguiente, new DateInterval($intervalo));
         }
 
         return $mensaje;

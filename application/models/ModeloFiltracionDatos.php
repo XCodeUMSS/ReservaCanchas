@@ -53,6 +53,7 @@ class ModeloFiltracionDatos extends CI_Model {
         $this->db->from('Reserva AS r, CampoDeportivo as c');
         $this->db->where("r.IdCampoDeportivo = c.IdCampoDeportivo".
                 "AND r.IdCampoDeportivo = '".$id_campo."'");
+        $this->db->order_by('r.HoraInicio', 'asc');
         $consulta = $this->db->get();
         
         
@@ -60,8 +61,27 @@ class ModeloFiltracionDatos extends CI_Model {
         return $consulta->result();
     }
     
-    
-    
+    public function obetenerHorariosAtencion($idCampoDeportivo) {
+        $this->db->select('h.HoraInicio as horaInicio, h.HoraFin as horaFin');
+        $this->db->from('HorarioAtencion as h');
+        $this->db->where("h.IdCampoDeportivo = '".$idCampoDeportivo."'");
+        $consulta = $this->db->get();
+        
+        return $consulta->result();
+    }
+
+
+    public function obtenerFechas($idCampoDeportivo, $fecha) {
+        $fecha1 = $this->formatear_fecha($fecha);
+        $this->db->select('r.HoraInicio AS horaInicio, r.HoraFin AS horaFin');
+        $this->db->from('Reserva AS r');
+        $this->db->where("r.IdCampoDeportivo = '".$idCampoDeportivo."' AND r.Fecha= '".$fecha1."'");
+        $consulta = $this->db->get();
+        
+        return $consulta->result();
+    }
+
+
     /*
      * Funcion que formatea la fecha a dd/mm/yyyy.
      */
