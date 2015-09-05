@@ -11,12 +11,12 @@
         <?php require_once 'inc/cabecera_vistas.php'; ?>
         
         <div class="container well">
-            <h2>XCode Realizar Prereserva</h2><br>
+            <h2><?php echo $nombreCampo ?></h2><br>
             <div class="row">
                 
                 <?php require_once 'inc/mensaje_alerta.php'; ?>
                 <div class="col-sm-6">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorPreservas/prereservar">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorPrereservas/prereservar">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
@@ -65,7 +65,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <input type="submit" class="btn btn-primary" value="Reservar">
+                                <input type="submit" class="btn btn-primary" value="Prereservar">
                                 <input type="reset" class="btn btn-default" value="Limpiar">
                             </div>
                         </div>

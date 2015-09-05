@@ -18,7 +18,7 @@
                 <li><a href="<?php echo base_url();?>index.php/Welcome/index">Canchas</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorPreservas/mostrarDetallesCanchas">Preservas</a></li>
+                <li><a href="<?php echo base_url();?>index.php/ControladorPrereservas/mostrarDetallesCanchas">Prereservas</a></li>
             </ul>
         </div>
     </div>

@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @author Beimar
  */
-class ControladorPreservas extends CI_Controller {
+class ControladorPrereservas extends CI_Controller {
 
     private $validador;
     var $reservas;
@@ -103,7 +103,8 @@ class ControladorPreservas extends CI_Controller {
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $datos['mensaje'] = $this->mensaje;
         $datos['idCampo'] = $this->codigo;
-
+        $datos['nombreCampo'] = $this->consultas->obtenerNombreCampo($this->codigo);
+        
         $this->load->view('vista_prereserva', $datos);
     }
 
