@@ -117,20 +117,28 @@ function realizarPeticionHorario(idCampoDeportivo, fecha) {
                     horaIni = horarios[i].horaFin;
                 } else {
                     var objeto = {};
-                    objeto.horaInicio = horaIni;
-                    objeto.horaFin = horarios[i].horaInicio;
+                    if (horaIni != horarios[i].horaInicio) {
+                        objeto.horaInicio = horaIni;
+                        objeto.horaFin = horarios[i].horaInicio;
 
-                    horariosDisponibles[horariosDisponibles.length] = objeto;
-                    horaIni = horarios[i].horaFin;
+                        horariosDisponibles[horariosDisponibles.length] = objeto;
+                        horaIni = horarios[i].horaFin;
+                    } else {
+                        horaIni = horarios[i].horaFin;
+                    }
+
                 }
 
             }
+            
+            if (horaIni != horaTer) {
+                var objeto = {
+                    horaInicio: horaIni,
+                    horaFin: horaTer
+                };
+                horariosDisponibles[horariosDisponibles.length] = objeto;
+            }
 
-            var objeto = {
-                horaInicio: horaIni,
-                horaFin: horaTer
-            };
-            horariosDisponibles[horariosDisponibles.length] = objeto;
 
             var result = "<ul class=\"list-group\">" +
                     "<li class=\"list-group-item active\">Horarios Disponibles</li>";
@@ -160,8 +168,8 @@ function mostrarMensajeSeleccion() {
     var result = "<ul class=\"list-group\">" +
             "<li class=\"list-group-item active\">Horarios Disponibles</li>" +
             "<div class=\"alert alert-info\" role=\"alert\">"
-            +"<span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>"
-            +"Debe Seleccionar un Campo Deportivo</div>"
-            +"</ul>";
+            + "<span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>"
+            + "Debe Seleccionar un Campo Deportivo</div>"
+            + "</ul>";
     $('#campo-disponible').html(result);
 }
