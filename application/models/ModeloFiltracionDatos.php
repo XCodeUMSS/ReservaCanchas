@@ -76,6 +76,7 @@ class ModeloFiltracionDatos extends CI_Model {
         $this->db->select('r.HoraInicio AS horaInicio, r.HoraFin AS horaFin');
         $this->db->from('Reserva AS r');
         $this->db->where("r.IdCampoDeportivo = '".$idCampoDeportivo."' AND r.Fecha= '".$fecha1."'");
+        $this->db->order_by('r.HoraInicio', 'asc');
         $consulta = $this->db->get();
         
         return $consulta->result();
