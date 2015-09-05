@@ -9,29 +9,22 @@
     </head>
     <body>
         <?php require_once 'inc/cabecera_vistas.php'; ?>
+        
         <div class="container well">
-            <h2>XCode Realizar Reserva</h2><br>
+            <h2>XCode Realizar Prereserva</h2><br>
             <div class="row">
-                <div id="campo-disponible" class="col-sm-6">
-                    <!--<img class="img-rounded img-responsive" id="imagen" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" style="height: 280px;">-->
-                    <ul class="list-group">
-                        <li class="list-group-item active">Horarios Disponibles</li>
-                        <li class="list-group-item">Debe Seleccionar un campo Deportivo</li>
-                    </ul>
-                    
-
-                </div>
+                
                 <?php require_once 'inc/mensaje_alerta.php'; ?>
                 <div class="col-sm-6">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorReserva/reservar">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorPreservas/prereservar">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
                                 <input type="text" title="Debe empezar con letra y contener solo letras, minima longitud de 3" pattern="^[a-zA-Z][a-zA-Z ]{1,}[a-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
                             </div>
                         </div>
-
-
+                        <input class="idcampo hidden" name="campo_deportivo" id="<?php echo $idCampo; ?>" value="<?php echo $idCampo; ?>">
+                        <p class="idcampo" id="<?php echo $idCampo; ?>"></p>
                         <div class="form-group">
                             <label class="control-label col-sm-3">Telefono Ref.:</label>
                             <div class="col-sm-9">
@@ -45,18 +38,6 @@
                                 <select class="form-control" name="repeticion" id="repeticion">
                                     <?php foreach ($repeticiones as $repeticion): ?>
                                         <option value="<?php echo $repeticion->IdRepeticion; ?>"><?php echo $repeticion->Nombre; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-3">Cancha :</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" name="campo_deportivo" id="campo_deportivo">
-                                    <option value="nulo">seleccione cancha</option>
-                                    <?php foreach ($canchas as $cancha): ?>
-                                        <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -90,10 +71,18 @@
                         </div>
                     </form>
                 </div>
+                
+                <div id="campo-disponible" class="col-sm-6">
+                    <ul class="list-group">
+                        <li class="list-group-item active">Horarios Disponibles</li>
+                        <li class="list-group-item">Debe Seleccionar un campo Deportivo</li>
+                    </ul>
+                </div>
             </div>
-            <?php require_once '/tabla_reserva.php'; ?>
+            
         </div>
         <?php require_once 'inc/inclusion_jquery.php'; ?>
-        <script src="<?php echo base_url(); ?>assets/js/peticiones_reservas.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/peticiones_prereservas.js"></script>
+        
     </body>
 </html>
