@@ -19,16 +19,16 @@
             <h3>Confirmar Prereserva</h3>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Buscar  </span>
-                <input type="text" class="form-control" placeholder="Nombre de Usuario" aria-describedby="basic-addon1">
+                <input type="text" id="nombre_usuario" class="form-control" placeholder="Nombre de Usuario" aria-describedby="basic-addon1">
             </div>
-
-            <?php require_once 'plantillas/reservas_no_confirmadas.php'; ?>
-
+            <div id="reservas_no_confirmadas">
+                <?php require_once 'plantillas/reservas_no_confirmadas.php'; ?>
+            </div>
         </div>
+
     </div>
 
-</div>
-
-<?php require_once 'inc/inclusion_jquery.php'; ?>
+    <?php require_once 'inc/inclusion_jquery.php'; ?>
+    <script src="<?php echo base_url(); ?>assets/js/reservas_no_cofirmadas.js"></script>
 </body>
 </html>

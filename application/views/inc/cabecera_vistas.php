@@ -23,7 +23,7 @@
                 <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorPrereservas/mostrarDetallesCanchas">Prereservas</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion">Reservas No Confirmadas</a></li>-->
+                <li><a href="<?php echo base_url();?>index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion">Confirmar Reserva</a></li>-->
             </ul>
         </div>
     </div>

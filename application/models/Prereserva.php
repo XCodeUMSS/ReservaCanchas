@@ -2,7 +2,7 @@
 
 
 /**
- * Description of Prereserva
+ * Modelo para un Prereserva
  *
  * @author Beimar
  */
@@ -41,6 +41,8 @@ class Prereserva extends CI_Model{
         );
         return $reserva;
     }
+    
+    
     public function actualizar($nombre, $telefono, $id_campo, $fecha, 
                     $hora_inicio, $hora_fin, $precio, $tipo_reserva,
             $fecha_expiracion, $horaExpiracion,$confirmado){
