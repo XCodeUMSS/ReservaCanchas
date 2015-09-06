@@ -36,6 +36,17 @@ class Consultas extends CI_Model {
     }
 
     /*
+     * Obtiene nombre del Campo Deportivo mediante id
+     */
+    public function obtenerNombreCampo($idCampoDeportivo) {
+        $this->db->select('Nombre');
+        $this->db->from('CampoDeportivo');
+        $this->db->where('IdCampoDeportivo', $idCampoDeportivo);
+        $consulta = $this->db->get();
+        return $consulta->first_row()->Nombre;
+    }
+
+    /*
      * Funcion que devuelve todos los tipos de cancha.
      */
 

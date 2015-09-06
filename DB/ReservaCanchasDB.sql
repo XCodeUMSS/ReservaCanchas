@@ -185,7 +185,10 @@ CREATE TABLE "Reserva" (
     "Precio" integer NOT NULL,
     "NombreCliente" character varying NOT NULL,
     "TelefonoReferencia" integer NOT NULL,
-    "ReservaEspecial" boolean DEFAULT false NOT NULL
+    "ReservaEspecial" boolean DEFAULT false NOT NULL,
+    "FechaExpiracion" date,
+    "HoraExpiracion" time with time zone,
+    "Confirmado" boolean DEFAULT true NOT NULL
 );
  
  

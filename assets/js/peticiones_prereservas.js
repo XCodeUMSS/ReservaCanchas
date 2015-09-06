@@ -1,22 +1,11 @@
 
-/** 
- *  Espera a que el DOM se termine de cargar
- */
 
 $(document).ready(function () {
     fechaActual = $('#fecha_reserva').val();
-
-    realizarPeticionFecha($('#fecha_reserva').val());
     /*
      * Agregado del evento change, para detectar cambios en campo deportivo
      */
-    $("select[name=campo_deportivo]").change(function () {
-
-        realizarPeticionCampo($('select[name=campo_deportivo]').val());
-
-        realizarPeticionHorario($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
-    });
-
+    realizarPeticionHorario($('.idcampo').attr('id'), $('#fecha_reserva').val());
     
     detectarCambiosFecha();
 
@@ -29,67 +18,10 @@ $(document).ready(function () {
 function detectarCambiosFecha() {
     setInterval(function () {
         if (fechaActual != $('#fecha_reserva').val()) {
-            realizarPeticionFecha($('#fecha_reserva').val());
-
             fechaActual = $('#fecha_reserva').val();
-            realizarPeticionHorario($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
+            realizarPeticionHorario($('.idcampo').attr('id'), $('#fecha_reserva').val());
         }
     }, 200);
-}
-
-/**
- * Funcion que realiza la peticion ajax al servidor, filtrando la fecha
- * @param {date} fecha
- * @returns void
- */
-function realizarPeticionFecha(fecha) {
-    //Invocar al metodo ajax de jquery
-    $.ajax({
-        data: 'fecha_reserva=' + fecha,
-        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
-        type: 'post',
-        beforeSend: function () {
-            console.log('enviando la peticion......');
-        },
-        success: function (response) {
-            console.log('La peticion ha sido satisfactoria');
-
-            $('#cuerpo-tabla-reservas').html(response);
-        },
-        error: function () {
-            console.log('Existen fallas en el servidor');
-        }
-    });
-}
-
-/**
- * Funcion que realiza la peticion ajax al servidor, filtrando el tipo de cancha
- * @param {type} idCampoDeportivo
- * @returns void
- */
-function realizarPeticionCampo(idCampoDeportivo) {
-    var idCampoDeportivo = idCampoDeportivo;
-    if (idCampoDeportivo == 'nulo') {
-        return;
-    }
-
-    //Invocar al metodo ajax de jquery
-    $.ajax({
-        data: 'id_campo_deportivo=' + idCampoDeportivo,
-        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
-        type: 'post',
-        beforeSend: function () {
-            console.log('enviando la peticion......');
-        },
-        success: function (response) {
-            console.log('La peticion ha sido satisfactoria');
-
-            $('#cuerpo-tabla-reservas').html(response);
-        },
-        error: function () {
-            console.log('Existen fallas en el servidor');
-        }
-    });
 }
 
 /**
@@ -212,16 +144,19 @@ function calcularHorariosDisponibles(horarios, horarioAtencion) {
 }
 
 /**
- * Funcion para mostrar el mensaje de seleccion de cancha, para el caso en que el 
+ * funcion para mostrar el mensaje de seleccion de cancha, para el caso en que el 
  * usuario no seleccione una cancha
  * @returns 
  */
+
 function mostrarMensajeSeleccion() {
     var result = "<ul class=\"list-group\">" +
             "<li class=\"list-group-item active\">Horarios Disponibles</li>" +
             "<div class=\"alert alert-info\" role=\"alert\">"
-            + "<span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>"
-            + "Debe Seleccionar un Campo Deportivo</div>"
-            + "</ul>";
+            +"<span class=\"glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>"
+            +"Debe Seleccionar un Campo Deportivo</div>"
+            +"</ul>";
     $('#campo-disponible').html(result);
 }
+
+
