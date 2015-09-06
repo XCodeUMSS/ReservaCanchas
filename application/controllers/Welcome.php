@@ -19,23 +19,19 @@ class Welcome extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    private $manejador;
-    private $validador;
-    var $mensaje;
-
+    
     /*
      * Constructor de la clase en el cual se carga el modelo consultas
      * El controlador ValidadorDatos y ManejadorImagen.
      */
 
+    const CLIENTE = 2;
+    var $mensaje;
+    
     public function __construct() {
         parent::__construct();
-        $this->load->model('consultas');
-        include(APPPATH . 'controllers/ManejadorImagen.php');
-        include(APPPATH . 'controllers/ValidadorDatos.php');
-        $this->manejador = new ManejadorImagen();
-        $this->validador = new ValidadorDatos();
         $this->mensaje = '';
+        $this->load->model('consultas');
     }
 
     /*
@@ -44,60 +40,68 @@ class Welcome extends CI_Controller {
      */
 
     public function index() {
-        $datos['canchas'] = $this->consultas->campos_registrados();
-        $datos['tipos_cancha'] = $this->consultas->tipos_cancha();
-        $datos['tipos_suelo'] = $this->consultas->tipos_suelo();
         $datos['mensaje'] = $this->mensaje;
-        $this->load->view('vista_agregar_cancha', $datos);
+        $this->load->view('inicio_sesion', $datos);
     }
 
     /*
-     * Funcion que recupera los datos del formulario y si se puede realizar
-     * el registro, registrar el campo deportivo, sino informa al usuario 
-     * porque no se pudo registrar.
+     * 
      */
 
-    public function agregar_campo() {
-        $hora_inicio = $this->input->post('hora_inicio');
-        $hora_fin = $this->input->post('hora_fin');
-        $nombre = $this->input->post('nombre_cancha');
-        $precio_minimo = $this->input->post('precio_hora');
-        $id_tipo_cancha = $this->input->post('tipo_cancha');
+    public function solicitud_sesion() {
+        $nombre_usuario = $this->input->post('nombre_usuario');
+        $ci = $this->input->post('ci');
+        $this->iniciar_sesion($nombre_usuario, $ci);
+    }
+    
+        /*
+     * 
+     */
 
-        if ($this->realizar_registro($nombre, $hora_inicio, $hora_fin, 
-                $precio_minimo, $id_tipo_cancha)) {
-            $ruta = $this->manejador->guardar_imagen($nombre);
-            $campo = array(
+    public function iniciar_sesion($nombre_usuario, $ci) {
+        if($this->consultas->sesion_exitosa($nombre_usuario, $ci)){
+            echo "Iniciando sesion: Bienvenido $nombre_usuario";
+        }
+        else{
+            $this->mensaje = 'Los datos son incorrectos.';
+            $this->index();
+        }
+    }
+
+    /*
+     * 
+     */
+
+    public function vista_registro() {
+        $datos['mensaje'] = $this->mensaje;
+        $this->load->view('registro_usuario', $datos);
+    }
+    
+    public function registrar_usuario() {
+        $nombre_usuario = $this->input->post('nombre_usuario');
+        $ci = $this->input->post('ci');
+        $telefono = $this->input->post('telefono_referencia');
+        $nombre = $this->input->post('nombre');
+        $apellidos = $this->input->post('apellidos');
+        
+        if($this->consultas->existe_usuario($nombre_usuario)){
+            $this->mensaje = "Ya existe el nombre de usuario: $nombre_usuario. "
+                    . "Por favor escoja otro";
+            $this->vista_registro();
+        }
+        else{
+            $usuario = array(
                 'Nombre' => $nombre,
-                'RutaFoto' => $ruta,
-                'PrecioPorHora' => $precio_minimo,
-                'IdTipoCancha' => $id_tipo_cancha,
-                'IdTipoSuelo' => $this->input->post('tipo_suelo')
+                'CarnetIdentidad' => $ci,
+                'TelefonoReferencia' => $telefono,
+                'Apellidos' => $apellidos,
+                'NombreUsuario' => $nombre_usuario,
+                'Rol' => self::CLIENTE
             );
-            $this->consultas->registrar_campo($campo, $hora_inicio, $hora_fin);
-            $this->mensaje = "Se registro exitosamente el campo deportivo: $nombre";
+            $this->consultas->registrar_usuario($usuario);
+            $this->iniciar_sesion($nombre_usuario, $ci);
         }
-        $this->index();
-    }
-
-    /*
-     * Funcion que verifica si existe ya el campo deportivo y si los datos son
-     * validos.
-     */
-
-    public function realizar_registro($nombre, $hora_inicio, $hora_fin, 
-            $precio, $id_tipo) {
-        $mensaje = '';
-        $precio_minimo = $this->consultas->precio_tipo_cancha($id_tipo);
-        if ($this->consultas->existe_nombre($nombre)) {
-            $mensaje .= '- Este nombre ya existe. ';
-        }
-        $mensaje .= $this->validador->datos_validos_campo($nombre, 
-                $hora_inicio, $hora_fin, $precio_minimo, $precio);
-
-        $valido = $mensaje == '';
-        $this->mensaje = $mensaje;
-        return $valido;
+        
     }
 
 }

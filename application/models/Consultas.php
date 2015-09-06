@@ -186,5 +186,38 @@ class Consultas extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->result();
     }
+    
+    /*
+     * Funcion que verifica si existe un usuario con ese nombre.
+     */
+    
+    public function existe_usuario($nombre) {
+        $this->db->select('IdUsuario');
+        $this->db->from('Usuario');
+        $this->db->where('NombreUsuario', $nombre);
+        $consulta = $this->db->get();
+        return $consulta->num_rows() > 0;
+    }
+    
+    /*
+     * Funcion que registra usuarios.
+     */
+    
+    public function registrar_usuario($usuario) {
+        $this->db->insert("Usuario", $usuario);
+    }
+    
+    /*
+     * Funcion que verifica si los datos de sesion son correctos.
+     */
+    
+    public function sesion_exitosa($usuario, $ci) {
+        $this->db->select('IdUsuario');
+        $this->db->from('Usuario');
+        $this->db->where("NombreUsuario = '".$usuario.
+                "' AND CarnetIdentidad = '" . $ci."'");
+        $consulta = $this->db->get();
+        return $consulta->num_rows() > 0;
+    }
 
 }

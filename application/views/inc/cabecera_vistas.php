@@ -15,7 +15,7 @@
         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio</a></li>
-                <li><a href="<?php echo base_url();?>index.php/Welcome/index">Canchas</a></li>
+                <li><a href="<?php echo base_url();?>index.php/ControladorCanchas/index">Canchas</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
             </ul>
