@@ -21,10 +21,6 @@ SET search_path = public, pg_catalog;
 -- Data for Name: TipoCancha; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (1, 'Tenis', 50);
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (2, 'Futbol de Salon', 50);
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (3, 'Futbol', 10);
-INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (4, 'Basquet', 10);
 
 
 --
@@ -33,9 +29,6 @@ INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (4, '
 -- Data for Name: TipoSuelo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (1, 'Cesped');
-INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (2, 'Pavimento');
-INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (3, 'Madera');
 
 
 --
@@ -170,10 +163,6 @@ INSERT INTO "HorarioAtencion" ("IdHorario", "HoraInicio", "HoraFin", "Dia", "IdC
 -- Data for Name: TipoEvento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (1, 'Mantenimiento de Cancha');
-INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (2, 'Evento Especial');
-INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (3, 'Feriado');
-INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (4, 'Paro');
 
 
 --
@@ -182,10 +171,6 @@ INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (4, 'Paro');
 -- Data for Name: TipoRepeticion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (1, 'Ninguno');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (2, 'Diario');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (3, 'Semanal');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
 
 
 --

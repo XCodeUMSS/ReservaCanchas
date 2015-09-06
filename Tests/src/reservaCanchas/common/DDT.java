@@ -19,30 +19,47 @@ import org.apache.log4j.Logger;
  * @author Khrono
  */
 public class DDT {
-    private static CSVReader csvReader;
-	
-	private final static Logger logger = Logger.getRootLogger();
 
-	public static Object[][] DDTReaderFull(String csvPath) {
+    private static CSVReader csvReader;
+
+    private final static Logger logger = Logger.getRootLogger();
+
+    public static Object[][] DDTReaderFull(String csvPath) {
         List<Object[]> resp = new ArrayList<>();
+        List<String[]> preresp = new ArrayList<>();
+        boolean exclusive = false;
         try {
             FileReader fr = new FileReader(csvPath);
             csvReader = new CSVReader(fr);
             List<String[]> complete = csvReader.readAll();
             complete.remove(0);
-            for( String[] row : complete){
-                if(!row[0].startsWith("//"))
+            for (String[] row : complete) {
+                if (!row[0].startsWith("//")) {
+                    if (row[0].startsWith("*")) exclusive = true;
+                    preresp.add(row);
+                }
+            }
+            if(!exclusive) {
+                for (String[] row : preresp) {
                     resp.add(row);
+                }
+            }
+            else{
+                for (String[] row : preresp) {
+                    if (row[0].startsWith("*")) {
+                        resp.add(row);
+                    }
+                }
             }
             Object[][] arrayResp = new Object[resp.size()][];
-            for(int i = 0; i < resp.size(); i++){
+            for (int i = 0; i < resp.size(); i++) {
                 arrayResp[i] = resp.get(i);
             }
             return arrayResp;
         } catch (FileNotFoundException ex) {
-        	logger.error(ex);
+            logger.error(ex);
         } catch (IOException ex) {
-        	logger.error(ex);
+            logger.error(ex);
         }
         return new Object[][]{};
     }

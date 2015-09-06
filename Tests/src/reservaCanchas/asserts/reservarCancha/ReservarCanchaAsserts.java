@@ -13,26 +13,29 @@ import reservaCanchas.features.reservaCancha.ReservarCanchaFeature;
 public class ReservarCanchaAsserts {
 
     public static void assertReservaCreada(Browser browser,
-            ReservarCanchaFeature reservarCancha,String nombre, String pathImagen,
-            String precioHora,String tipoCancha, String tipoSuelo, String horaInicio, String horaFin) {
+            ReservarCanchaFeature reservarCancha,String nombre, String telefono,
+            String repetir,String cancha, String fecha, String horaInicio, String horaFin) {
         Assert.assertEquals(reservarCancha.getLbl_ErrorMessages().getText(),
                 "Su reserva fue exitosamente registrada.", 
-                "No se puede agregar la nueva cancha por las siguientes razones: "
+                "No se puede agregar la nueva reserva por las siguientes razones: "
                         + reservarCancha.getLbl_ErrorMessages().getText());
         Assert.assertNotNull(browser.cell(nombre).under(reservarCancha.getLbl_nombre()),
-                "La cancha \"" + nombre + "\" no fue agregada correctamente");
-        Assert.assertNotNull(browser.cell(precioHora).rightOf(browser.cell(nombre)),
+                "La reserva del cliente: \"" + nombre + "\" no fue creada correctamente");
+        Assert.assertNotNull(browser.cell(telefono).rightOf(browser.cell(nombre)),
+                "El telefono del cliente: \"" + nombre + "\" no fue agregado correctamente");
+        //TODO - Verificar repeticiones
+        Assert.assertNotNull(browser.cell(repetir).rightOf(browser.cell(nombre)),
                 "El precio por hora de la cancha \"" + nombre + "\" no fue agregado correctamente");
-        Assert.assertNotNull(browser.cell(tipoCancha).rightOf(browser.cell(nombre)),
-                "El tipo de cancha \" " + tipoCancha + "\" de la cancha \"" +
-                        nombre + "\" no fue agregado correctamente");
-        Assert.assertNotNull(browser.cell(tipoSuelo).rightOf(browser.cell(nombre)),
-                "El tipo de suelo \" " + tipoSuelo + "\" de la cancha \"" +
-                        nombre + "\" no fue agregado correctamente");
+        Assert.assertNotNull(browser.cell(cancha).rightOf(browser.cell(nombre)),
+                "La cancha \" " + cancha + "\" de la reserva del usuario \"" +
+                        nombre + "\" no fue seleccionada correctamente");
+        Assert.assertNotNull(browser.cell(fecha).rightOf(browser.cell(nombre)),
+                "La fecha de reserva: \" " + fecha + "\" del usuario \"" +
+                        nombre + "\" no fue seleccionado correctamente");
         Assert.assertNotNull(browser.cell(horaInicio + ":00").rightOf(browser.cell(nombre)),
-                "La Hora de inicio de la cancha \"" + nombre + "\" no fue agregada correctamente");
+                "La Hora de inicio de la reserva del usuario \"" + nombre + "\" no fue creado correctamente");
         Assert.assertNotNull(browser.cell(horaFin + ":00").rightOf(browser.cell(nombre)),
-                "La Hora de fin de la cancha \"" + nombre + "\" no fue agregada correctamente");
+                "La Hora de fin de la reserva del usuario \"" + nombre + "\" no fue agregada correctamente");
     }
 
     public static void assertSetNombre(ReservarCanchaFeature reservarCancha, String nombre) {

@@ -5,6 +5,7 @@ import reservaCanchas.features.agregarCancha.AgregarCanchaFeature;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
 import reservaCanchas.features.reservaCancha.ReservarCanchaFeature;
+import reservaCanchas.features.reservaCanchaEspecial.ReservarCanchaEspecialFeature;
 
 /**
  * @date 16/08/2015
@@ -41,15 +42,14 @@ public class TopMenuFeature {
         return new AgregarCanchaFeature(browser);
     }
 
-    //TODO Añadir retorno
     public ReservarCanchaFeature gotoReserva(){
         btn_reserva.click();
         return new ReservarCanchaFeature(browser);
     }
 
-    //TODO Añadir retorno
-    public void gotoReservaEspecial(){
+    public ReservarCanchaEspecialFeature gotoReservaCanchaEspecial(){
         btn_reservaEspecial.click();
+        return new ReservarCanchaEspecialFeature(browser);
     }
 
 }
