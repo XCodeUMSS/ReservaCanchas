@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Clase encargada de administrar las prereservas
  *
- * @author Beimar
+ * @author Beimar & Alison
  */
 class ControladorPrereservas extends CI_Controller {
 
@@ -33,6 +33,12 @@ class ControladorPrereservas extends CI_Controller {
         $this->validador = new ValidadorDatos();
         $this->mensaje = '';
     }
+    
+    
+    public function index(){
+        session_start();
+        $this->mostrarFormulario();
+    }
 
     /*
      * Funcion que registra las prereservas en caso de que sus datos sean validos,
@@ -56,8 +62,6 @@ class ControladorPrereservas extends CI_Controller {
      */
     public function realizarPrereserva() {
         session_start();
-        $nombre = $_SESSION['nombre'];
-        $telefono = $_SESSION['telefono'];
         $id_campo = $this->input->post('campo_deportivo');
         $this->idcampo = $id_campo;
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
@@ -70,9 +74,12 @@ class ControladorPrereservas extends CI_Controller {
         $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
 
         $mensaje = '';
-        $mensaje .= $this->validador->datos_validos_reserva($nombre, $fecha, $hora_inicio, $hora_fin);
-        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, $hora_fin);
-        $mensaje .= $this->realizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, $repeticion);
+        $mensaje .= $this->validador->datos_validos_reserva($_SESSION['usuario'],
+                $fecha, $hora_inicio, $hora_fin);
+        $mensaje .= $this->dentro_horarios_atencion($id_campo, $hora_inicio, 
+                $hora_fin);
+        $mensaje .= $this->realizar($id_campo, $fecha, $hora_inicio, $hora_fin, 
+                $precio, $repeticion);
 
         $valido = $mensaje == '';
 
@@ -94,7 +101,6 @@ class ControladorPrereservas extends CI_Controller {
      * Realiza el renderizado de la vista de prereservas
      */
     public function mostrarFormulario() {
-        session_start();
         if (isset($_REQUEST['cod'])) {
             $campo = $_REQUEST['cod'];
             $this->codigo = $campo;
@@ -105,13 +111,12 @@ class ControladorPrereservas extends CI_Controller {
         
         $datos_usuario = $this->consultas->datos_usuario($_SESSION['usuario']);
         $_SESSION['telefono'] = $datos_usuario->telefono;
-        $_SESSION['nombre'] = $datos_usuario->nombre;
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $datos['mensaje'] = $this->mensaje;
         $datos['idCampo'] = $this->codigo;
         $datos['nombreCampo'] = $this->consultas->obtenerNombreCampo($this->codigo);
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
-        $datos['usuario'] = $datos_usuario->nombre;
+        $datos['usuario'] = $_SESSION['usuario'];
         $datos['telefono'] = $datos_usuario->telefono;
         $this->load->view('vista_prereserva', $datos);
     }
@@ -121,28 +126,35 @@ class ControladorPrereservas extends CI_Controller {
      * registrar y sus repeticiones.
      */
 
-    public function realizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, $repeticion) {
+    public function realizar($id_campo, $fecha, $hora_inicio, $hora_fin, 
+            $precio, $repeticion) {
 
-        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
+        $mensaje = $this->consultas->existe_reserva($id_campo, $fecha, 
+                $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
         $reserva = new Prereserva();
 
         $fechaExpiracion = $this->obtenerFechaExpiracion();
         $horaExpiracion = $this->obtenerHoraExpiracion();
-        $reserva->actualizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL
-                , $fechaExpiracion, $horaExpiracion, self::CONFIRMADO);
+        $reserva->actualizar($_SESSION['usuario'], $_SESSION['telefono'], 
+                $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, 
+                self::RESERVA_ESPECIAL, $fechaExpiracion, $horaExpiracion, 
+                self::CONFIRMADO);
         $this->reservas->append($reserva);
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
         if ($mensaje == '' && $repeticion != self::REPETICION_NINGUNA) {
             switch ($repeticion) {
                 case self::REPETICION_DIARIA:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P1D', $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($precio, $id_campo, 
+                            $fecha, $fecha_limite, 'P1D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_SEMANAL:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P7D', $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($precio, $id_campo, 
+                            $fecha, $fecha_limite, 'P7D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_MENSUAL:
-                    $mensaje = $this->realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, 'P1M', $hora_inicio, $hora_fin);
+                    $mensaje = $this->realizar_repeticion($precio, $id_campo, 
+                            $fecha, $fecha_limite, 'P1M', $hora_inicio, $hora_fin);
                     break;
             }
         }
@@ -163,7 +175,7 @@ class ControladorPrereservas extends CI_Controller {
         /**
          * zona horaria para bolivia
          */
-        date_default_timezone_set('America/Manaus');
+        date_default_timezone_set('America/La_Paz');
 
         /**
          * crea un nuevo objeto con la fecha de hoy
@@ -182,22 +194,28 @@ class ControladorPrereservas extends CI_Controller {
      * registradas.
      */
 
-    public function realizar_repeticion($nombre, $telefono, $precio, $id_campo, $fecha, $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
+    public function realizar_repeticion($precio, $id_campo, $fecha, 
+            $fecha_limite, $intervalo, $hora_inicio, $hora_fin) {
 
         $mensaje = '';
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
         $fecha_siguiente = date_add($fecha_formato, new DateInterval($intervalo));
         while ($fecha_siguiente <= $fecha_limite && $mensaje == '') {
-            $mensaje = $this->consultas->existe_reserva($id_campo, $fecha_siguiente->format("d/m/Y"), $hora_inicio, $hora_fin) ? "- En la repeticion: fecha " .
+            $mensaje = $this->consultas->existe_reserva($id_campo, 
+                    $fecha_siguiente->format("d/m/Y"), $hora_inicio, 
+                    $hora_fin) ? "- En la repeticion: fecha " .
                     $fecha_siguiente->format("Y/m/d") . ' existe una reserva.' : '';
             $reserva_otra = new Prereserva();
             $fechaExpiracion = $this->obtenerFechaExpiracion();
             $horaExpiracion = $this->obtenerHoraExpiracion();
-            $reserva_otra->actualizar($nombre, $telefono, $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL
-                    ,$fechaExpiracion, $horaExpiracion, self::CONFIRMADO);
+            $reserva_otra->actualizar($_SESSION['usuario'], 
+                    $_SESSION['telefono'], $id_campo, $fecha, $hora_inicio, 
+                    $hora_fin, $precio, self::RESERVA_ESPECIAL, $fechaExpiracion,
+                    $horaExpiracion, self::CONFIRMADO);
             $reserva_otra->cambiar_fecha($fecha_siguiente->format("d/m/Y"));
             $this->reservas->append($reserva_otra);
-            $fecha_siguiente = date_add($fecha_siguiente, new DateInterval($intervalo));
+            $fecha_siguiente = date_add($fecha_siguiente, 
+                    new DateInterval($intervalo));
         }
 
         return $mensaje;

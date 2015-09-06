@@ -12,7 +12,7 @@
             <label>Fecha Limite Pago : </label> <?php echo $reserva->fechaExpiracion; ?> <br>
             <label>Hora Limite Pago : </label> <?php echo $reserva->horaExpiracion; ?> <br>
 
-            <a href="<?php echo base_url(); ?>index.php/ControladorPrereservas/mostrarFormulario" class="btn btn-primary">Confirmar Prereserva >></a>
+            <a href="<?php echo base_url(); ?>index.php/ControladorConfirmarPrereserva/confirmar_prereserva?cod=<?php echo $reserva->id?>" class="btn btn-primary">Confirmar Prereserva >></a>
         </div>
     </div>
 <?php endforeach; ?>

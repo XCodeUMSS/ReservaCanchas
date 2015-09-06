@@ -18,12 +18,18 @@
                 <div class="col-sm-6">
                     <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorPrereservas/prereservar">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Nombre : <?php echo $usuario?></label>
+                            <label class="control-label col-sm-3">Nombre :</label>
+                            <div class="col-sm-9">
+                                <label class="control-label col-sm-3"><?php echo $usuario?></label>
+                            </div>
                         </div>
                         <input class="idcampo hidden" name="campo_deportivo" id="<?php echo $idCampo; ?>" value="<?php echo $idCampo; ?>">
                         <p class="idcampo" id="<?php echo $idCampo; ?>"></p>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Telefono Ref.: <?php echo $telefono?></label>
+                            <label class="control-label col-sm-3">Telefono Ref.:</label>
+                            <div class="col-sm-9">
+                                <label class="control-label col-sm-3"><?php echo $telefono?></label>
+                            </div>
                         </div>
 
                         <div class="form-group">

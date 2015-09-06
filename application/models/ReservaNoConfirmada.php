@@ -17,7 +17,7 @@ class ReservaNoConfirmada extends CI_Model{
      * @return Array
      */
     public function obtenerReservasNoConfirmadas() {
-        $this->db->select('r.NombreCliente AS nombre, '
+        $this->db->select('r.IdReserva as id, r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
                 . 'c.Nombre AS campo, ' . ' r.Precio as precio, ' 
@@ -35,7 +35,7 @@ class ReservaNoConfirmada extends CI_Model{
      * @return Array
      */
     public function obtenerReservasNoConfirmadasPorUsuario($nombreUsuario) {
-        $this->db->select('r.NombreCliente AS nombre, '
+        $this->db->select('r.IdReserva as id, r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
                 . 'c.Nombre AS campo, ' . ' r.Precio as precio, ' 
@@ -44,5 +44,12 @@ class ReservaNoConfirmada extends CI_Model{
         $this->db->where("r.IdCampoDeportivo = c.IdCampoDeportivo AND r.Confirmado = FALSE AND \"r\".\"NombreCliente\" ilike '".$nombreUsuario."%'");
         $consulta = $this->db->get();
         return $consulta->result();
+    }
+    
+    
+    public function confirmar($id) {
+        $this->db->set('Confirmado', true);
+        $this->db->where('IdReserva', $id);
+        $this->db->update('Reserva');
     }
 }

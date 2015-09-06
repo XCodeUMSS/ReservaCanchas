@@ -11,7 +11,7 @@
             <label>Hora Fin Atencion :</label><?php echo $cancha->horaFin; ?>
 
 
-            <p><a href="<?php echo base_url();?>index.php/ControladorPrereservas/mostrarFormulario?cod=<?php echo $cancha->id; ?>" class="btn btn-primary">Realizar Preserva >></a></p>
+            <p><a href="<?php echo base_url();?>index.php/ControladorPrereservas/index?cod=<?php echo $cancha->id; ?>" class="btn btn-primary">Realizar Preserva >></a></p>
         </div>
         <div class=" col-sm-6 clearfix">
             <img class="img-rounded img-responsive" src="<?php echo (base_url().$cancha->imagen); ?>" width="250" height="150">
