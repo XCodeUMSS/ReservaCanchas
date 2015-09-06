@@ -55,8 +55,9 @@ class ControladorPrereservas extends CI_Controller {
      * @return type
      */
     public function realizarPrereserva() {
-        $nombre = $this->input->post('nombre_cliente');
-        $telefono = $this->input->post('telefono_referencia');
+        session_start();
+        $nombre = $_SESSION['nombre'];
+        $telefono = $_SESSION['telefono'];
         $id_campo = $this->input->post('campo_deportivo');
         $this->idcampo = $id_campo;
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
@@ -83,7 +84,9 @@ class ControladorPrereservas extends CI_Controller {
      * Muestra los Detalles de las canchas hacia los usuarios
      */
     public function mostrarDetallesCanchas() {
+        session_start();
         $datos['canchas'] = $this->consultas->campos_registrados();
+        $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $this->load->view('vista_detalles_canchas', $datos);
     }
 
@@ -91,7 +94,7 @@ class ControladorPrereservas extends CI_Controller {
      * Realiza el renderizado de la vista de prereservas
      */
     public function mostrarFormulario() {
-
+        session_start();
         if (isset($_REQUEST['cod'])) {
             $campo = $_REQUEST['cod'];
             $this->codigo = $campo;
@@ -99,12 +102,17 @@ class ControladorPrereservas extends CI_Controller {
             $this->codigo = $this->idcampo;
         }
 
-
+        
+        $datos_usuario = $this->consultas->datos_usuario($_SESSION['usuario']);
+        $_SESSION['telefono'] = $datos_usuario->telefono;
+        $_SESSION['nombre'] = $datos_usuario->nombre;
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $datos['mensaje'] = $this->mensaje;
         $datos['idCampo'] = $this->codigo;
         $datos['nombreCampo'] = $this->consultas->obtenerNombreCampo($this->codigo);
-        
+        $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
+        $datos['usuario'] = $datos_usuario->nombre;
+        $datos['telefono'] = $datos_usuario->telefono;
         $this->load->view('vista_prereserva', $datos);
     }
 

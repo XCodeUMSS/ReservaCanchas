@@ -40,12 +40,29 @@ class Welcome extends CI_Controller {
      */
 
     public function index() {
+        session_start();
         $datos['mensaje'] = $this->mensaje;
-        $this->load->view('inicio_sesion', $datos);
+        if(!empty($_SESSION['usuario'])){
+            $this->bienvenida();
+        }
+        else{
+            $this->load->view('inicio_sesion', $datos);
+        }
+            
+    }
+    
+    /*
+     * Funcion que da la bienvenida al usuario
+     */
+    
+    public function bienvenida() {
+        $datos['usuario'] = $_SESSION['usuario'];
+        $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
+        $this->load->view('bienvenido_usuario', $datos);
     }
 
     /*
-     * 
+     * Funcion que procesa los datos para iniciar sesion
      */
 
     public function solicitud_sesion() {
@@ -54,28 +71,45 @@ class Welcome extends CI_Controller {
         $this->iniciar_sesion($nombre_usuario, $ci);
     }
     
-        /*
-     * 
-     */
+    /*
+    * Funcion que ve si los datos son correctos pa iniciar la sesion.
+    */
 
     public function iniciar_sesion($nombre_usuario, $ci) {
         if($this->consultas->sesion_exitosa($nombre_usuario, $ci)){
-            echo "Iniciando sesion: Bienvenido $nombre_usuario";
+            session_start();
+            $_SESSION['usuario'] = $nombre_usuario;
+            $_SESSION['rol'] = $this->consultas->rol_usuario($nombre_usuario);
+            $this->bienvenida();
         }
         else{
             $this->mensaje = 'Los datos son incorrectos.';
             $this->index();
         }
     }
+    
+    /*
+    *   Funcion que cierra la sesion 
+    */
+
+    public function cerrar_sesion() {
+        session_start();
+        session_destroy();
+        $this->index();
+    }
 
     /*
-     * 
-     */
+    *   Funcion que muestra el form registro. 
+    */
 
     public function vista_registro() {
         $datos['mensaje'] = $this->mensaje;
         $this->load->view('registro_usuario', $datos);
     }
+    
+    /*
+    *   Funcion que ve si los datos son validos para un registro. 
+    */
     
     public function registrar_usuario() {
         $nombre_usuario = $this->input->post('nombre_usuario');

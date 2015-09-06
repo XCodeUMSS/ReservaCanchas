@@ -18,18 +18,12 @@
                 <div class="col-sm-6">
                     <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorPrereservas/prereservar">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Nombre :</label>
-                            <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con letra y contener solo letras, minima longitud de 3" pattern="^[a-zA-Z][a-zA-Z ]{1,}[a-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
-                            </div>
+                            <label class="control-label col-sm-3">Nombre : <?php echo $usuario?></label>
                         </div>
                         <input class="idcampo hidden" name="campo_deportivo" id="<?php echo $idCampo; ?>" value="<?php echo $idCampo; ?>">
                         <p class="idcampo" id="<?php echo $idCampo; ?>"></p>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Telefono Ref.:</label>
-                            <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con 4, 6 o 7 y contener solo numeros, minima longitud de 6 o 7" pattern="^[4|6|7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
-                            </div>
+                            <label class="control-label col-sm-3">Telefono Ref.: <?php echo $telefono?></label>
                         </div>
 
                         <div class="form-group">

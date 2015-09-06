@@ -42,10 +42,12 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function index() {
+        session_start();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $datos['mensaje'] = $this->mensaje;
+        $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $this->load->view('vista_realizar_reserva', $datos);
     }
 

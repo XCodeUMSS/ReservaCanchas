@@ -15,11 +15,15 @@
         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Inicio</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorCanchas/index">Canchas</a></li>
+                <?php foreach ($menus as $menu) {?>
+                    <li><a href="<?php echo $menu->url?>"><?php echo $menu->nombre ?></a></li>
+                <?php }?>
+                    <li><a href="<?php echo base_url();?>index.php/Welcome/cerrar_sesion">Cerrar Sesion</a></li>
+<!--                <li><a href="<?php echo base_url();?>index.php/ControladorCanchas/index">Canchas</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
                 <li><a href="<?php echo base_url();?>index.php/ControladorPrereservas/mostrarDetallesCanchas">Prereservas</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion">Reservas No Confirmadas</a></li>
+                <li><a href="<?php echo base_url();?>index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion">Reservas No Confirmadas</a></li>-->
             </ul>
         </div>
     </div>

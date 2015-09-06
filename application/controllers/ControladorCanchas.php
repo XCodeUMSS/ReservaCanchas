@@ -38,10 +38,12 @@ class ControladorCanchas extends CI_Controller{
      */
 
     public function index() {
+        session_start();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['tipos_cancha'] = $this->consultas->tipos_cancha();
         $datos['tipos_suelo'] = $this->consultas->tipos_suelo();
         $datos['mensaje'] = $this->mensaje;
+        $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $this->load->view('vista_agregar_cancha', $datos);
     }
 
