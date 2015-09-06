@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Carnet Identidad:</label>
                             <div class="col-sm-9">
-                                <input type="password" required class="form-control" name="ci" id="ci">
+                                <input type="password" title="Solo se permiten numeros" pattern="[0-9]*" inputmode="numeric" required class="form-control" name="ci" id="ci">
                             </div>
                         </div>
                         <div class="form-group">

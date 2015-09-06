@@ -24,7 +24,7 @@
 
 </header>
         <div class="container well">
-            <h2>XCode Iniciar Sesion</h2><br>
+            <h2>XCode Registro de usuario</h2><br>
             <div class="row">
                 <div class="col-sm-6">
                     <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
