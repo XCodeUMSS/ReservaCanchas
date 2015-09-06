@@ -17,7 +17,7 @@
                 </div>
                 <?php require_once 'inc/mensaje_alerta.php';?>
                 <div class="col-sm-6">
-                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/Welcome/agregar_campo">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="<?php echo base_url(); ?>index.php/ControladorCanchas/agregar_campo">
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">

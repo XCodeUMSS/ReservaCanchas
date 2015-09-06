@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con letra y contener solo letras, minima longitud de 3" pattern="^[a-zA-Z][a-zA-Z ]{1,}[a-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
+                                <label class="control-label col-sm-3"><?php echo $usuario?></label>
                             </div>
                         </div>
                         <input class="idcampo hidden" name="campo_deportivo" id="<?php echo $idCampo; ?>" value="<?php echo $idCampo; ?>">
@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Telefono Ref.:</label>
                             <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con 4, 6 o 7 y contener solo numeros, minima longitud de 6 o 7" pattern="^[4|6|7][0-9]{6,7}" required class="form-control" name="telefono_referencia" id="telefono_referencia">
+                                <label class="control-label col-sm-3"><?php echo $telefono?></label>
                             </div>
                         </div>
 

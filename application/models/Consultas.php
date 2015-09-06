@@ -197,5 +197,75 @@ class Consultas extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->result();
     }
+    
+    /*
+     * Funcion que verifica si existe un usuario con ese nombre.
+     */
+    
+    public function existe_usuario($nombre) {
+        $this->db->select('IdUsuario');
+        $this->db->from('Usuario');
+        $this->db->where('NombreUsuario', $nombre);
+        $consulta = $this->db->get();
+        return $consulta->num_rows() > 0;
+    }
+    
+    /*
+     * Funcion que registra usuarios.
+     */
+    
+    public function registrar_usuario($usuario) {
+        $this->db->insert("Usuario", $usuario);
+    }
+    
+    /*
+     * Funcion que verifica si los datos de sesion son correctos.
+     */
+    
+    public function sesion_exitosa($usuario, $ci) {
+        $this->db->select('IdUsuario');
+        $this->db->from('Usuario');
+        $this->db->where("NombreUsuario = '".$usuario.
+                "' AND CarnetIdentidad = '" . $ci."'");
+        $consulta = $this->db->get();
+        return $consulta->num_rows() > 0;
+    }
 
+    /*
+     * Funcion que da el rol de un usuario
+     */
+    
+    public function rol_usuario($usuario) {
+        $this->db->select('r.Nombre as rol');
+        $this->db->from('Usuario as u, Rol as r');
+        $this->db->where("u.NombreUsuario = '".$usuario.
+                "' AND u.Rol = r.IdRol");
+        $consulta = $this->db->get();
+        return $consulta->first_row()->rol;
+    }
+    
+    /*
+     * Funcion que da los menus de acuerdo al rol
+     */
+    
+    public function menus($rol) {
+        $this->db->select('m.Nombre as nombre, m.Url as url');
+        $this->db->from('Menu as m, Rol as r');
+        $this->db->where("r.Nombre = '".$rol.
+                "' AND m.IdRol = r.IdRol");
+        $consulta = $this->db->get();
+        return $consulta->result();
+    }
+    
+    /*
+     * Funcion que da los datos del usuario
+     */
+    
+    public function datos_usuario($usuario) {
+        $this->db->select('Nombre as nombre, TelefonoReferencia as telefono');
+        $this->db->from('Usuario');
+        $this->db->where("NombreUsuario = '".$usuario."'");
+        $consulta = $this->db->get();
+        return $consulta->first_row();
+    }
 }

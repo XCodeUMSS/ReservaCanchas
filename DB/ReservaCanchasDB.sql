@@ -307,6 +307,101 @@ ALTER TABLE public."TipoRepeticion" OWNER TO postgres;
  
  
  ALTER TABLE public."TipoSuelo" OWNER TO postgres;
+
+--
+ -- TOC entry 178 (class 1259 OID 49525)
+ -- Name: seqidmenu; Type: SEQUENCE; Schema: public; Owner: postgres
+ --
+ 
+ CREATE SEQUENCE seqidmenu
+     START WITH 1
+     INCREMENT BY 1
+     NO MINVALUE
+     NO MAXVALUE
+     CACHE 1;
+ 
+ 
+ ALTER TABLE public.seqidmenu OWNER TO postgres;
+
+
+--
+-- TOC entry 189 (class 1259 OID 65693)
+-- Name: Menu; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Menu" (
+    "IdMenu" integer DEFAULT nextval('seqidmenu'::regclass) NOT NULL,
+    "Nombre" character varying NOT NULL,
+    "Url" character varying NOT NULL,
+    "IdRol" integer NOT NULL
+);
+
+
+ALTER TABLE public."Menu" OWNER TO postgres;
+
+--
+ -- TOC entry 178 (class 1259 OID 49525)
+ -- Name: seqidrol; Type: SEQUENCE; Schema: public; Owner: postgres
+ --
+ 
+ CREATE SEQUENCE seqidrol
+     START WITH 1
+     INCREMENT BY 1
+     NO MINVALUE
+     NO MAXVALUE
+     CACHE 1;
+ 
+ 
+ ALTER TABLE public.seqidrol OWNER TO postgres;
+
+
+--
+-- TOC entry 185 (class 1259 OID 65659)
+-- Name: Rol; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Rol" (
+    "IdRol" integer DEFAULT nextval('seqidrol'::regclass) NOT NULL,
+    "Nombre" character varying NOT NULL
+);
+
+
+ALTER TABLE public."Rol" OWNER TO postgres;
+
+
+--
+ -- TOC entry 178 (class 1259 OID 49525)
+ -- Name: seqidusuario; Type: SEQUENCE; Schema: public; Owner: postgres
+ --
+ 
+ CREATE SEQUENCE seqidusuario
+     START WITH 1
+     INCREMENT BY 1
+     NO MINVALUE
+     NO MAXVALUE
+     CACHE 1;
+ 
+ 
+ ALTER TABLE public.seqidusuario OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 65668)
+-- Name: Usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Usuario" (
+    "IdUsuario" integer DEFAULT nextval('seqidusuario'::regclass) NOT NULL,
+    "NombreUsuario" character varying NOT NULL,
+    "Nombre" character varying NOT NULL,
+    "Apellidos" character varying NOT NULL,
+    "TelefonoReferencia" integer NOT NULL,
+    "CarnetIdentidad" integer NOT NULL,
+    "Rol" integer NOT NULL
+);
+
+
+ALTER TABLE public."Usuario" OWNER TO postgres;
+
  
  --
  -- TOC entry 1993 (class 0 OID 49494)
@@ -376,7 +471,40 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
  INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (1, 'Cesped');
  INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (2, 'Pavimento');
  INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (3, 'Madera');
+
+--
+ -- TOC entry 2001 (class 0 OID 49527)
+ -- Dependencies: 179
+ -- Data for Name: Menu; Type: TABLE DATA; Schema: public; Owner: postgres
+ --
  
+ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (1, 'Campos Deportivos', 'http://localhost/Repo/ReservaCanchas/index.php/ControladorCanchas/index', 1);
+
+ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (2, 'Realizar Reserva', 'http://localhost/Repo/ReservaCanchas/index.php/ControladorReserva/index', 1);
+
+ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (3, 'Realizar Reserva Especial', 'http://localhost/Repo/ReservaCanchas/index.php/ControladorReservaEspecial/index', 1);
+
+INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (4, 'Confirmar Reservas', 'http://localhost/Repo/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion', 1);
+
+INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (5, 'Realizar Reserva', 'http://localhost/Repo/ReservaCanchas/index.php/ControladorPrereservas/mostrarDetallesCanchas', 2);
+
+--
+-- TOC entry 1994 (class 0 OID 65659)
+-- Dependencies: 185
+-- Data for Name: Rol; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "Rol" ("IdRol", "Nombre") VALUES (1, 'Administrador'); 
+
+INSERT INTO "Rol" ("IdRol", "Nombre") VALUES (2, 'Cliente');
+
+--
+-- TOC entry 1995 (class 0 OID 65668)
+-- Dependencies: 187
+-- Data for Name: Usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "Usuario" ("IdUsuario", "NombreUsuario", "Nombre", "Apellidos", "TelefonoReferencia", "CarnetIdentidad", "Rol") VALUES (1, 'Admi', 'XCode', 'Agil', 4472104, 123456, 1); 
  
  --
  -- TOC entry 2013 (class 0 OID 0)
@@ -439,7 +567,31 @@ SELECT pg_catalog.setval('seqidtiporepeticion', 1, false);
  
  SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
  
+ --
+ -- TOC entry 2018 (class 0 OID 0)
+ -- Dependencies: 178
+ -- Name: seqidmenu; Type: SEQUENCE SET; Schema: public; Owner: postgres
+ --
  
+ SELECT pg_catalog.setval('seqidmenu', 5, true);
+ 
+ --
+ -- TOC entry 2018 (class 0 OID 0)
+ -- Dependencies: 178
+ -- Name: seqidrol; Type: SEQUENCE SET; Schema: public; Owner: postgres
+ --
+ 
+ SELECT pg_catalog.setval('seqidrol', 2, true);
+ 
+--
+ -- TOC entry 2018 (class 0 OID 0)
+ -- Dependencies: 178
+ -- Name: seqidusuario; Type: SEQUENCE SET; Schema: public; Owner: postgres
+ --
+ 
+ SELECT pg_catalog.setval('seqidusuario', 1, true);
+
+
  --
  -- TOC entry 1866 (class 2606 OID 49535)
  -- Name: IdCampoDeportivo; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
@@ -493,7 +645,42 @@ SELECT pg_catalog.setval('seqidtiporepeticion', 1, false);
  ALTER TABLE ONLY "HorarioAtencion"
      ADD CONSTRAINT "idHorario" PRIMARY KEY ("IdHorario");
  
+--
+-- TOC entry 1880 (class 2606 OID 65676)
+-- Name: idRol; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Rol"
+    ADD CONSTRAINT "idRol" PRIMARY KEY ("IdRol");
+
+
+--
+-- TOC entry 1882 (class 2606 OID 65678)
+-- Name: idUsuario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Usuario"
+    ADD CONSTRAINT "idUsuario" PRIMARY KEY ("IdUsuario");
+
+
+--
+-- TOC entry 1886 (class 2606 OID 65702)
+-- Name: Menu-Rol; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Menu"
+    ADD CONSTRAINT "Menu-Rol" FOREIGN KEY ("IdRol") REFERENCES "Rol"("IdRol") ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 1885 (class 2606 OID 65679)
+-- Name: Usuario-Rol; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Usuario"
+    ADD CONSTRAINT "Usuario-Rol" FOREIGN KEY ("Rol") REFERENCES "Rol"("IdRol");
  
+
  --
  -- TOC entry 1867 (class 1259 OID 49544)
  -- Name: fki_IDTipoSuelo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 

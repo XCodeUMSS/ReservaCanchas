@@ -17,6 +17,7 @@
         <?php require_once 'inc/cabecera_vistas.php'; ?>
         <div class="container well">
             <h3>Confirmar Prereserva</h3>
+            <?php require_once 'inc/mensaje_alerta.php'; ?>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Buscar  </span>
                 <input type="text" id="nombre_usuario" class="form-control" placeholder="Nombre de Usuario" aria-describedby="basic-addon1">
