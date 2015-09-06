@@ -10,10 +10,12 @@ class ControladorConfirmarPrereserva extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model('Prereserva');
+        $this->load->model('reservaNoConfirmada');
     }
     
     public function mostrarVistaConfirmacion() {
-        $this->load->view('vista_confirmar_prereserva');
+        $datos['reservas'] = $this->reservaNoConfirmada->obtenerReservasNoConfirmadas();
+        
+        $this->load->view('vista_confirmar_prereserva', $datos);
     }
 }
