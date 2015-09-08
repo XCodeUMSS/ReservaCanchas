@@ -161,12 +161,18 @@ class Consultas extends CI_Model {
             $hora_fin) {
         $this->db->select('IdReserva');
         $this->db->from('Reserva');
-        $this->db->where("IdCampoDeportivo = '" . $id_campo .
+        $this->db->where("(IdCampoDeportivo = '" . $id_campo .
                 "' AND Fecha = '" . $fecha . 
-                "' AND (HoraInicio < '" . $hora_fin . 
-                "' AND HoraInicio >= '". $hora_inicio . 
-                "' OR HoraFin > '" . $hora_inicio . 
-                "' AND HoraFin <= '". $hora_fin . "')");
+                "' AND HoraInicio < '" . $hora_fin .
+                "' AND HoraFin >= '" . $hora_fin .
+                "') OR (IdCampoDeportivo = '" . $id_campo .
+                "' AND Fecha = '" . $fecha . 
+                "' AND HoraInicio <= '". $hora_inicio . 
+                "' AND HoraFin > '" . $hora_inicio . 
+                "') OR ( IdCampoDeportivo = '" . $id_campo .
+                "' AND Fecha = '" . $fecha . 
+                "' AND HoraFin <= '". $hora_fin . 
+                "' AND HoraInicio >= '" . $hora_inicio ."')");
         $consulta = $this->db->get();
         return $consulta->num_rows() > 0;
     }
