@@ -85,5 +85,6 @@
             <?php require_once '/tabla_cancha.php'; ?>
         </div>
         <?php require_once 'inc/inclusion_jquery.php'; ?>
+        <script src="<?php echo base_url(); ?>assets/js/actualizacion_mensaje.js"></script>
     </body>
 </html>

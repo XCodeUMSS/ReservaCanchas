@@ -1,4 +1,4 @@
 <div>
-    <p style="color:red"><?php echo $mensaje;?></p>
+    <p id="mensaje" style="color:red"><?php echo $mensaje;?></p>
 </div>
 
