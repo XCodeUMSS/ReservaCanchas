@@ -60,10 +60,10 @@ function obtenerReservasPorFecha(fecha) {
     //Invocar al metodo ajax de jquery
     $.ajax({
         data: 'fecha_reserva=' + fecha,
-        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
+        url: '../servicioDeFiltracionDatos/procesarPeticionFecha',
         type: 'post',
         beforeSend: function () {
-            console.log('enviando la peticion......');
+            console.log('enviando la peticion......fasdfsd');
         },
         success: function (response) {
             console.log('La peticion ha sido satisfactoria');
