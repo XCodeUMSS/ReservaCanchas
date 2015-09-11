@@ -44,16 +44,17 @@ class ModeloFiltracionDatos extends CI_Model {
      * como un array asociativo.
      */
     
-    public function reservas_registradas($id_campo) {
+    public function reservas_registradas($id_campo, $fecha_reserva) {
+        $fecha = $this->formatear_fecha($fecha_reserva);
         
         $this->db->select('r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
-                . 'c.Nombre AS campo');
+                . 'c.Nombre AS campo, r.Confirmado AS confirmado');
         $this->db->from('Reserva AS r, CampoDeportivo as c');
         $this->db->where("r.IdCampoDeportivo = c.IdCampoDeportivo".
-                "AND r.IdCampoDeportivo = '".$id_campo."'");
-        $this->db->order_by('r.HoraInicio', 'asc');
+                "AND r.IdCampoDeportivo = '".$id_campo."' AND r.Fecha = '".$fecha."'");
+        //$this->db->order_by('r.HoraInicio', 'asc');
         $consulta = $this->db->get();
         
         

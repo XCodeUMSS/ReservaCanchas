@@ -6,21 +6,75 @@
 $(document).ready(function () {
     fechaActual = $('#fecha_reserva').val();
 
-    realizarPeticionFecha($('#fecha_reserva').val());
+    //realizarPeticionFecha($('#fecha_reserva').val());
+    obtenerReservasPorFecha($('#fecha_reserva').val());
     /*
      * Agregado del evento change, para detectar cambios en campo deportivo
      */
     $("select[name=campo_deportivo]").change(function () {
 
-        realizarPeticionCampo($('select[name=campo_deportivo]').val());
+        //realizarPeticionCampo($('select[name=campo_deportivo]').val());
+        obtenerReservas($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
 
         realizarPeticionHorario($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
     });
 
-    
+
     detectarCambiosFecha();
 
 });
+
+/**
+ * Funcion que realiza la peticion ajax al servidor, filtrando reservas
+ * deacuerdo a fecha y campo
+ * @param {date} fecha
+ * @returns void
+ */
+function obtenerReservas(id_campo_deportivo, fecha) {
+    //Invocar al metodo ajax de jquery
+    $.ajax({
+        data: 'id_campo_deportivo=' + id_campo_deportivo + '&fecha_reserva=' + fecha,
+        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
+        type: 'post',
+        beforeSend: function () {
+            console.log('enviando la peticion......');
+        },
+        success: function (response) {
+            console.log('La peticion ha sido satisfactoria');
+
+            $('#cuerpo-tabla-reservas').html(response);
+        },
+        error: function () {
+            console.log('Existen fallas en el servidor');
+        }
+    });
+}
+
+/**
+ * Obtiene las reservas deacuerdo a una fecha
+ * Esta funcion solo se ejecuta una vez, cuando la pagina ha sido cargada
+ * @param {date} fecha
+ * @returns void
+ */
+function obtenerReservasPorFecha(fecha) {
+    //Invocar al metodo ajax de jquery
+    $.ajax({
+        data: 'fecha_reserva=' + fecha,
+        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
+        type: 'post',
+        beforeSend: function () {
+            console.log('enviando la peticion......');
+        },
+        success: function (response) {
+            console.log('La peticion ha sido satisfactoria');
+
+            $('#cuerpo-tabla-reservas').html(response);
+        },
+        error: function () {
+            console.log('Existen fallas en el servidor');
+        }
+    });
+}
 
 /**
  * Esta funcion detecta cambios en el campo de fecha de manera automatica
@@ -29,10 +83,15 @@ $(document).ready(function () {
 function detectarCambiosFecha() {
     setInterval(function () {
         if (fechaActual != $('#fecha_reserva').val()) {
-            realizarPeticionFecha($('#fecha_reserva').val());
-
-            fechaActual = $('#fecha_reserva').val();
-            realizarPeticionHorario($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
+            //realizarPeticionFecha($('#fecha_reserva').val());
+            if ($('select[name=campo_deportivo]').val() == 'nulo') {
+                obtenerReservasPorFecha($('#fecha_reserva').val());
+                fechaActual = $('#fecha_reserva').val();
+            } else {
+                obtenerReservas($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
+                fechaActual = $('#fecha_reserva').val();
+                realizarPeticionHorario($('select[name=campo_deportivo]').val(), $('#fecha_reserva').val());
+            }
         }
     }, 200);
 }
@@ -46,7 +105,7 @@ function realizarPeticionFecha(fecha) {
     //Invocar al metodo ajax de jquery
     $.ajax({
         data: 'fecha_reserva=' + fecha,
-        url: '../servicioDeFiltracionDatos/procesarPeticionAjax',
+        url: '../servicioDeFiltracionDatos/procesarPeticionFecha',
         type: 'post',
         beforeSend: function () {
             console.log('enviando la peticion......');
@@ -135,17 +194,17 @@ function realizarPeticionHorario(idCampoDeportivo, fecha) {
  */
 function exitoPeticionHorarios(respuesta) {
     var horarioAtencion = respuesta.horariosAtencion[0];
-    
+
     var horarios = respuesta.horarios;
-    
+
     /**
      * Almacenador de horarios validos
      * @type Array
      */
     var horariosDisponibles = [];
-    
+
     horariosDisponibles = calcularHorariosDisponibles(horarios, horarioAtencion);
-  
+
     renderizarHorariosDisponibles(horariosDisponibles);
 }
 
@@ -157,7 +216,7 @@ function exitoPeticionHorarios(respuesta) {
 function renderizarHorariosDisponibles(horariosDisponibles) {
     var result = "<ul class=\"list-group\">" +
             "<li class=\"list-group-item active\">Horarios Disponibles</li>";
-    
+
     for (var i = 0; i < horariosDisponibles.length; i++) {
         result = result + "<li class=\"list-group-item\"><span class=\"text-left\">" + horariosDisponibles[i].horaInicio +
                 "</span> -     <span class=\"text-right\">" + horariosDisponibles[i].horaFin + "</span></li>"
@@ -175,12 +234,12 @@ function renderizarHorariosDisponibles(horariosDisponibles) {
  */
 function calcularHorariosDisponibles(horarios, horarioAtencion) {
     var horariosDisponibles = [];
-    
+
     //Hora Inicial de horarios disponibles
     var horaIni = horarioAtencion.horaInicio;
     //Hora Final de horarios disponibles
     var horaTer = horarioAtencion.horaFin;
-    
+
     for (var i = 0; i < horarios.length; i++) {
         if (horarios[i].horaInicio == horarioAtencion.horaInicio) {
             horaIni = horarios[i].horaFin;
@@ -199,7 +258,7 @@ function calcularHorariosDisponibles(horarios, horarioAtencion) {
         }
 
     }
-    
+
     if (horaIni != horaTer) {
         var objeto = {
             horaInicio: horaIni,
@@ -207,7 +266,7 @@ function calcularHorariosDisponibles(horarios, horarioAtencion) {
         };
         horariosDisponibles[horariosDisponibles.length] = objeto;
     }
-    
+
     return horariosDisponibles;
 }
 
