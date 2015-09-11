@@ -51,7 +51,9 @@ class ControladorPrereservas extends CI_Controller {
             for ($i = 0; $i < count($this->reservas); $i++) {
                 $this->consultas->registrar_reserva($this->reservas[$i]->datos());
             }
-            $this->mensaje = "Su reserva fue exitosamente registrada.";
+            $this->mensaje = "Su reserva fue exitosamente registrada, usted debe "
+                    . "pagar el precio de la reserva en un plazo de dos dias,"
+                    . "caso contrario se eliminara su reserva.";
         }
         $this->mostrarFormulario();
     }
