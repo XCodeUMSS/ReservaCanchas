@@ -12,6 +12,7 @@ class ControladorPrereservas extends CI_Controller {
     private $validador;
     var $reservas;
     var $mensaje;
+    var $precio;
 
     //Constantes a ser usadas como valores por defecto en los campos necesarios
     const RESERVA_ESPECIAL = false;
@@ -52,7 +53,7 @@ class ControladorPrereservas extends CI_Controller {
                 $this->consultas->registrar_reserva($this->reservas[$i]->datos());
             }
             $this->mensaje = "Su reserva fue exitosamente registrada, usted debe "
-                    . "pagar el precio de la reserva en un plazo de dos dias,"
+                    . "pagar el precio de la reserva: $this->precio en un plazo de dos dias,"
                     . "caso contrario se eliminara su reserva.";
         }
         $this->mostrarFormulario();
@@ -74,7 +75,7 @@ class ControladorPrereservas extends CI_Controller {
         $valido = false;
 
         $precio = $this->calcular_precio($id_campo, $hora_inicio, $hora_fin);
-
+        $this->precio = $precio;
         $mensaje = '';
         $mensaje .= $this->validador->datos_validos_reserva($_SESSION['usuario'],
                 $fecha, $hora_inicio, $hora_fin);
