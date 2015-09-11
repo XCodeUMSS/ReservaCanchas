@@ -44,57 +44,57 @@ INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (3, 'Madera');
 -- Data for Name: CampoDeportivo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (1, 'El Balon', 20, './assets/img/El Balon.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (2, 'FastBall', 20, './assets/img/FastBall.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (3, 'Los Balones', 20, './assets/img/Los Balones.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (4, 'Ositos', 20, './assets/img/Ositos.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (5, 'Panchito', 20, './assets/img/Panchito.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (6, 'Pentachampion', 20, './assets/img/Pentachampion.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (7, 'Pies y Tacos', 20, './assets/img/Pies y Tacos.jpg', 4, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (8, 'Pollitos', 10, './assets/img/Pollitos.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (9, 'Ronaldinho', 10, './assets/img/Ronaldinho.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (10, 'Sierra Nevada', 10, './assets/img/Sierra Nevada.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (11, 'SpeedBall', 10, './assets/img/SpeedBall.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (12, 'UEFA', 10, './assets/img/UEFA.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (13, 'Zinedine', 10, './assets/img/Zinedine.jpg', 4, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (14, 'Gol Presente', 15, './assets/img/Gol Presente.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (15, 'Goles de Fuego', 15, './assets/img/Goles de Fuego.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (16, 'Gran Penalty', 15, './assets/img/Gran Penalty.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (17, 'Hambre y Goles', 15, './assets/img/Hambre y Goles.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (18, 'Heidelbergen Sokker', 15, './assets/img/Heidelbergen Sokker.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (19, 'Joga Futebol', 15, './assets/img/Joga Futebol.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (20, 'Penalty', 15, './assets/img/Penalty.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (21, 'Porteria Grande', 10, './assets/img/Porteria Grande.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (22, 'Real Madrid Soccer', 10, './assets/img/Real Madrid Soccer.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (23, 'Soccer y Taco', 10, './assets/img/Soccer y Taco.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (24, 'SoccerFive', 10, './assets/img/SoccerFive.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (25, 'Soccer Match', 10, './assets/img/Soccer Match.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (26, 'Tiro de Esquina', 10, './assets/img/Tiro de Esquina.jpg', 3, 1);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (27, 'Balon de Oro', 55, './assets/img/Balon de Oro.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (28, 'Campo Futbolero', 55, './assets/img/Campo Futbolero.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (29, 'Diversoccer', 55, './assets/img/Diversoccer.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (30, 'Eat and Run Soccer', 55, './assets/img/Eat and Run Soccer.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (31, 'El Rey del Gol', 55, './assets/img/El Rey del Gol.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (32, 'FIFA Soccer', 55, './assets/img/FIFA Soccer.jpg', 2, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (33, 'Firesoccer', 75, './assets/img/Firesoccer.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (34, 'Futbol de a Varo', 75, './assets/img/Futbol de a Varo.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (35, 'Futbol y Taco', 75, './assets/img/Futbol y Taco.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (36, 'Futboleros Comelones', 75, './assets/img/Futboleros Comelones.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (37, 'FutbolFive', 75, './assets/img/FutbolFive.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (38, 'Futbolorama 2000', 75, './assets/img/Futbolorama 2000.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (39, 'Gol de Oro', 75, './assets/img/Gol de Oro.jpg', 2, 3);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (40, 'America 4 Ever', 65, './assets/img/America 4 Ever.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (41, 'Balones Ponchados', 65, './assets/img/Balones Ponchados.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (42, 'Campo del Balon', 65, './assets/img/Campo del Balon.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (43, 'Contrapuntos y Balones', 65, './assets/img/Contrapuntos y Balones.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (44, 'Diverball', 65, './assets/img/Diverball.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (45, 'El balonsito', 50, './assets/img/El balonsito.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (46, 'El rinconsito del balon', 50, './assets/img/El rinconsito del balon.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (47, 'Fireball', 50, './assets/img/Fireball.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (48, 'General Zaragoza', 55, './assets/img/General Zaragoza.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (49, 'Joga Bonito', 55, './assets/img/Joga Bonito.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (50, 'Joga Feito', 55, './assets/img/Joga Feito.jpg', 1, 2);
-INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (51, 'Miguel Hidalgo y Costilla', 70, './assets/img/Miguel Hidalgo y Costilla.jpg', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (1, 'El Balon', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (2, 'FastBall', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (3, 'Los Balones', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (4, 'Ositos', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (5, 'Panchito', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (6, 'Pentachampion', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (7, 'Pies y Tacos', 20, './assets/img/default.png', 4, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (8, 'Pollitos', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (9, 'Ronaldinho', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (10, 'Sierra Nevada', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (11, 'SpeedBall', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (12, 'UEFA', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (13, 'Zinedine', 10, './assets/img/default.png', 4, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (14, 'Gol Presente', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (15, 'Goles de Fuego', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (16, 'Gran Penalty', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (17, 'Hambre y Goles', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (18, 'Heidelbergen Sokker', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (19, 'Joga Futebol', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (20, 'Penalty', 15, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (21, 'Porteria Grande', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (22, 'Real Madrid Soccer', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (23, 'Soccer y Taco', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (24, 'SoccerFive', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (25, 'Soccer Match', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (26, 'Tiro de Esquina', 10, './assets/img/default.png', 3, 1);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (27, 'Balon de Oro', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (28, 'Campo Futbolero', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (29, 'Diversoccer', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (30, 'Eat and Run Soccer', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (31, 'El Rey del Gol', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (32, 'FIFA Soccer', 55, './assets/img/default.png', 2, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (33, 'Firesoccer', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (34, 'Futbol de a Varo', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (35, 'Futbol y Taco', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (36, 'Futboleros Comelones', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (37, 'FutbolFive', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (38, 'Futbolorama 2000', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (39, 'Gol de Oro', 75, './assets/img/default.png', 2, 3);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (40, 'America 4 Ever', 65, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (41, 'Balones Ponchados', 65, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (42, 'Campo del Balon', 65, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (43, 'Contrapuntos y Balones', 65, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (44, 'Diverball', 65, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (45, 'El balonsito', 50, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (46, 'El rinconsito del balon', 50, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (47, 'Fireball', 50, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (48, 'General Zaragoza', 55, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (49, 'Joga Bonito', 55, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (50, 'Joga Feito', 55, './assets/img/default.png', 1, 2);
+INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "RutaFoto", "IdTipoCancha", "IdTipoSuelo") VALUES (51, 'Miguel Hidalgo y Costilla', 70, './assets/img/default.png', 1, 2);
 
 
 --
@@ -218,6 +218,21 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
 --
 
 INSERT INTO "Usuario" ("IdUsuario", "NombreUsuario", "Nombre", "Apellidos", "TelefonoReferencia", "CarnetIdentidad", "Rol") VALUES (1, 'Admi', 'XCode', 'Agil', 4472104, 123456, 1);
+INSERT INTO "Usuario" ("IdUsuario", "NombreUsuario", "Nombre", "Apellidos", "TelefonoReferencia", "CarnetIdentidad", "Rol") VALUES (2, 'Nosila', 'Alison', 'Fernandez', 4472104, 8795681, 2);
+
+--
+-- TOC entry 2054 (class 0 OID 42322)
+-- Dependencies: 189
+-- Data for Name: Reserva; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO "Reserva" VALUES (1, '2015-09-12', 1, '08:00:00', '09:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:08:50+02', false);
+INSERT INTO "Reserva" VALUES (2, '2015-09-12', 1, '09:00:00', '10:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:11:36+02', false);
+INSERT INTO "Reserva" VALUES (3, '2015-09-12', 1, '10:00:00', '11:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:12:22+02', false);
+INSERT INTO "Reserva" VALUES (4, '2015-09-12', 1, '07:00:00', '08:00:00', 20, 'Carlos', 70342315, false, NULL, NULL, true);
+INSERT INTO "Reserva" VALUES (5, '2015-09-14', 1, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
+INSERT INTO "Reserva" VALUES (6, '2015-09-12', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
+INSERT INTO "Reserva" VALUES (7, '2015-09-13', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
 
 
 --
@@ -307,7 +322,15 @@ SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
 -- Name: seqidusuario; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidusuario', 1, true);
+SELECT pg_catalog.setval('seqidusuario', 2, true);
+
+--
+-- TOC entry 2059 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: seqidreserva; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seqidreserva', 7, true);
 
 
 -- Completed on 2015-09-11 10:02:04
@@ -315,4 +338,3 @@ SELECT pg_catalog.setval('seqidusuario', 1, true);
 --
 -- PostgreSQL database dump complete
 --
-
