@@ -14,16 +14,25 @@
 
         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url();?>index.php/">Inicio</a></li>
-                <?php foreach ($menus as $menu) {?>
-                    <li><a href="<?php echo $menu->url?>"><?php echo $menu->nombre ?></a></li>
-                <?php }?>
-                    <li><a href="<?php echo base_url();?>index.php/Welcome/cerrar_sesion">Cerrar Sesion</a></li>
-<!--                <li><a href="<?php echo base_url();?>index.php/ControladorCanchas/index">Canchas</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorReserva/index">Reservar</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorReservaEspecial/index">Reserva Especial</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorPrereservas/mostrarDetallesCanchas">Prereservas</a></li>
-                <li><a href="<?php echo base_url();?>index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion">Confirmar Reserva</a></li>-->
+                <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio</a></li>
+                <?php foreach ($menus as $menu): ?>
+                    <?php if ($menu->nombre == "Campos Deportivos"): ?>
+                        <li><a href="<?php echo $menu->url ?>"><?php echo $menu->nombre ?></a></li>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Gestion Reservas <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <?php foreach ($menus as $menu): ?>
+                            <?php if ($menu->nombre != "Campos Deportivos"): ?>
+                                <li><a href="<?php echo $menu->url ?>"><?php echo $menu->nombre ?></a></li>
+                            <?php endif; ?>
+
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                <li><a href="<?php echo base_url(); ?>index.php/Welcome/cerrar_sesion">Cerrar Sesion</a></li>
             </ul>
         </div>
     </div>
