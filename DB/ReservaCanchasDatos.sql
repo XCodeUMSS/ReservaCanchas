@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.6
 -- Dumped by pg_dump version 9.3.6
--- Started on 2015-09-10 23:01:29
+-- Started on 2015-09-11 10:02:02
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,7 +16,7 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2038 (class 0 OID 33927)
+-- TOC entry 2042 (class 0 OID 42268)
 -- Dependencies: 177
 -- Data for Name: TipoCancha; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -28,7 +28,7 @@ INSERT INTO "TipoCancha" ("IdTipoCancha", "Nombre", "PrecioMinimo") VALUES (4, '
 
 
 --
--- TOC entry 2044 (class 0 OID 33954)
+-- TOC entry 2048 (class 0 OID 42295)
 -- Dependencies: 183
 -- Data for Name: TipoSuelo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -39,7 +39,7 @@ INSERT INTO "TipoSuelo" ("IdTipoSuelo", "Nombre") VALUES (3, 'Madera');
 
 
 --
--- TOC entry 2032 (class 0 OID 33901)
+-- TOC entry 2036 (class 0 OID 42242)
 -- Dependencies: 171
 -- Data for Name: CampoDeportivo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -98,7 +98,7 @@ INSERT INTO "CampoDeportivo" ("IdCampoDeportivo", "Nombre", "PrecioPorHora", "Ru
 
 
 --
--- TOC entry 2034 (class 0 OID 33910)
+-- TOC entry 2038 (class 0 OID 42251)
 -- Dependencies: 173
 -- Data for Name: HorarioAtencion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -157,7 +157,7 @@ INSERT INTO "HorarioAtencion" ("IdHorario", "HoraInicio", "HoraFin", "Dia", "IdC
 
 
 --
--- TOC entry 2048 (class 0 OID 33972)
+-- TOC entry 2052 (class 0 OID 42313)
 -- Dependencies: 187
 -- Data for Name: Rol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -167,7 +167,7 @@ INSERT INTO "Rol" ("IdRol", "Nombre") VALUES (2, 'Cliente');
 
 
 --
--- TOC entry 2046 (class 0 OID 33963)
+-- TOC entry 2050 (class 0 OID 42304)
 -- Dependencies: 185
 -- Data for Name: Menu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -177,15 +177,10 @@ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (2, 'Realizar Res
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (3, 'Realizar Reserva Especial', 'http://localhost/ReservaCanchas/index.php/ControladorReservaEspecial/index', 1);
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (4, 'Confirmar Reservas', 'http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion', 1);
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (5, 'Realizar Reserva', 'http://localhost/ReservaCanchas/index.php/ControladorPrereservas/mostrarDetallesCanchas', 2);
-INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (1, 'Campos Deportivos', 'http://localhost/ReservaCanchas/index.php/ControladorCanchas/index', 1);
-INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (2, 'Realizar Reserva', 'http://localhost/ReservaCanchas/index.php/ControladorReserva/index', 1);
-INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (3, 'Realizar Reserva Especial', 'http://localhost/ReservaCanchas/index.php/ControladorReservaEspecial/index', 1);
-INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (4, 'Confirmar Reservas', 'http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion', 1);
-INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (5, 'Realizar Reserva', 'http://localhost/ReservaCanchas/index.php/ControladorPrereservas/mostrarDetallesCanchas', 2);
 
 
 --
--- TOC entry 2036 (class 0 OID 33916)
+-- TOC entry 2040 (class 0 OID 42257)
 -- Dependencies: 175
 -- Data for Name: Reserva; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -193,7 +188,7 @@ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (5, 'Realizar Res
 
 
 --
--- TOC entry 2040 (class 0 OID 33936)
+-- TOC entry 2044 (class 0 OID 42277)
 -- Dependencies: 179
 -- Data for Name: TipoEvento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -205,7 +200,7 @@ INSERT INTO "TipoEvento" ("IdEvento", "Nombre") VALUES (4, 'Paro');
 
 
 --
--- TOC entry 2042 (class 0 OID 33945)
+-- TOC entry 2046 (class 0 OID 42286)
 -- Dependencies: 181
 -- Data for Name: TipoRepeticion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -214,14 +209,10 @@ INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (1, 'Ninguno');
 INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (2, 'Diario');
 INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (3, 'Semanal');
 INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (1, 'Ninguno');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (2, 'Diario');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (3, 'Semanal');
-INSERT INTO "TipoRepeticion" ("IdRepeticion", "Nombre") VALUES (4, 'Mensual');
 
 
 --
--- TOC entry 2050 (class 0 OID 33981)
+-- TOC entry 2054 (class 0 OID 42322)
 -- Dependencies: 189
 -- Data for Name: Usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -230,7 +221,7 @@ INSERT INTO "Usuario" ("IdUsuario", "NombreUsuario", "Nombre", "Apellidos", "Tel
 
 
 --
--- TOC entry 2055 (class 0 OID 0)
+-- TOC entry 2059 (class 0 OID 0)
 -- Dependencies: 170
 -- Name: seqidcampodeportivo; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -239,7 +230,7 @@ SELECT pg_catalog.setval('seqidcampodeportivo', 51, true);
 
 
 --
--- TOC entry 2056 (class 0 OID 0)
+-- TOC entry 2060 (class 0 OID 0)
 -- Dependencies: 172
 -- Name: seqidhorarioatencion; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -248,7 +239,7 @@ SELECT pg_catalog.setval('seqidhorarioatencion', 51, true);
 
 
 --
--- TOC entry 2057 (class 0 OID 0)
+-- TOC entry 2061 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: seqidmenu; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -257,7 +248,7 @@ SELECT pg_catalog.setval('seqidmenu', 5, true);
 
 
 --
--- TOC entry 2058 (class 0 OID 0)
+-- TOC entry 2062 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: seqidreserva; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -266,7 +257,7 @@ SELECT pg_catalog.setval('seqidreserva', 0, true);
 
 
 --
--- TOC entry 2059 (class 0 OID 0)
+-- TOC entry 2063 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: seqidrol; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -275,7 +266,7 @@ SELECT pg_catalog.setval('seqidrol', 2, true);
 
 
 --
--- TOC entry 2060 (class 0 OID 0)
+-- TOC entry 2064 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: seqidtipocancha; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -284,7 +275,7 @@ SELECT pg_catalog.setval('seqidtipocancha', 4, true);
 
 
 --
--- TOC entry 2061 (class 0 OID 0)
+-- TOC entry 2065 (class 0 OID 0)
 -- Dependencies: 178
 -- Name: seqidtipoevento; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -293,7 +284,7 @@ SELECT pg_catalog.setval('seqidtipoevento', 4, true);
 
 
 --
--- TOC entry 2062 (class 0 OID 0)
+-- TOC entry 2066 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: seqidtiporepeticion; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -302,7 +293,7 @@ SELECT pg_catalog.setval('seqidtiporepeticion', 1, false);
 
 
 --
--- TOC entry 2063 (class 0 OID 0)
+-- TOC entry 2067 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: seqidtiposuelo; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -311,7 +302,7 @@ SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
 
 
 --
--- TOC entry 2064 (class 0 OID 0)
+-- TOC entry 2068 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: seqidusuario; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -319,7 +310,7 @@ SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
 SELECT pg_catalog.setval('seqidusuario', 1, true);
 
 
--- Completed on 2015-09-10 23:01:31
+-- Completed on 2015-09-11 10:02:04
 
 --
 -- PostgreSQL database dump complete
