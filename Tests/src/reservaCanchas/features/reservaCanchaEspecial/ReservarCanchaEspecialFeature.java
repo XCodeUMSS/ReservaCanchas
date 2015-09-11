@@ -1,4 +1,4 @@
-package reservaCanchas.features.reservaCancha;
+package reservaCanchas.features.reservaCanchaEspecial;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.Locale;
 import net.sf.sahi.client.Browser;
 import net.sf.sahi.client.ElementStub;
-import reservaCanchas.asserts.reservarCancha.ReservarCanchaAsserts;
+import reservaCanchas.asserts.reservarCanchaEspecial.ReservarCanchaEspecialAsserts;
 
 /**
  * @date 04/09/2015
  * @author Khrono
  */
-public class ReservarCanchaFeature {
+public class ReservarCanchaEspecialFeature {
     /*
      * Instancia de la clase Browser, utilizada  identificar los objetos
      */
@@ -20,8 +20,7 @@ public class ReservarCanchaFeature {
     private final Browser browser;
 
     //elementos del ui
-    private final ElementStub txt_nombre;
-    private final ElementStub txt_telefono;
+    private final ElementStub cbo_evento;
     private final ElementStub cbo_repetir;
     private final ElementStub cbo_cancha;
     private final ElementStub txt_fecha;
@@ -40,11 +39,10 @@ public class ReservarCanchaFeature {
 
     private final ElementStub lbl_ErrorMessages;
 
-    public ReservarCanchaFeature(Browser b) {
+    public ReservarCanchaEspecialFeature(Browser b) {
         this.browser = b;
         //Creando intancias para lso objetos del UI
-        txt_nombre = browser.textbox("nombre_cliente");
-        txt_telefono = browser.textbox("telefono_referencia");
+        cbo_evento = browser.select("nombre_evento");
         cbo_repetir = browser.select("repeticion");
         cbo_cancha = browser.select("campo_deportivo");
         txt_fecha = browser.textbox("fecha_reserva");
@@ -63,17 +61,16 @@ public class ReservarCanchaFeature {
         lbl_ErrorMessages = browser.paragraph("/.*/");
     }
 
-    public void reservarCancha(String nombre, String telefono, String repetir,
-            String cancha, String fecha, String horaInicio, String horaFin) {
-        setNombre(nombre);
-        setTelefono(telefono);
+    public void reservarCancha(String evento, String repetir, String cancha,
+            String fecha, String horaInicio, String horaFin) {
+        setEvento(evento);
         setRepetir(repetir);
         setCancha(cancha);
         setFecha(fecha);
         setHoraInicio(horaInicio);
         setHoraFin(horaFin);
         Reservar();
-        ReservarCanchaAsserts.assertReservaCreada(browser, this, nombre, telefono,
+        ReservarCanchaEspecialAsserts.assertReservaCreada(browser, this, evento,
                 repetir, cancha, fecha, horaInicio, horaFin);
     }
 
@@ -85,24 +82,19 @@ public class ReservarCanchaFeature {
         btn_limpiar.click();
     }
 
-    public void setNombre(String nombre) {
-        txt_nombre.setValue(nombre);
-        ReservarCanchaAsserts.assertSetNombre(this, nombre);
-    }
-
-    public void setTelefono(String telefono) {
-            txt_telefono.setValue(telefono);
-            ReservarCanchaAsserts.assertSetTelefono(this, telefono);
+    public void setEvento(String evento) {
+        cbo_evento.choose(evento);
+        ReservarCanchaEspecialAsserts.assertSetEvento(this, evento);
     }
 
     public void setRepetir(String repetir) {
         cbo_repetir.choose(repetir);
-        ReservarCanchaAsserts.assertSetRepetir(this, repetir);
+        ReservarCanchaEspecialAsserts.assertSetRepetir(this, repetir);
     }
 
     public void setCancha(String cancha) {
         cbo_cancha.choose(cancha);
-        ReservarCanchaAsserts.assertSetCancha(this, cancha);
+        ReservarCanchaEspecialAsserts.assertSetCancha(this, cancha);
     }
 
     public void setFecha(String fecha) {
@@ -149,7 +141,7 @@ public class ReservarCanchaFeature {
             day = browser.cell(fechaModificada[1] + "[1]").in(browser.table("calendar table table-bordered"));
         day.click();
         
-        ReservarCanchaAsserts.assertSetFecha(this, fecha);
+        ReservarCanchaEspecialAsserts.assertSetFecha(this, fecha);
     }
 
     public void setHoraInicio(String horaInicio) {
@@ -159,7 +151,7 @@ public class ReservarCanchaFeature {
         String[] time = horaInicio.split(":");
         hora.setValue(time[0]);
         minutos.setValue(time[1]);
-        ReservarCanchaAsserts.assertSetHoraInicio(this, horaInicio);
+        ReservarCanchaEspecialAsserts.assertSetHoraInicio(this, horaInicio);
     }
 
     public void setHoraFin(String horaFin) {
@@ -170,37 +162,36 @@ public class ReservarCanchaFeature {
         hora.setValue(time[0]);
         minutos.setValue(time[1]);
         //TODO Take a look of this issue
-        //ReservarCanchaAsserts.assertSetHoraFin(this, horaFin);
+        //ReservarCanchaEspecialAsserts.assertSetHoraFin(this, horaFin);
     }
 
     public void verificarNoAgregado(String nombre) {
-        ReservarCanchaAsserts.verificarNoAgregado(browser, this, nombre);
+        ReservarCanchaEspecialAsserts.verificarNoAgregado(browser, this, nombre);
     }
 
     public void verificarCanchaNoAgregada(String cancha) {
-        ReservarCanchaAsserts.verificarNuevaCanchaNoAgregada(browser, this, cancha);
+        ReservarCanchaEspecialAsserts.verificarNuevaCanchaNoAgregada(browser, this, cancha);
     }
 
-    public void verificarCreado(String nombre, String telefono,
-            String repetir, String cancha, String fecha, String horaInicio, String horaFin) {
-        ReservarCanchaAsserts.assertReservaCreada(browser, this, nombre, telefono,
+    public void verificarCreado(String evento, String repetir, String cancha,
+            String fecha, String horaInicio, String horaFin) {
+        ReservarCanchaEspecialAsserts.assertReservaCreada(browser, this, evento,
                 repetir, cancha, fecha, horaInicio, horaFin);
     }
 
     public void verificarMensajeDeError(String mensaje) {
-        ReservarCanchaAsserts.assertMensajeDeError(this, mensaje);
+        ReservarCanchaEspecialAsserts.assertMensajeDeError(this, mensaje);
     }
 
-    public void verificarCampos(String defaultNombre, String defaultTelefono,
+    public void verificarCampos(String defaultEvento,
             String defaultRepetir, String defaultCancha, String defaultFecha, 
             String defaultHoraInicio, String defaultHoraFin) {
-        ReservarCanchaAsserts.assertSetNombre(this, defaultNombre);
-        ReservarCanchaAsserts.assertSetTelefono(this, defaultTelefono);
-        ReservarCanchaAsserts.assertSetRepetir(this, defaultRepetir);
-        ReservarCanchaAsserts.assertSetCancha(this, defaultCancha);
-        ReservarCanchaAsserts.assertSetFecha(this, defaultFecha);
-        ReservarCanchaAsserts.assertSetHoraInicio(this, defaultHoraInicio);
-        ReservarCanchaAsserts.assertSetHoraFin(this, defaultHoraFin);
+        ReservarCanchaEspecialAsserts.assertSetEvento(this, defaultEvento);
+        ReservarCanchaEspecialAsserts.assertSetRepetir(this, defaultRepetir);
+        ReservarCanchaEspecialAsserts.assertSetCancha(this, defaultCancha);
+        ReservarCanchaEspecialAsserts.assertSetFecha(this, defaultFecha);
+        ReservarCanchaEspecialAsserts.assertSetHoraInicio(this, defaultHoraInicio);
+        ReservarCanchaEspecialAsserts.assertSetHoraFin(this, defaultHoraFin);
     }
 
     public ElementStub getLbl_nombre() {
@@ -231,12 +222,8 @@ public class ReservarCanchaFeature {
         return lbl_ErrorMessages;
     }
 
-    public ElementStub getTxt_nombre() {
-        return txt_nombre;
-    }
-
-    public ElementStub getTxt_telefono() {
-        return txt_telefono;
+    public ElementStub getCbo_evento() {
+        return cbo_evento;
     }
 
     public ElementStub getCbo_repetir() {

@@ -3,63 +3,56 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package reservaCanchas.suites.reservarCancha;
+package reservaCanchas.suites.reservarCanchaEspecial;
 
 import net.sf.sahi.client.Browser;
 import org.testng.annotations.*;
 import reservaCanchas.common.Config;
 import reservaCanchas.common.DDT;
 import reservaCanchas.features.menu.TopMenuFeature;
-import reservaCanchas.features.reservaCancha.ReservarCanchaFeature;
+import reservaCanchas.features.reservaCanchaEspecial.ReservarCanchaEspecialFeature;
 
 /**
  *
  * @author Khronos
  */
-public class ReservarCanchaTest {
+public class ReservarCanchaEspecialTest {
 
     private Browser browser;
-    private ReservarCanchaFeature reservarCancha;
+    private ReservarCanchaEspecialFeature reservarCancha;
 
-    @Test(dataProvider = "reservarCancha")
-    public void AgregarCanchaTest(String nombreTestCase, String nombreCliente,
-            String telefono, String repetir, String cancha, String fecha,
-            String horaInicio, String horaFin, String resultado) {
+    @Test(dataProvider = "reservarCanchaEspecial")
+    public void AgregarCanchaTest(String nombreTestCase, String evento,
+            String repetir, String cancha, String fecha, String horaInicio,
+            String horaFin, String resultado) {
         if (resultado.equalsIgnoreCase("Creado")) {
-                reservarCancha.reservarCancha(nombreCliente, telefono, repetir,
+                reservarCancha.reservarCancha(evento, repetir,
                         cancha, fecha, horaInicio, horaFin);
         } else {
             //obteniendo valores por defecto
-            String defaultNombre = "", defaultTelefono = "", defaultRepetir = "",
+            String defaultNombre = "", defaultRepetir = "",
                     defaultCancha = "", defaultFecha = "",
                     defaultHoraInicio = "", defaultHoraFin = "";
             if(resultado.equals("Limpiar debe resetear campos")){
-                defaultNombre = reservarCancha.getTxt_nombre().getText();
-                defaultTelefono = reservarCancha.getTxt_telefono().getValue();
+                defaultNombre = reservarCancha.getCbo_evento().getText();
                 defaultRepetir = reservarCancha.getCbo_repetir().getSelectedText();
                 defaultCancha = reservarCancha.getCbo_cancha().getSelectedText();
                 defaultFecha = reservarCancha.getTxt_fecha().getValue();
                 defaultHoraInicio = reservarCancha.getTxt_horaInicio().getValue();
                 defaultHoraFin = reservarCancha.getTxt_horaFin().getValue();
             }
-            reservarCancha.setNombre(nombreCliente);
-            reservarCancha.setTelefono(telefono);
+            reservarCancha.setEvento(evento);
             reservarCancha.setRepetir(repetir);
             reservarCancha.setCancha(cancha);
             reservarCancha.setFecha(fecha);
             reservarCancha.setHoraInicio(horaInicio);
             reservarCancha.setHoraFin(horaFin);
             switch (resultado) {
-                case "con espacios extra":
-                    reservarCancha.Reservar();
-                    reservarCancha.verificarCreado(nombreCliente.trim(), telefono,
-                            repetir, cancha, fecha, horaInicio, horaFin);
-                    break;
                 /*case "nombre repetido":
                     reservarCancha.Agregar();
                     reservarCancha.verificarCreado(nombreCliente, telefono,
                             repetir, cancha, horaInicio, horaFin);
-                    reservarCancha.setNombre(nombreCliente);
+                    reservarCancha.setEvento(nombreCliente);
                     reservarCancha.setPrecioHora(telefono);
                     reservarCancha.setTipoCancha(repetir);
                     reservarCancha.setTipoSuelo(cancha);
@@ -68,18 +61,15 @@ public class ReservarCanchaTest {
                     reservarCancha.Agregar();
                     reservarCancha.verificarMensajeDeError(nombreCliente);
                     break;*/
-                case "minima longitud de 3":
-                case "sin caracteres especiales":
-                case "nombre blanco":
-                case "telefono blanco":
-                case "telefono no numeral":
-                    reservarCancha.Reservar();
-                    reservarCancha.verificarNoAgregado(nombreCliente);
+                case "evento no editable":
+                    String nuevoEvento = evento + " extra";
+                    reservarCancha.getCbo_evento().setValue(nuevoEvento);
+                    reservarCancha.verificarNoAgregado(evento);
                     break;
                 case "repeticion no editable":
                     String nuevaRepeticion = repetir + " extra";
                     reservarCancha.getCbo_repetir().setValue(nuevaRepeticion);
-                    reservarCancha.verificarNoAgregado(nombreCliente);
+                    reservarCancha.verificarNoAgregado(repetir);
                     break;
                 case "cancha no editable":
                     String nuevaCancha = cancha + " extra";
@@ -88,7 +78,7 @@ public class ReservarCanchaTest {
                     break;
                 case "Limpiar debe resetear campos":
                     reservarCancha.Limpiar();
-                    reservarCancha.verificarCampos(defaultNombre,defaultTelefono,
+                    reservarCancha.verificarCampos(defaultNombre,
                             defaultRepetir,defaultCancha,defaultFecha,
                             defaultHoraInicio,defaultHoraFin);
                     break;
@@ -98,16 +88,16 @@ public class ReservarCanchaTest {
         }
     }
 
-    @DataProvider(name = "reservarCancha")
+    @DataProvider(name = "reservarCanchaEspecial")
     public static Object[][] data() {
-        return DDT.DDTReaderFull("DDT/ReservarCancha/ReservarCancha.csv");
+        return DDT.DDTReaderFull("DDT/ReservarCanchaEspecial/ReservarCanchaEspecial.csv");
     }
 
     @BeforeMethod
     public void setUpMethod() throws Exception {
         this.browser = Config.getBrowser();
         TopMenuFeature topMenu = new TopMenuFeature(browser);
-        reservarCancha = topMenu.gotoReserva();
+        reservarCancha = topMenu.gotoReservaCanchaEspecial();
     }
 
     @AfterMethod

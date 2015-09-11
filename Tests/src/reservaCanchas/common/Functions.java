@@ -110,7 +110,7 @@ public class Functions {
             System.setProperty(LibraryLoader.JACOB_DLL_PATH, jacobDLL.getAbsolutePath());
             Process p = Runtime.getRuntime().exec("regsvr32.exe /s " + autoITXDLL.getAbsolutePath());
             p.waitFor();
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
             logger.error(e.fillInStackTrace());
         }
     }
@@ -250,6 +250,7 @@ public class Functions {
      */
     public static void takeScreenshot(String screenshotName) {
         try {
+            screenshotName = screenshotName.replaceAll("[*|\\||\\\\|:|\"|<|>|?|/]", "_");
             String outputFormat = "bmp";
             Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
             BufferedImage capture = new Robot().createScreenCapture(screenRect);

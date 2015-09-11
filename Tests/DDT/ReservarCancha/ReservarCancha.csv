@@ -1,14 +1,15 @@
 TestCaseName,NombreCliente,Telefono,Repetir,Cancha,Fecha,HoraInicio,HoraFin,Resultado
-CrearReserva,Usuario 1 Walter,123456789,Ninguno,Hambre y Goles,12/01/2015,09:00,10:00,Creado
-//Nombre - No Caracteres Especiales,"@!%&%",123456789,Ninguno,Pollitos,12/01/2015,10:00,11:00,sin caracteres especiales
-//Nombre - Filtrar Espacios al inicio o Fin,      Usuario Con Espacios    ,123456789,Ninguno,Gran Penalty,12/01/2015,11:00,12:00,con espacios extra
-//Nombre - Nombre Blanco,,123456789,Ninguno,Soccer y Taco,12/01/2015,12:00,13:00,con nombre en blanco
-//Telefono - Telefono Blanco,Usuario Telefono 1,,Ninguno,Hambre y Goles,12/01/2015,09:00,10:00,telefono blanco
-//Telefono - no numeral,Usuario Telefono 2,NoNumbers!,Ninguno,Pollitos,12/01/2015,10:00,11:00,telefono no numeral
-Telefono - formato mundial,Usuario Telefono 3,+591 72771005,Ninguno,Gran Penalty,12/01/2015,11:00,12:00,Creado
+CrearReserva,Usuario 1 Walter,71234567,Ninguno,Hambre y Goles,12/01/2015,09:00,10:00,Creado
+Nombre - No Caracteres Especiales,"@!%&%",71234567,Ninguno,Pollitos,12/01/2015,10:00,11:00,sin caracteres especiales
+Nombre - Nombre de no menos de 3 caracters,as,71234567,Ninguno,Pollitos,12/01/2015,10:00,11:00,minima logitud de 3
+Nombre - Filtrar Espacios al inicio o Fin,      Usuario Con Espacios    ,71234567,Ninguno,Gran Penalty,12/01/2015,11:00,12:00,con espacios extra
+Nombre - Nombre Blanco,,71234567,Ninguno,Soccer y Taco,12/01/2015,12:00,13:00,con nombre en blanco
+Telefono - Telefono Blanco,Usuario Telefono 1,,Ninguno,Hambre y Goles,12/01/2015,09:00,10:00,telefono blanco
+Telefono - no numeral,Usuario Telefono 2,NoNumbers!,Ninguno,Pollitos,12/01/2015,10:00,11:00,telefono no numeral
 Repetir - Sin Repeticion,Usuario Reserva Simple,72771005,Ninguno,FIFA Soccer,12/02/2015,09:00,10:00,Creado
 Repetir - Diario,Usuario Reserva Diario,72771005,Diario,Balon de Oro,12/02/2015,11:00,12:00,Creado
 Repetir - Semanal,Usuario Reserva Semanal,72771005,Semanal,Diversoccer,01/01/2016,09:00,10:00,Creado
 Repetir - Mensual,Usuario Reserva Mensual,72771005,Mensual,Pentachampion,01/01/2017,09:00,10:00,Creado
-//Repetir - No editable,Usuario Reserva No Editar,72771005,Cada 3 Dias,Pentachampion,01/01/2018,09:00,10:00,repeticion no editable
-//Cancha - No editable,Usuario Cancha No Editar,72771005,Canchita del Barrio,Pentachampion,01/01/2019,09:00,10:00,cancha no editable
+Repetir - No editable,Usuario Reserva No Editar,72771005,Ninguno,Pentachampion,01/01/2018,09:00,10:00,repeticion no editable
+Cancha - No editable,Usuario Cancha No Editar,72771005,Ninguno,Pentachampion,01/01/2019,09:00,10:00,cancha no editable
+Limpiar - Boton Limpiar debe resetear campos,Usuario Limpiar,71234567,Ninguno,Hambre y Goles,12/01/2015,09:00,10:00,Limpiar debe resetear campos
