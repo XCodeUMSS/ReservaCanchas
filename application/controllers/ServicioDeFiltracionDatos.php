@@ -18,6 +18,22 @@ class ServicioDeFiltracionDatos extends CI_Controller {
     }
     
     /**
+     * Procesa las peticiones de la filtracion mediante fecha
+     */
+    public function procesarPeticionFecha() {
+        $fecha_reserva = $this->input->post('fecha_reserva');
+        
+        $datos['reservas'] = null;
+        
+        if($fecha_reserva) {
+            $datos['reservas'] = $this->obtenerDatosFecha($fecha_reserva);
+        
+            $this->enviarDatos($datos);
+        }
+    }
+
+
+    /**
      * Funcion que procesa la peticion ajax del cliente
      * filtrando los campos reservados
      */
@@ -27,14 +43,8 @@ class ServicioDeFiltracionDatos extends CI_Controller {
         $fecha_reserva = $this->input->post('fecha_reserva');
         $datos['reservas'] = null;
         
-        if($fecha_reserva) {
-            $datos['reservas'] = $this->obtenerDatosFecha($fecha_reserva);
-        
-            $this->enviarDatos($datos);
-        }
-        
-        if($id_campo_deportivo) {
-            $datos['reservas'] = $this->obtenerDatos($id_campo_deportivo);
+        if($id_campo_deportivo && $fecha_reserva) {
+            $datos['reservas'] = $this->obtenerDatos($id_campo_deportivo, $fecha_reserva);
         
             $this->enviarDatos($datos);
         }
@@ -70,8 +80,8 @@ class ServicioDeFiltracionDatos extends CI_Controller {
      * @param type $id_campo_deportivo
      * @return void
      */
-    public function obtenerDatos($id_campo_deportivo) {
-        return $this->modeloFiltracionDatos->reservas_registradas($id_campo_deportivo);
+    public function obtenerDatos($id_campo_deportivo, $fecha) {
+        return $this->modeloFiltracionDatos->reservas_registradas($id_campo_deportivo, $fecha);
     }
 
     /**
