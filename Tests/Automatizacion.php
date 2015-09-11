@@ -4,7 +4,7 @@
 **				* ejecutar Scripts
 *****************************************************************/
         $baseDir = getcwd();
-	echo "\r\n**********************"
+	echo     "\r\n**********************"
            . "\r\n**  Iniciando SAHI  **"
            . "\r\n**********************\r\n\r\n";
         chdir("C:\\sahi\\userdata\\bin\\");
@@ -22,13 +22,21 @@
 		exit($exception);
 	}
         chdir($baseDir);
-	echo "\r\n********************************"
+	echo     "\r\n************************"
+           . "\r\n**  Iniciando Autoit  **"
+           . "\r\n************************\r\n\r\n";
+        system("regsvr32.exe /s AutoItX3.dll",$retVal);
+        echo "\t* Return value: {$retVal}\r\n\r\n";
+        system("regsvr32.exe /s AutoItX3_x64.dll",$retVal);
+        echo "\t* Return value: {$retVal}\r\n\r\n";
+        
+	echo     "\r\n********************************"
            . "\r\n**  Compilando Proyecto SAHI  **"
            . "\r\n********************************\r\n\r\n";
         system("ant -Dnb.internal.action.name=rebuild clean jar",$retVal);
         echo "\t* Return value: {$retVal}\r\n\r\n";
         
-	echo "\r\n******************************"
+	echo     "\r\n******************************"
            . "\r\n**  Iniciando scripts SAHI  **"
            . "\r\n******************************\r\n\r\n";
         chdir($baseDir);
@@ -48,7 +56,7 @@
 		exit($exception);
 	}
         chdir($baseDir);
-	echo "\r\n*******************************************************"
+	echo     "\r\n*******************************************************"
            . "\r\n**  Abriendo resultados en el navegador por defecto  **"
            . "\r\n*******************************************************\r\n\r\n";
         system("start " . $baseDir . "\\test-output\\index.html",$retVal);

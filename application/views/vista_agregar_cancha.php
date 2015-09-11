@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre:</label>
                             <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con letra y contener solo letras o numeros, minima longitud de 3" pattern="^[a-zA-Z][a-zA-Z0-9 ]{1,}[a-zA-Z0-9]$" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
+                                <input type="text" title="Debe empezar con letra y contener solo letras o numeros, minima longitud de 3" pattern="^[\sa-zA-Z][a-zA-Z0-9 ]{1,}[\sa-zA-Z0-9]$" required class="form-control" name="nombre_cancha" id="nombre_cancha" placeholder="Nombre de la cancha">
                             </div>
                         </div>
                         <div class="form-group">

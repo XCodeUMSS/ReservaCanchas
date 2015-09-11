@@ -1,0 +1,10 @@
+TestCaseName,NombreEvento,Telefono,Repetir,Cancha,Fecha,HoraInicio,HoraFin,Resultado
+Crear Reserva,Mantenimiento de Cancha,Ninguno,Contrapuntos y Balones,12/01/2015,09:00,10:00,Creado
+Evento - No editable,Paro,Ninguno,Diverball,01/01/2019,09:00,10:00,evento no editable
+Repetir - Sin Repeticion,Paro,Ninguno,El balonsito,12/02/2015,09:00,10:00,Creado
+Repetir - Diario,Paro,Diario,El rinconsito del balon,12/02/2015,11:00,12:00,Creado
+Repetir - Semanal,Paro,Semanal,Fireball,01/01/2016,09:00,10:00,Creado
+Repetir - Mensual,Paro,Mensual,Diverball,01/01/2017,09:00,10:00,Creado
+Repetir - No editable,Paro,Ninguno,Diverball,01/01/2018,09:00,10:00,repeticion no editable
+Cancha - No editable,Paro,Ninguno,Diverball,01/01/2019,09:00,10:00,cancha no editable
+Limpiar - Boton Limpiar debe resetear campos,Paro,Ninguno,Diverball,12/01/2015,09:00,10:00,Limpiar debe resetear campos

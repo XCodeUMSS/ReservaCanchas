@@ -1,10 +1,10 @@
 TestCaseName,NombreCancha,PathImagen,PrecioHora,TipoCancha,TipoSuelo,HoraInicio,HoraFin,Resultado
+Imagen - Agregar Cancha Sin Imagen,Cancha sin foto,,20,Futbol,Cesped,08:00,20:00,Agregado
+*Imagen - Agregar Cancha Con Imagen 4K,Cancha con foto 4K,\\Utils\\Imagenes\\4K.jpg,20,Futbol,Cesped,08:00,20:00,Agregado
 Nombre - No Caracteres Especiales,"@!%&%",,20,Futbol,Cesped,08:00,20:00,sin caracteres especiales
 Nombre - Filtrar Espacios al inicio o Fin,   Cancha con espacios extra   ,,20,Futbol,Cesped,08:00,20:00,con espacios extra
 Nombre - Nombre Repetido,Cancha con Nombre Repetido,,20,Futbol,Cesped,08:00,20:00,con nombre repetido
 Nombre - Nombre Blanco,,,20,Futbol,Cesped,08:00,20:00,con nombre en blanco
-Imagen - Agregar Cancha Sin Imagen,Cancha sin foto,,20,Futbol,Cesped,08:00,20:00,Agregado
-Imagen - Agregar Cancha Con Imagen 4K,Cancha con foto 4K,Utils//Imagenes//4K.jpg,20,Futbol,Cesped,08:00,20:00,Agregado
 Precio/Hora - Precio/Hora Blanco,Precio Hora Blanco,,,Futbol,Cesped,08:00,20:00,precio hora blanco
 Precio/Hora - Precio/Hora no numeral,Precio Hora No Numeral,,NoNumbers!,Futbol,Cesped,08:00,20:00,precio hora no numeral
 Precio/Hora - Precio/Hora futbol !< 10,Precio Hora No Menos de 10 Futbol,,5,Futbol,Cesped,08:00,20:00,precio hora !< 10 Futbol

@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">Nombre :</label>
                             <div class="col-sm-9">
-                                <input type="text" title="Debe empezar con letra y contener solo letras, minima longitud de 3" pattern="^[a-zA-Z][a-zA-Z ]{1,}[a-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
+                                <input type="text" title="Debe empezar con letra y contener solo letras, minima longitud de 3" pattern="^[\sa-zA-Z][a-zA-Z ]{1,}[\sa-zA-Z]$" required class="form-control" name="nombre_cliente" id="nombre_cliente" placeholder="Nombre cliente">
                             </div>
                         </div>
 

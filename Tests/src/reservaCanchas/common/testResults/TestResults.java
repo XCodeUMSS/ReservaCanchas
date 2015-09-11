@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
+import reservaCanchas.common.Functions;
 
 /**
  * Test Results Class extends from a Test Listener that is used during the
@@ -55,24 +56,28 @@ public class TestResults extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult tr) {
+        Functions.takeScreenshot(tr.getParameters()[0].toString() + " " + tr.getParameters()[tr.getParameters().length-1]);
         showResults(tr, status.FAIL);
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
+        Functions.takeScreenshot(tr.getParameters()[0].toString() + " " + tr.getParameters()[tr.getParameters().length-1]);
         showResults(tr, status.BLOCKED);
         super.onTestSkipped(tr);
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult tr) {
+        Functions.takeScreenshot(tr.getParameters()[0].toString() + " " + tr.getParameters()[tr.getParameters().length-1]);
         showResults(tr, status.PERCENTFAIL);
         super.onTestFailedButWithinSuccessPercentage(tr);
     }
 
     @Override
     public void onConfigurationFailure(ITestResult tr) {
+        Functions.takeScreenshot(tr.getParameters()[0].toString() + " " + tr.getParameters()[tr.getParameters().length-1]);
         showResults(tr, status.ERROR);
         super.onConfigurationFailure(tr);
     }
