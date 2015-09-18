@@ -200,7 +200,7 @@ CREATE TABLE "Reserva" (
     "TelefonoReferencia" integer NOT NULL,
     "ReservaEspecial" boolean DEFAULT false NOT NULL,
     "FechaExpiracion" date,
-    "HoraExpiracion" time with time zone,
+    "HoraExpiracion" time without time zone,
     "Confirmado" boolean DEFAULT true NOT NULL
 );
 
