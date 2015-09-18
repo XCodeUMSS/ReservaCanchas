@@ -35,6 +35,11 @@ class ControladorReserva extends CI_Controller {
         $this->mensaje = '';
     }
 
+    public function hola() {
+        echo "Beimar huarachi jdsklfjakljsldfasd";
+    }
+
+
     /*
      * Funcion que carga la vista principal de realizar reserva
      * Y se recupera de consultas, los campos deportivos registrados y
