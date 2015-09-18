@@ -46,7 +46,7 @@
                             <label class="control-label col-sm-3">Cancha :</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="campo_deportivo" id="campo_deportivo">
-                                    <option value="seleccion">seleccione cancha</option>
+                                    <option value="nulo">seleccione cancha</option>
                                     <?php foreach ($canchas as $cancha): ?>
                                         <option value="<?php echo $cancha->id; ?>"><?php echo $cancha->nombre; ?></option>
                                     <?php endforeach; ?>
