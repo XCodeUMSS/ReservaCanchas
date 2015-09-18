@@ -10,12 +10,34 @@
         <?php require_once 'inc/cabecera_vistas.php'; ?>
 
         <div class="container well">
-            <h2>Bienvenido: <?php echo $usuario;?></h2><br>
+            <h2>Bienvenido: <?php echo $usuario; ?></h2><br>
+            <?php if ($_SESSION['rol'] == "Administrador"): ?>
             <div class="row">
-                <div class="col-sm-6">
-                    <img class="img-rounded img-responsive" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500" height="">
+                <div class="col-sm-12">
+                    <img class="img-rounded img-responsive" style="margin-bottom: 15px" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="500">
                 </div>
-        </div>
-        <?php require_once 'inc/inclusion_jquery.php'; ?>
+            </div>
+            <?php endif; ?>
+            <?php if ($_SESSION['rol'] == "Cliente"): ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <img class="img-rounded" style="margin-bottom: 15px" src="<?php echo base_url(); ?>assets/img/imagen_cancha.jpg" width="1100" height="100">
+                </div>
+            </div>
+            <div class="row">
+                
+                
+                <div class="col-sm-12">
+                    
+                        <?php require_once 'plantillas/reservas_usuario.php'; ?>
+                    
+                </div>
+                
+            </div>
+            <?php endif; ?>
+            <div class="row">
+
+            </div>
+            <?php require_once 'inc/inclusion_jquery.php'; ?>
     </body>
 </html>

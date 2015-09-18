@@ -58,6 +58,11 @@ class Welcome extends CI_Controller {
     public function bienvenida() {
         $datos['usuario'] = $_SESSION['usuario'];
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
+        
+        if($_SESSION['rol'] == 'Cliente') {
+            $datos['reservas'] = $this->consultas->reservas_cliente($_SESSION['usuario']);
+        }
+        
         $this->load->view('bienvenido_usuario', $datos);
     }
 

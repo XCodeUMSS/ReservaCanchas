@@ -274,4 +274,16 @@ class Consultas extends CI_Model {
         $consulta = $this->db->get();
         return $consulta->first_row();
     }
+    
+    public function reservas_cliente($nombre_usuario) {
+        $this->db->select('r.Fecha AS fecha, '
+                . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
+                . 'r.FechaExpiracion AS fechaExpiracion, r.Precio AS precio,'
+                . 'r.Confirmado AS confirmado,c.Nombre AS campo');
+        $this->db->from('Reserva AS r, CampoDeportivo as c');
+        $this->db->where("r.IdCampoDeportivo = c.IdCampoDeportivo AND "
+                . "r.NombreCliente ='".$nombre_usuario."'" );
+        $consulta = $this->db->get();
+        return $consulta->result();
+    }
 }
