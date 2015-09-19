@@ -112,20 +112,22 @@ class ControladorReservaEspecial extends CI_Controller {
                 $hora_inicio, $hora_fin, $precio, self::RESERVA_ESPECIAL);
         $this->reservas->append($reserva);
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
-        $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
         if($mensaje == '' && $repeticion != self::REPETICION_NINGUNA){
             switch ($repeticion) {
                 case self::REPETICION_DIARIA:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P6D'));
                     $mensaje = $this->realizar_repeticion($nombre, $telefono, 
                             $precio, $id_campo, $fecha, $fecha_limite, 'P1D',
                             $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_SEMANAL:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P1M'));
                     $mensaje = $this->realizar_repeticion($nombre, $telefono, 
                             $precio, $id_campo, $fecha, $fecha_limite, 'P7D', 
                             $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_MENSUAL:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P4M'));
                     $mensaje = $this->realizar_repeticion($nombre, $telefono, 
                             $precio, $id_campo, $fecha, $fecha_limite, 'P1M', 
                             $hora_inicio, $hora_fin);
