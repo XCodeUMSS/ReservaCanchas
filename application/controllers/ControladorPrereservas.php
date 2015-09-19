@@ -53,10 +53,23 @@ class ControladorPrereservas extends CI_Controller {
                 $this->consultas->registrar_reserva($this->reservas[$i]->datos());
             }
             $this->mensaje = "Su reserva fue exitosamente registrada, usted debe "
-                    . "pagar el precio de la reserva: $this->precio en un plazo de dos dias,"
-                    . "caso contrario se eliminara su reserva.";
+                    . "pagar el precio de la reserva: $this->precio hasta la "
+                    . "fecha de expiracion, caso contrario se eliminara su reserva.";
+            
+            $datos['usuario'] = $_SESSION['usuario'];
+            $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
+            $datos['mensaje'] = $this->mensaje;
+
+            if($_SESSION['rol'] == 'Cliente') {
+                $datos['reservas'] = $this->consultas->reservas_cliente($_SESSION['usuario']);
+            }
+
+            $this->load->view('bienvenido_usuario', $datos);
+            
         }
-        $this->mostrarFormulario();
+        else{
+            $this->index();
+        }
     }
 
     /**
@@ -136,7 +149,7 @@ class ControladorPrereservas extends CI_Controller {
                 $hora_inicio, $hora_fin) ? "- Existe una reserva." : '';
         $reserva = new Prereserva();
 
-        $fechaExpiracion = $this->obtenerFechaExpiracion();
+        $fechaExpiracion = $this->obtenerFechaExpiracion($fecha);
         $horaExpiracion = $this->obtenerHoraExpiracion();
         $reserva->actualizar($_SESSION['usuario'], $_SESSION['telefono'], 
                 $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, 
@@ -144,18 +157,20 @@ class ControladorPrereservas extends CI_Controller {
                 self::CONFIRMADO);
         $this->reservas->append($reserva);
         $fecha_formato = DateTime::createFromFormat("d/m/Y", $fecha);
-        $fecha_limite = date_add($fecha_formato, new DateInterval('P5M'));
         if ($mensaje == '' && $repeticion != self::REPETICION_NINGUNA) {
             switch ($repeticion) {
                 case self::REPETICION_DIARIA:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P6D'));
                     $mensaje = $this->realizar_repeticion($precio, $id_campo, 
                             $fecha, $fecha_limite, 'P1D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_SEMANAL:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P1M'));
                     $mensaje = $this->realizar_repeticion($precio, $id_campo, 
                             $fecha, $fecha_limite, 'P7D', $hora_inicio, $hora_fin);
                     break;
                 case self::REPETICION_MENSUAL:
+                    $fecha_limite = date_add($fecha_formato, new DateInterval('P4M'));
                     $mensaje = $this->realizar_repeticion($precio, $id_campo, 
                             $fecha, $fecha_limite, 'P1M', $hora_inicio, $hora_fin);
                     break;
@@ -174,7 +189,7 @@ class ControladorPrereservas extends CI_Controller {
         return $today;
     }
 
-    public function obtenerFechaExpiracion() {
+    public function obtenerFechaExpiracion($fecha) {
         /**
          * zona horaria para bolivia
          */
@@ -184,10 +199,17 @@ class ControladorPrereservas extends CI_Controller {
          * crea un nuevo objeto con la fecha de hoy
          */
         $datetime = new DateTime('now');
+        
         /*
          * Recorrer 2 dias para la expiracion
          */
         $datetime->add(new DateInterval('P2D'));
+        
+        $fecha_reserva = DateTime::createFromFormat("d/m/Y", $fecha);
+        
+        if($datetime >= $fecha_reserva){
+            return $fecha_reserva->format('d/m/y');
+        }
 
         return $datetime->format('d/m/y');
     }

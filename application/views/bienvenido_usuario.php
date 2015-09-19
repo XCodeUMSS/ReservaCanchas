@@ -28,7 +28,7 @@
                 
                 
                 <div class="col-sm-12">
-                    
+                    <?php require_once ('inc/mensaje_alerta.php');?>
                         <?php require_once 'plantillas/reservas_usuario.php'; ?>
                     
                 </div>

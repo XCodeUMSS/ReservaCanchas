@@ -61,6 +61,7 @@ class Welcome extends CI_Controller {
         
         if($_SESSION['rol'] == 'Cliente') {
             $datos['reservas'] = $this->consultas->reservas_cliente($_SESSION['usuario']);
+            $datos['mensaje'] = '';
         }
         
         $this->load->view('bienvenido_usuario', $datos);

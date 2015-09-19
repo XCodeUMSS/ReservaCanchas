@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio</a></li>
                 <?php foreach ($menus as $menu): ?>
-                    <?php if ($menu->nombre == "Campos Deportivos"): ?>
+                    <?php if ($menu->nombre == "Campos Deportivos" || $menu->nombre == "Registrar Administrador"): ?>
                         <li><a href="<?php echo $menu->url ?>"><?php echo $menu->nombre ?></a></li>
                     <?php endif; ?>
 
@@ -25,7 +25,7 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">Gestion Reservas <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu">
                         <?php foreach ($menus as $menu): ?>
-                            <?php if ($menu->nombre != "Campos Deportivos"): ?>
+                            <?php if ($menu->nombre != "Campos Deportivos" && $menu->nombre != "Registrar Administrador"): ?>
                                 <li><a href="<?php echo $menu->url ?>"><?php echo $menu->nombre ?></a></li>
                             <?php endif; ?>
 
