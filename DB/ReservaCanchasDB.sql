@@ -382,6 +382,35 @@ CREATE TABLE "Usuario" (
 ALTER TABLE public."Usuario" OWNER TO postgres;
 
 --
+-- TOC entry 188 (class 1259 OID 42320)
+-- Name: seqidnotificacion; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE seqidnotificacion
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seqidnotificacion OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 42322)
+-- Name: Notificacion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Notificacion" (
+    "IdNotificacion" integer DEFAULT nextval('seqidnotificacion'::regclass) NOT NULL,
+    "Visto" boolean NOT NULL,
+    "IdReserva" integer NOT NULL
+);
+
+
+ALTER TABLE public."Notificacion" OWNER TO postgres;
+
+--
 -- TOC entry 2050 (class 0 OID 42304)
 -- Dependencies: 185
 -- Data for Name: Menu; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -557,6 +586,14 @@ SELECT pg_catalog.setval('seqidtiposuelo', 3, true);
 
 SELECT pg_catalog.setval('seqidusuario', 1, true);
 
+--
+-- TOC entry 2072 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: seqidnotificacion; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seqidnotificacion', 1, true);
+
 
 --
 -- TOC entry 1899 (class 2606 OID 42330)
@@ -648,6 +685,13 @@ ALTER TABLE ONLY "Usuario"
     ADD CONSTRAINT "idUsuario" PRIMARY KEY ("IdUsuario");
 
 
+-- TOC entry 1921 (class 2606 OID 42348)
+-- Name: idNotificacion; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Notificacion"
+    ADD CONSTRAINT "idNotificacion" PRIMARY KEY ("IdNotificacion");
+
 --
 -- TOC entry 1900 (class 1259 OID 42359)
 -- Name: fki_IDTipoSuelo; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
@@ -733,6 +777,14 @@ ALTER TABLE ONLY "Reserva"
 ALTER TABLE ONLY "Usuario"
     ADD CONSTRAINT "Usuario-Rol" FOREIGN KEY ("Rol") REFERENCES "Rol"("IdRol");
 
+--
+-- TOC entry 1927 (class 2606 OID 42354)
+-- Name: Notificacion-Reserva; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "Notificacion"
+    ADD CONSTRAINT "Notificacion-Reserva" FOREIGN KEY ("IdReserva") REFERENCES "Reserva"("IdReserva") ON UPDATE CASCADE ON DELETE RESTRICT;
+
 
 --
 -- TOC entry 2061 (class 0 OID 0)
@@ -751,4 +803,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
