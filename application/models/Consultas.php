@@ -159,6 +159,7 @@ class Consultas extends CI_Model {
 
     public function existe_reserva($id_campo, $fecha, $hora_inicio, 
             $hora_fin) {
+        $this->eliminar_prereserva();
         $this->db->select('IdReserva');
         $this->db->from('Reserva');
         $this->db->where("(IdCampoDeportivo = '" . $id_campo .
@@ -194,6 +195,7 @@ class Consultas extends CI_Model {
      */
 
     public function reservas_registradas() {
+        $this->eliminar_prereserva();
         $this->db->select('r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
@@ -276,6 +278,7 @@ class Consultas extends CI_Model {
     }
     
     public function reservas_cliente($nombre_usuario) {
+        $this->eliminar_prereserva();
         $this->db->select('r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
                 . 'r.FechaExpiracion AS fechaExpiracion, r.Precio AS precio,'
@@ -285,5 +288,19 @@ class Consultas extends CI_Model {
                 . "r.NombreCliente ='".$nombre_usuario."'" );
         $consulta = $this->db->get();
         return $consulta->result();
+    }
+    
+    /*
+     * Funcion que elimina las prereservas cuya hora ya paso para pagar.
+    */
+    public function eliminar_prereserva() {
+        date_default_timezone_set('America/La_Paz');
+        $datetime = new DateTime('now');
+        $datetime = $datetime->format("d/m/y");
+        $today = date("H:i:s");
+        $this->db->where("FechaExpiracion < '".$datetime."'"
+                . "OR (FechaExpiracion = '".$datetime."' "
+                . "AND HoraExpiracion < '".$today."')");
+        $this->db->delete('Reserva');
     }
 }
