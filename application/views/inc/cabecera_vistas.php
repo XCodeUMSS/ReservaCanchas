@@ -14,7 +14,12 @@
 
         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio</a></li>
+                <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio  </a></li>
+                <li>
+                    <?php if ($_SESSION['rol'] == 'Administrador'): ?>
+                        <span style="margin-top: 15px; margin-left: 10px"class="badge sr-only">  0</span>
+                    <?php endif; ?>
+                </li>           
                 <?php foreach ($menus as $menu): ?>
                     <?php if ($menu->nombre == "Campos Deportivos" || $menu->nombre == "Registrar Administrador"): ?>
                         <li><a href="<?php echo $menu->url ?>"><?php echo $menu->nombre ?></a></li>
