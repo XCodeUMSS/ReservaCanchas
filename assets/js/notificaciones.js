@@ -18,7 +18,7 @@ Ayudantes = {
         return URLactual;
     },
     urlValido: function () {
-        if (Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
+        if (Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/Welcome/solicitud_sesion") {
             return true;
         } else {
             return false;
@@ -26,9 +26,21 @@ Ayudantes = {
     },
     getUrlValido: function () {
         if (Ayudantes.urlValido()) {
+            return "../ControladorNotificaciones/procesarPeticionNumeroPrereservas";
+        } else if(Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/"){
             return "ControladorNotificaciones/procesarPeticionNumeroPrereservas";
         } else {
             return "../ControladorNotificaciones/procesarPeticionNumeroPrereservas";
+        }
+    },
+    getUrlReservas : function () {
+        if (Ayudantes.urlValido()) {
+            console.log('esdsafsdfad');
+            return "../ControladorNotificaciones/procesarPeticionNotificaciones";
+        } else if(Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/"){
+            return "ControladorNotificaciones/procesarPeticionNotificaciones";
+        } else {
+            return "../ControladorNotificaciones/procesarPeticionNotificaciones";
         }
     }
 }
@@ -43,7 +55,7 @@ ProcesoPeticion = {
     realizarPeticionPrereservas: function () {
         $.ajax({
             data: 'id_campo_deportivo=' + 1,
-            url: 'ControladorNotificaciones/procesarPeticionNotificaciones',
+            url: Ayudantes.getUrlReservas(),
             type: 'post',
             beforeSend: function () {
 
@@ -74,7 +86,7 @@ function inicializarComponentes() {
 
 function agregarEvento(botonNotificacion) {
     botonNotificacion.on('click', function (event) {
-        if(Ayudantes.urlValido()) {
+        if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
             ProcesoPeticion.realizarPeticionPrereservas();
         } else {
             window.location="http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion";
@@ -88,7 +100,7 @@ function realizarPeticionNumeroPrereservas() {
         url: Ayudantes.getUrlValido(),
         type: 'post',
         beforeSend: function () {
-            
+            console.log(this.url);
         },
         success: function (response) {
 
