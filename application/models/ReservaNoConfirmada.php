@@ -21,7 +21,8 @@ class ReservaNoConfirmada extends CI_Model{
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
                 . 'c.Nombre AS campo, ' . ' r.Precio as precio, ' 
-                . 'r.FechaExpiracion as fechaExpiracion, ' . 'r.HoraExpiracion as horaExpiracion');
+                . 'r.FechaExpiracion as fechaExpiracion, ' . 'r.HoraExpiracion as horaExpiracion, '
+                . 'c.RutaFoto as foto');
         $this->db->from('Reserva AS r, CampoDeportivo as c');
         $this->db->where('r.IdCampoDeportivo = c.IdCampoDeportivo AND r.Confirmado = FALSE');
         $consulta = $this->db->get();
