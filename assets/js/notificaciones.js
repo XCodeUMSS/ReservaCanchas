@@ -76,7 +76,12 @@ $(document).ready(function () {
     Notificaciones.inicializar();
     Notificaciones.agregarEvento(botonNotificacion);
 
+    $('[data-toggle="tooltip"]').tooltip(); 
+
     ProcesoPeticion.realizarPeticionNumeroPrereservas();
+    if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
+        ProcesoPeticion.realizarPeticionPrereservas();
+    }
 });
 
 function inicializarComponentes() {
@@ -86,11 +91,9 @@ function inicializarComponentes() {
 
 function agregarEvento(botonNotificacion) {
     botonNotificacion.on('click', function (event) {
-        if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
-            ProcesoPeticion.realizarPeticionPrereservas();
-        } else {
-            window.location="http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion";
-        }
+        
+        window.location="http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion";
+       
     });
 }
 
@@ -100,7 +103,7 @@ function realizarPeticionNumeroPrereservas() {
         url: Ayudantes.getUrlValido(),
         type: 'post',
         beforeSend: function () {
-            console.log(this.url);
+            
         },
         success: function (response) {
 

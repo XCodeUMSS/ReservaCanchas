@@ -6,4 +6,8 @@
 <!-- Inclusion de FormHelper de bootstrap -->
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-formhelpers.js"></script>
 
+<script src="<?php echo base_url(); ?>assets/js/tooltip.js"></script>
+
+
+
 
