@@ -30,6 +30,7 @@ class ControladorReservaEspecial extends CI_Controller {
      */
 
     public function __construct() {
+        session_start();
         parent::__construct();
         $this->load->model('consultas');
         $this->load->model('Reserva');
@@ -45,7 +46,6 @@ class ControladorReservaEspecial extends CI_Controller {
      */
 
     public function index() {
-        session_start();
         $datos['eventos'] = $this->consultas->tipos_evento();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();

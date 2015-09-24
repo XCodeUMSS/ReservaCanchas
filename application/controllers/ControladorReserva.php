@@ -27,6 +27,7 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function __construct() {
+        session_start();
         parent::__construct();
         $this->load->model('consultas');
         $this->load->model('Reserva');
@@ -47,7 +48,6 @@ class ControladorReserva extends CI_Controller {
      */
 
     public function index() {
-        session_start();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['reservas'] = $this->consultas->reservas_registradas();
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
@@ -169,7 +169,10 @@ class ControladorReserva extends CI_Controller {
         $horario_fin = $horarios->HoraFin;
         $mensaje_alerta = '- Las horas no estan dentro de los horarios de'
                 . ' atencion.';
-
+        $hora_inicio = DateTime::createFromFormat("H:i:s", $hora_inicio);
+        $hora_fin = DateTime::createFromFormat("H:i:s", $hora_fin);
+        $horario_inicio = DateTime::createFromFormat("H:i:s", $horario_inicio);
+        $horario_fin = DateTime::createFromFormat("H:i:s", $horario_fin);
         if ($hora_inicio >= $horario_inicio && $hora_inicio < $horario_fin &&
                 $hora_fin > $horario_inicio && $hora_fin <= $horario_fin) {
             $mensaje_alerta = '';

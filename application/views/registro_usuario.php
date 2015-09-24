@@ -20,6 +20,11 @@
 
             <a href="#" class="btn" style="padding-top: 14px;">XCodeRC</a>
         </div>
+         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio  </a></li>
+            </ul>
+         </div>
     </div>
 
 </header>

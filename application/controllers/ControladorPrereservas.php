@@ -27,6 +27,7 @@ class ControladorPrereservas extends CI_Controller {
     public $idcampo;
 
     public function __construct() {
+        session_start();
         parent::__construct();
         $this->load->model('consultas');
         $this->load->model('Prereserva');
@@ -37,7 +38,6 @@ class ControladorPrereservas extends CI_Controller {
     
     
     public function index(){
-        session_start();
         $this->mostrarFormulario();
     }
 
@@ -64,7 +64,7 @@ class ControladorPrereservas extends CI_Controller {
                 $datos['reservas'] = $this->consultas->reservas_cliente($_SESSION['usuario']);
             }
 
-            $this->load->view('bienvenido_usuario', $datos);
+            //$this->load->view('bienvenido_usuario', $datos);
             
         }
         else{
@@ -77,7 +77,6 @@ class ControladorPrereservas extends CI_Controller {
      * @return type
      */
     public function realizarPrereserva() {
-        session_start();
         $id_campo = $this->input->post('campo_deportivo');
         $this->idcampo = $id_campo;
         $fecha = $this->formatear_fecha($this->input->post('fecha_reserva'));
@@ -107,7 +106,6 @@ class ControladorPrereservas extends CI_Controller {
      * Muestra los Detalles de las canchas hacia los usuarios
      */
     public function mostrarDetallesCanchas() {
-        session_start();
         $datos['canchas'] = $this->consultas->campos_registrados();
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $this->load->view('vista_detalles_canchas', $datos);
@@ -150,7 +148,8 @@ class ControladorPrereservas extends CI_Controller {
         $reserva = new Prereserva();
 
         $fechaExpiracion = $this->obtenerFechaExpiracion($fecha);
-        $horaExpiracion = $this->obtenerHoraExpiracion();
+        $horaExpiracion = $this->obtenerHoraExpiracion($fechaExpiracion, $fecha,
+                $hora_inicio);
         $reserva->actualizar($_SESSION['usuario'], $_SESSION['telefono'], 
                 $id_campo, $fecha, $hora_inicio, $hora_fin, $precio, 
                 self::RESERVA_ESPECIAL, $fechaExpiracion, $horaExpiracion, 
@@ -183,9 +182,13 @@ class ControladorPrereservas extends CI_Controller {
      * Obtiene la hora de la expiracion
      * @return hora
      */
-    public function obtenerHoraExpiracion() {
+    public function obtenerHoraExpiracion($fecha_exp, $fecha, $hora) {
         $today = date("H:i:s");
-
+        $fecha_reserva = DateTime::createFromFormat("d/m/Y", $fecha);
+        $fecha_reserva = $fecha_reserva->format("d/m/y");
+        if($fecha_exp == $fecha_reserva){
+            return $hora;
+        }
         return $today;
     }
 
@@ -259,6 +262,10 @@ class ControladorPrereservas extends CI_Controller {
         $mensaje_alerta = '- Las horas no estan dentro de los horarios de'
                 . ' atencion.';
 
+        $hora_inicio = DateTime::createFromFormat("H:i:s", $hora_inicio);
+        $hora_fin = DateTime::createFromFormat("H:i:s", $hora_fin);
+        $horario_inicio = DateTime::createFromFormat("H:i:s", $horario_inicio);
+        $horario_fin = DateTime::createFromFormat("H:i:s", $horario_fin);
         if ($hora_inicio >= $horario_inicio && $hora_inicio < $horario_fin &&
                 $hora_fin > $horario_inicio && $hora_fin <= $horario_fin) {
             $mensaje_alerta = '';
