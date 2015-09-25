@@ -7,6 +7,7 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-formhelpers.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/tooltip.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/notify.min.js"></script>
 
 
 
