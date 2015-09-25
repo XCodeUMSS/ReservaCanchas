@@ -1,10 +1,17 @@
 Notificaciones = {
+	numeroInicial : 0,
     inicializar: inicializarComponentes,
     agregarEvento: agregarEvento,
     verificarNumeroPrereervas: function (numeroPrereservas) {
         if (numeroPrereservas > 0) {
             botonNotificacion.removeClass('sr-only');
             botonNotificacion.text(numeroPrereservas);
+			if(numeroPrereservas != Notificaciones.numeroInicial) {
+				if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
+					ProcesoPeticion.realizarPeticionPrereservas();
+				}
+				Notificaciones.numeroInicial = numeroPrereservas;
+			}
         } else {
             botonNotificacion.addClass('sr-only');
             botonNotificacion.text(numeroPrereservas);
@@ -61,6 +68,7 @@ ProcesoPeticion = {
 
             },
             success: function (response) {
+				console.log('renderizando');
                 $('#panelNotificaciones').html(response);
             },
             error: function () {
@@ -106,7 +114,7 @@ function realizarPeticionNumeroPrereservas() {
             
         },
         success: function (response) {
-
+			
             Notificaciones.verificarNumeroPrereervas(response);
         },
         error: function () {
