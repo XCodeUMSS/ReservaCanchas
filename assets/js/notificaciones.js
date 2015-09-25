@@ -1,3 +1,4 @@
+contador = 0;
 Notificaciones = {
 	numeroInicial : 0,
     inicializar: inicializarComponentes,
@@ -6,12 +7,28 @@ Notificaciones = {
         if (numeroPrereservas > 0) {
             botonNotificacion.removeClass('sr-only');
             botonNotificacion.text(numeroPrereservas);
-			if(numeroPrereservas != Notificaciones.numeroInicial) {
+			if(numeroPrereservas > Notificaciones.numeroInicial) {
+				if(contador == 0) {
+					$.notify("Bienvenido", "info");
+					contador++;
+				} else {
+					$.notify("Se realizo una nueva Prereserva", "info");
+				}
+				
 				if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
 					ProcesoPeticion.realizarPeticionPrereservas();
 				}
 				Notificaciones.numeroInicial = numeroPrereservas;
+				
+			} else if(numeroPrereservas < Notificaciones.numeroInicial) {
+				$.notify("Se confirmo una prereserva", "info");
+				if(Ayudantes.urlValido() || Ayudantes.rutaActual() == "http://localhost/ReservaCanchas/index.php/") {
+					ProcesoPeticion.realizarPeticionPrereservas();
+				}
+				Notificaciones.numeroInicial = numeroPrereservas;
+				
 			}
+			
         } else {
             botonNotificacion.addClass('sr-only');
             botonNotificacion.text(numeroPrereservas);
