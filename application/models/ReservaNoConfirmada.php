@@ -17,6 +17,7 @@ class ReservaNoConfirmada extends CI_Model{
      * @return Array
      */
     public function obtenerReservasNoConfirmadas() {
+        $this->eliminar_prereservas();
         $this->db->select('r.IdReserva as id, r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
@@ -36,6 +37,7 @@ class ReservaNoConfirmada extends CI_Model{
      * @return Array
      */
     public function obtenerReservasNoConfirmadasPorUsuario($nombreUsuario) {
+        $this->eliminar_prereservas();
         $this->db->select('r.IdReserva as id, r.NombreCliente AS nombre, '
                 . 'r.TelefonoReferencia AS telefono, r.Fecha AS fecha, '
                 . 'r.HoraInicio AS horaInicio, r.HoraFin AS horaFin, '
@@ -52,5 +54,16 @@ class ReservaNoConfirmada extends CI_Model{
         $this->db->set('Confirmado', true);
         $this->db->where('IdReserva', $id);
         $this->db->update('Reserva');
+    }
+    
+    public function eliminar_prereservas() {
+        date_default_timezone_set('America/La_Paz');
+        $datetime = new DateTime('now');
+        $datetime = $datetime->format("d/m/y");
+        $today = date("H:i:s");
+        $this->db->where("FechaExpiracion < '".$datetime."'"
+                . "OR (FechaExpiracion = '".$datetime."' "
+                . "AND HoraExpiracion < '".$today."')");
+        $this->db->delete('Reserva');
     }
 }
