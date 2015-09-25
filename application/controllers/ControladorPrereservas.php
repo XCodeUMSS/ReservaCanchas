@@ -234,8 +234,8 @@ class ControladorPrereservas extends CI_Controller {
                     $hora_fin) ? "- En la repeticion: fecha " .
                     $fecha_siguiente->format("Y/m/d") . ' existe una reserva.' : '';
             $reserva_otra = new Prereserva();
-            $fechaExpiracion = $this->obtenerFechaExpiracion();
-            $horaExpiracion = $this->obtenerHoraExpiracion();
+            $fechaExpiracion = $this->obtenerFechaExpiracion($fecha);
+            $horaExpiracion = $this->obtenerHoraExpiracion($fechaExpiracion, $fecha, $hora_inicio);
             $reserva_otra->actualizar($_SESSION['usuario'], 
                     $_SESSION['telefono'], $id_campo, $fecha, $hora_inicio, 
                     $hora_fin, $precio, self::RESERVA_ESPECIAL, $fechaExpiracion,
