@@ -52,7 +52,7 @@ class ControladorAdministradores extends CI_Controller{
             );
             $this->consultas->registrar_usuario($usuario);
             $this->mensaje = "El administrador $nombre_usuario fue exitosamente"
-                    . "registrado. Listo para iniciar sesion.";
+                    . " registrado. Listo para iniciar sesion.";
             $this->index();
         }
     }
