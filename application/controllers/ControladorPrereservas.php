@@ -64,7 +64,7 @@ class ControladorPrereservas extends CI_Controller {
                 $datos['reservas'] = $this->consultas->reservas_cliente($_SESSION['usuario']);
             }
 
-            //$this->load->view('bienvenido_usuario', $datos);
+            $this->load->view('bienvenido_usuario', $datos);
             
         }
         else{
