@@ -9,7 +9,9 @@ Notificaciones = {
             botonNotificacion.text(numeroPrereservas);
 			if(numeroPrereservas > Notificaciones.numeroInicial) {
 				if(contador == 0) {
-					$.notify("Bienvenido", "info");
+					if(Ayudantes.urlValido()) {
+						$.notify("Bienvenido", "success");
+					}
 					contador++;
 				} else {
 					$.notify("Se realizo una nueva Prereserva", "info");
