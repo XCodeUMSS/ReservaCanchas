@@ -13,6 +13,7 @@ class ControladorConfirmarPrereserva extends CI_Controller {
     var $mensaje;
 
     public function __construct() {
+        session_start();
         parent::__construct();
         $this->load->model('reservaNoConfirmada');
         $this->load->model('Consultas');
@@ -23,7 +24,6 @@ class ControladorConfirmarPrereserva extends CI_Controller {
      * Funcion encargada de mostrar la vista de confirmacion de una prereserva
      */
     public function mostrarVistaConfirmacion() {
-        session_start();
         $datos['reservas'] = $this->reservaNoConfirmada->obtenerReservasNoConfirmadas();
         $datos['menus'] = $this->Consultas->menus($_SESSION['rol']);
         $datos['mensaje'] = $this->mensaje;
@@ -41,12 +41,41 @@ class ControladorConfirmarPrereserva extends CI_Controller {
         $this->load->view('plantillas/reservas_no_confirmadas', $datos);
     }
     
+    /*
+     * Funcion que confirma prereserva
+     */
+    
     public function confirmar_prereserva(){
         if (isset($_REQUEST['cod'])) {
             $this->reservaNoConfirmada->confirmar($_REQUEST['cod']);
             $this->mensaje = 'La reserva fue confirmada.';
-            $this->mostrarVistaConfirmacion();
+            $reserva = $this->reservaNoConfirmada->codigo($_REQUEST['cod']);
+            $datos['confirmar'] = true;
+            $datos['cliente'] = $reserva[0]->cliente;
+            $datos['detalle'] = "Reserva el dia " .$reserva[0]->fecha . " de " .
+                    $reserva[0]->horaInicio . " a " . $reserva[0]->horaFin;
+            $datos['precio_total'] = $reserva[0]->precio;
+            $datos['mensaje'] = $this->mensaje;
+            $datos['menus'] = $this->Consultas->menus($_SESSION['rol']);
+            $datos['codigo'] = $this->crear_recibo($datos);
+            $this->load->view('recibo', $datos);
         }
+    }
+    
+    /*
+     * Funcion que crea un recibo
+     */
+    
+    public function crear_recibo($datos) {
+        $datetime = new DateTime('now');
+        $datetime = $datetime->format('d/m/y');
+        $recibo = array(
+            "Fecha" => $datetime,
+            "Precio" => $datos['precio_total'],
+            "CantidadReserva" => 1,
+            "IdReserva" => $_REQUEST['cod']
+        );
+        return $this->Consultas->insertar_recibo($recibo);
     }
 
 }
