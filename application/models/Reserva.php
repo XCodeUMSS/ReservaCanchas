@@ -22,7 +22,7 @@ class Reserva extends CI_Model{
     var $hora_fin = '';
     var $reserva_especial = '';
     var $precio = '';
-    var $repeticiones = array();
+    var $detalle = '';
     
     public function __construct(){
         parent::__construct();
@@ -52,6 +52,7 @@ class Reserva extends CI_Model{
         $this->hora_fin = $hora_fin;
         $this->precio = $precio;
         $this->reserva_especial = $tipo_reserva;
+        $this->detalle = "Reserva el dia $fecha de $hora_inicio a $hora_fin";
     }
 
     public function cambiar_fecha($fecha){

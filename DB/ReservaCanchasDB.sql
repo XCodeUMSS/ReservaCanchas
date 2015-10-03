@@ -410,6 +410,32 @@ CREATE TABLE "Notificacion" (
 
 ALTER TABLE public."Notificacion" OWNER TO postgres;
 
+CREATE SEQUENCE seqidrecibo
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 0
+    NO MAXVALUE
+    CACHE 1;
+ALTER TABLE public.seqidrecibo OWNER TO postgres;
+
+CREATE TABLE "Recibo" (
+    "IdRecibo" integer DEFAULT nextval('seqidrecibo'::regclass) NOT NULL,
+    "Fecha" date NOT NULL,
+    "Precio" integer NOT NULL,
+    "CantidadReserva" integer NOT NULL,
+    "IdReserva" integer NOT NULL
+);
+
+
+ALTER TABLE public."Recibo" OWNER TO postgres;
+
+ALTER TABLE ONLY "Recibo"
+    ADD CONSTRAINT "idRecibo" PRIMARY KEY ("IdRecibo");
+
+    ALTER TABLE ONLY "Recibo"
+    ADD CONSTRAINT "Recibo-Reserva" FOREIGN KEY ("IdReserva") REFERENCES "Reserva"("IdReserva") ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
 --
 -- TOC entry 2050 (class 0 OID 42304)
 -- Dependencies: 185

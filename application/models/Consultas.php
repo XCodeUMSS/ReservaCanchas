@@ -138,6 +138,7 @@ class Consultas extends CI_Model {
 
     public function registrar_reserva($reserva) {
         $this->db->insert("Reserva", $reserva);
+        return $this->db->insert_id();
     }
 
     /*
@@ -302,5 +303,14 @@ class Consultas extends CI_Model {
                 . "OR (FechaExpiracion = '".$datetime."' "
                 . "AND HoraExpiracion < '".$today."')");
         $this->db->delete('Reserva');
+    }
+    
+    /*
+     * Funcion que inserta recibo
+     */
+    
+    public function insertar_recibo($recibo) {
+        $this->db->insert("Recibo", $recibo);
+        return $this->db->insert_id();
     }
 }

@@ -13,6 +13,7 @@ class ControladorReserva extends CI_Controller {
     private $validador;
     var $reservas;
     var $mensaje;
+    var $precio_total;
 
     //Constantes a ser usadas como valores por defecto en los campos necesarios
     const RESERVA_ESPECIAL = false;
@@ -34,12 +35,8 @@ class ControladorReserva extends CI_Controller {
         include(APPPATH . 'controllers/ValidadorDatos.php');
         $this->validador = new ValidadorDatos();
         $this->mensaje = '';
+        $this->precio_total = 0;
     }
-
-    public function hola() {
-        echo "Beimar huarachi jdsklfjakljsldfasd";
-    }
-
 
     /*
      * Funcion que carga la vista principal de realizar reserva
@@ -64,12 +61,39 @@ class ControladorReserva extends CI_Controller {
     public function reservar() {
         $this->reservas = new ArrayObject(array());
         if ($this->realizar_reserva()) {
+            $codigo = 0;
             for ($i = 0; $i < count($this->reservas); $i++) {
-                $this->consultas->registrar_reserva($this->reservas[$i]->datos());
+                $codigo = $this->consultas->registrar_reserva($this->reservas[$i]->datos());
+                $this->precio_total += $this->reservas[$i]->precio;
             }
             $this->mensaje = "Su reserva fue exitosamente registrada.";
+            $datos['reservas'] = $this->reservas;
+            $datos['precio_total'] = $this->precio_total;
+            $datos['cliente'] = $this->reservas[0]->cliente;
+            $datos['mensaje'] = $this->mensaje;
+            $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
+            $datos['confirmar'] = false;
+            $datos['codigo'] = $this->crear_recibo($datos, $codigo);
+            $this->load->view('recibo', $datos);
         }
-        $this->index();
+        else{
+            $this->index();
+        }
+    }
+    
+    /*
+     * Funcion que crea recibo
+     */
+    public function crear_recibo($datos, $codigo) {
+        $datetime = new DateTime('now');
+        $datetime = $datetime->format('d/m/y');
+        $recibo = array(
+            "Fecha" => $datetime,
+            "Precio" => $datos['precio_total'],
+            "CantidadReserva" => count($this->reservas),
+            "IdReserva" => $codigo
+        );
+        return $this->Consultas->insertar_recibo($recibo);
     }
 
     /*
