@@ -15,6 +15,8 @@
         <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo base_url(); ?>index.php/">Inicio  </a></li>
+                <!--<li><a href="<?php echo base_url(); ?>index.php/ControladorReportes/ganancias">Reporte Ganancias  </a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/ControladorReportes/canchasPopulares">Reporte Canchas Populares  </a></li>-->
                 <li>
                     <?php if ($_SESSION['rol'] == 'Administrador'): ?>
                         <span style="margin-top: 15px; margin-left: 10px"class="badge sr-only" data-toggle="tooltip" data-placement="bottom" title="Usted tiene Prereservas por confirmar">  0</span>
