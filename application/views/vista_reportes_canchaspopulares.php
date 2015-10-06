@@ -31,5 +31,6 @@ and open the template in the editor.
         <?php require_once 'inc/inclusion_jquery.php'; ?>
         <script src="<?php echo base_url(); ?>assets/js/Chart.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/graficos_reporte_canchas.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/notificaciones.js"></script>
     </body>
 </html>
