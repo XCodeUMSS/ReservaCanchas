@@ -23,6 +23,8 @@ class Reserva extends CI_Model{
     var $reserva_especial = '';
     var $precio = '';
     var $detalle = '';
+    var $recibo = 0;
+    var $id = '';
     
     public function __construct(){
         parent::__construct();
@@ -38,7 +40,8 @@ class Reserva extends CI_Model{
             'Fecha' => $this->fecha,
             'HoraInicio' => $this->hora_inicio,
             'HoraFin' => $this->hora_fin,
-            'ReservaEspecial' => $this->reserva_especial
+            'ReservaEspecial' => $this->reserva_especial,
+            'IdRecibo' => $this->recibo
         );
         return $reserva;
     }
@@ -62,5 +65,9 @@ class Reserva extends CI_Model{
     
     public function fecha() {
         return $this->fecha;
+    }
+    
+    public function id($id){
+        $this->id = $id;
     }
 }

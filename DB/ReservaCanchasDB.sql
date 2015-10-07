@@ -201,7 +201,8 @@ CREATE TABLE "Reserva" (
     "ReservaEspecial" boolean DEFAULT false NOT NULL,
     "FechaExpiracion" date,
     "HoraExpiracion" time without time zone,
-    "Confirmado" boolean DEFAULT true NOT NULL
+    "Confirmado" boolean DEFAULT true NOT NULL,
+    "IdRecibo" integer
 );
 
 
@@ -422,8 +423,6 @@ CREATE TABLE "Recibo" (
     "IdRecibo" integer DEFAULT nextval('seqidrecibo'::regclass) NOT NULL,
     "Fecha" date NOT NULL,
     "Precio" integer NOT NULL,
-    "CantidadReserva" integer NOT NULL,
-    "IdReserva" integer NOT NULL,
     "Administrador" character varying NOT NULL
 );
 
