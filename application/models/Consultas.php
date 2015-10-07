@@ -314,6 +314,9 @@ class Consultas extends CI_Model {
         return $this->db->insert_id();
     }
     
+    /*
+     * Funcion que devuelve el nombre y apellido del administrador
+     */
     public function nombre_admi($username) {
         $this->db->select("Nombre, Apellidos");
         $this->db->from("Usuario");
@@ -321,5 +324,14 @@ class Consultas extends CI_Model {
         $consulta = $this->db->get();
         $primera = $consulta->first_row();
         return $primera->Nombre . " ". $primera->Apellidos;
+    }
+    
+    /*
+     * Funcion que asocia a recibo con reserva
+     */
+    public function reserva_pagada($id, $recibo) {
+        $this->db->set('IdRecibo', $recibo);
+        $this->db->where('IdReserva', $id);
+        $this->db->update('Reserva');
     }
 }

@@ -64,6 +64,7 @@ class ControladorReserva extends CI_Controller {
             $codigo = 0;
             for ($i = 0; $i < count($this->reservas); $i++) {
                 $codigo = $this->consultas->registrar_reserva($this->reservas[$i]->datos());
+                $this->reservas[$i]->id($codigo);
                 $this->precio_total += $this->reservas[$i]->precio;
             }
             $this->mensaje = "Su reserva fue exitosamente registrada.";
@@ -74,7 +75,8 @@ class ControladorReserva extends CI_Controller {
             $datos['mensaje'] = $this->mensaje;
             $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
             $datos['confirmar'] = false;
-            $datos['codigo'] = $this->crear_recibo($datos, $codigo);
+            $datos['codigo'] = $this->crear_recibo($datos);
+            $this->reservas_pagadas($datos['codigo']);
             $datos['admi'] = $this->Consultas->nombre_admi($_SESSION['usuario']);
             $this->load->view('recibo', $datos);
         }
@@ -86,14 +88,12 @@ class ControladorReserva extends CI_Controller {
     /*
      * Funcion que crea recibo
      */
-    public function crear_recibo($datos, $codigo) {
+    public function crear_recibo($datos) {
         $datetime = new DateTime('now');
         $datetime = $datetime->format('d/m/y');
         $recibo = array(
             "Fecha" => $datetime,
             "Precio" => $datos['precio_total'],
-            "CantidadReserva" => count($this->reservas),
-            "IdReserva" => $codigo,
             "Administrador" => $_SESSION['usuario']
         );
         return $this->Consultas->insertar_recibo($recibo);
@@ -229,6 +229,15 @@ class ControladorReserva extends CI_Controller {
 
     public function formatear_fecha($fecha) {
         return date_format(date_create($fecha), 'd/m/Y');
+    }
+
+    /*
+     * Funcion que actualiza las reservas pagadas
+     */
+    public function reservas_pagadas($recibo) {
+        foreach ($this->reservas as $reserva) {
+            $this->consultas->reserva_pagada($reserva->id, $recibo);
+        }
     }
 
 }

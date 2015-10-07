@@ -60,6 +60,7 @@ class ControladorConfirmarPrereserva extends CI_Controller {
             $datos['menus'] = $this->Consultas->menus($_SESSION['rol']);
             $datos['admi'] = $this->Consultas->nombre_admi($_SESSION['usuario']);
             $datos['codigo'] = $this->crear_recibo($datos);
+            $this->Consultas->reserva_pagada($_REQUEST['cod'], $datos['codigo']);
             $this->load->view('recibo', $datos);
         }
     }
@@ -74,8 +75,6 @@ class ControladorConfirmarPrereserva extends CI_Controller {
         $recibo = array(
             "Fecha" => $datetime,
             "Precio" => $datos['precio_total'],
-            "CantidadReserva" => 1,
-            "IdReserva" => $_REQUEST['cod'],
             "Administrador" => $_SESSION['usuario']
         );
         return $this->Consultas->insertar_recibo($recibo);
