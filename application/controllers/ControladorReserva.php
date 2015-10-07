@@ -70,10 +70,12 @@ class ControladorReserva extends CI_Controller {
             $datos['reservas'] = $this->reservas;
             $datos['precio_total'] = $this->precio_total;
             $datos['cliente'] = $this->reservas[0]->cliente;
+            $datos['campo'] = $this->consultas->nombre_campo($this->reservas[0]->campo_deportivo);
             $datos['mensaje'] = $this->mensaje;
             $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
             $datos['confirmar'] = false;
             $datos['codigo'] = $this->crear_recibo($datos, $codigo);
+            $datos['admi'] = $this->Consultas->nombre_admi($_SESSION['usuario']);
             $this->load->view('recibo', $datos);
         }
         else{
@@ -91,7 +93,8 @@ class ControladorReserva extends CI_Controller {
             "Fecha" => $datetime,
             "Precio" => $datos['precio_total'],
             "CantidadReserva" => count($this->reservas),
-            "IdReserva" => $codigo
+            "IdReserva" => $codigo,
+            "Administrador" => $_SESSION['usuario']
         );
         return $this->Consultas->insertar_recibo($recibo);
     }

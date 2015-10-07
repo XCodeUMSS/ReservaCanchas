@@ -23,7 +23,7 @@
                     echo $datetime->format('d/m/y')?></p>
                     <p><label>Recibi de: </label> <?php echo $cliente; ?></p>
                     <p><label>La suma de: </label> <?php echo $precio_total; ?> Bolivianos</p>
-                    <p><label>A concepto de: </label> Reserva</p>
+                    <p><label>A concepto de: </label> Reserva del campo: <?php echo $campo; ?></p>
                     <div class="table-responsive">
                         <table id="detalle" class="table table-bordered table-striped">
                             <thead>
@@ -48,8 +48,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><label>Total a pagar:</label> <?php echo $precio_total; ?> Bolivianos</p>
-                    <p><label>Recibido por:</label>________________</p>
+                    <p><label>Total a pagar: </label> <?php echo $precio_total; ?> Bolivianos</p>
+                    <p><label>Recibido por: </label><?php echo $admi;?></p>
                 </div>
                 <div class="col-sm-6">
                     <input type="button" class="btn btn-primary" onclick="imprimir('recibo')" value="Imprimir recibo">

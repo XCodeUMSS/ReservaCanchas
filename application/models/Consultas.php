@@ -38,7 +38,7 @@ class Consultas extends CI_Model {
     /*
      * Obtiene nombre del Campo Deportivo mediante id
      */
-    public function obtenerNombreCampo($idCampoDeportivo) {
+    public function nombre_campo($idCampoDeportivo) {
         $this->db->select('Nombre');
         $this->db->from('CampoDeportivo');
         $this->db->where('IdCampoDeportivo', $idCampoDeportivo);
@@ -312,5 +312,14 @@ class Consultas extends CI_Model {
     public function insertar_recibo($recibo) {
         $this->db->insert("Recibo", $recibo);
         return $this->db->insert_id();
+    }
+    
+    public function nombre_admi($username) {
+        $this->db->select("Nombre, Apellidos");
+        $this->db->from("Usuario");
+        $this->db->where("NombreUsuario", $username);
+        $consulta = $this->db->get();
+        $primera = $consulta->first_row();
+        return $primera->Nombre . " ". $primera->Apellidos;
     }
 }

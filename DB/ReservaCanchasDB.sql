@@ -423,7 +423,8 @@ CREATE TABLE "Recibo" (
     "Fecha" date NOT NULL,
     "Precio" integer NOT NULL,
     "CantidadReserva" integer NOT NULL,
-    "IdReserva" integer NOT NULL
+    "IdReserva" integer NOT NULL,
+    "Administrador" character varying NOT NULL
 );
 
 
