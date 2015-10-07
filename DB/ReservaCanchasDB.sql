@@ -449,6 +449,8 @@ INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (3, 'Realizar Res
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (4, 'Confirmar Reservas', 'http://localhost/ReservaCanchas/index.php/ControladorConfirmarPrereserva/mostrarVistaConfirmacion', 1);
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (5, 'Realizar Reserva', 'http://localhost/ReservaCanchas/index.php/ControladorPrereservas/mostrarDetallesCanchas', 2);
 INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (6, 'Registrar Administrador', 'http://localhost/ReservaCanchas/index.php/ControladorAdministradores/index', 1);
+INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (7, 'Reporte Ganancias', 'http://localhost/ReservaCanchas/index.php/ControladorReportes/ganancias', 1);
+INSERT INTO "Menu" ("IdMenu", "Nombre", "Url", "IdRol") VALUES (8, 'Reporte Canchas Populares', 'http://localhost/ReservaCanchas/index.php/ControladorReportes/canchasPopulares', 1);
 
 
 --
