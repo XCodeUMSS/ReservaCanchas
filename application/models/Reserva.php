@@ -57,6 +57,7 @@ class Reserva extends CI_Model{
 
     public function cambiar_fecha($fecha){
         $this->fecha = $fecha;
+        $this->detalle = "Reserva dia $fecha de $this->hora_inicio a $this->hora_fin";
     }
     
     public function fecha() {
