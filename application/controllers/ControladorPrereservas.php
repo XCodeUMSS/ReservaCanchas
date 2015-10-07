@@ -128,7 +128,7 @@ class ControladorPrereservas extends CI_Controller {
         $datos['repeticiones'] = $this->consultas->tipos_repeticion();
         $datos['mensaje'] = $this->mensaje;
         $datos['idCampo'] = $this->codigo;
-        $datos['nombreCampo'] = $this->consultas->obtenerNombreCampo($this->codigo);
+        $datos['nombreCampo'] = $this->consultas->nombre_campo($this->codigo);
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $datos['usuario'] = $_SESSION['usuario'];
         $datos['telefono'] = $datos_usuario->telefono;
