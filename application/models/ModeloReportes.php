@@ -26,10 +26,10 @@ FROM "Reserva" order by EXTRACT(YEAR FROM "Fecha") asc');
         return $consulta->result();
     }
     
-    public function reporteCanchaPopular() {
+    public function reporteCanchaPopular($gestion) {
         $consulta = $this->db->query('SELECT c."IdCampoDeportivo", c."Nombre",sum("Precio") as totalGanado, count("IdReserva") as numeroReservas
 FROM "Reserva" as r, "CampoDeportivo" as c
-where r."IdCampoDeportivo"=c."IdCampoDeportivo" and EXTRACT(YEAR FROM "Fecha") = 2015 AND "Confirmado" = true
+where r."IdCampoDeportivo"=c."IdCampoDeportivo" and EXTRACT(YEAR FROM "Fecha") = '.$gestion.' AND "Confirmado" = true
 group by c."IdCampoDeportivo"');
         return $consulta->result();
     }

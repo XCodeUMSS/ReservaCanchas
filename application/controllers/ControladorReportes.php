@@ -26,8 +26,8 @@ class ControladorReportes extends CI_Controller{
         
         
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
-        //$datos['gestiones'] = $this->modeloReportes->obtenerGestiones();
-        $datos['canchaspopulares'] = $this->modeloReportes->reporteCanchaPopular();
+        $datos['gestiones'] = $this->modeloReportes->obtenerGestiones();
+        //$datos['canchaspopulares'] = $this->modeloReportes->reporteCanchaPopular($gestion);
         $this->load->view('vista_reportes_canchaspopulares', $datos);
     }
 
@@ -48,7 +48,16 @@ class ControladorReportes extends CI_Controller{
     }
     
     public function procesarPeticionCanchasPopulares() {
-        $datos['canchaspopulares'] = $this->modeloReportes->reporteCanchaPopular();
+        $gestion = $this->input->post('gestion');
+        
+        $datos['canchaspopulares'] = $this->modeloReportes->reporteCanchaPopular($gestion);
         echo json_encode($datos);
+    }
+    
+    public function procesarPeticionCanchasPopularesTabla() {
+        $gestion = $this->input->post('gestion');
+        
+        $datos['canchaspopulares'] = $this->modeloReportes->reporteCanchaPopular($gestion);
+        $this->load->view('plantillas/reporte_canchas_populares', $datos);
     }
 }
