@@ -15,6 +15,18 @@ and open the template in the editor.
         <?php require_once 'inc/cabecera_vistas.php'; ?>
         <div class="container well">
             <h2 style="padding: 0px; margin: 0px; border: 0px">XCode Grafico Reporte de Ganancias<small> Bolivianos vs Mes</small></h2><br>
+            <div class="row">
+                <div class="col-sm-7"></div>
+                <div class="col-sm-1"><h5><strong>Gestion</strong></h5></div>
+                <div class="col-sm-4">
+                    <select class="form-control" id="select_gestion" name="tipo_cancha">
+                        <?php foreach ($gestiones as $gestion): ?>
+                            <option value="<?php echo $gestion->gestion; ?>"><?php echo $gestion->gestion; ?></option>
+                        <?php endforeach; ?>
+                        <!--<option value="2014">2014</option>-->
+                    </select>
+                </div>
+            </div>
             
             <div class="row">
                 <div class="col-sm-12">
@@ -23,8 +35,10 @@ and open the template in the editor.
                 <div class="col-md-12">
                     <h3>Total : <span id="total"></span></h3>
                 </div>
-                <?php require_once 'plantillas/reporte_ganancias.php'; ?>
                 
+                <div id="tabla_reportes" class="col-md-12">
+                <!--<?php require_once 'plantillas/reporte_ganancias.php'; ?>-->
+                </div>
             </div>
         </div>
         

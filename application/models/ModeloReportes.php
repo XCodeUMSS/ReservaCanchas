@@ -11,10 +11,10 @@ class ModeloReportes extends CI_Model {
         $this->load->database();
     }
     
-    public function reportesGanancias() {
+    public function reportesGanancias($gestion) {
         $consulta = $this->db->query('SELECT sum("Precio") as totalGanado, count("IdReserva") as numeroReservas,EXTRACT(MONTH FROM "Fecha") as mes
 FROM "Reserva"  
-where EXTRACT(YEAR FROM "Fecha") = 2015 AND "Confirmado" = true
+where EXTRACT(YEAR FROM "Fecha") = '.$gestion.' AND "Confirmado" = true
 group by EXTRACT(MONTH FROM "Fecha")
 order by EXTRACT(MONTH FROM "Fecha")');
         return $consulta->result();
@@ -22,7 +22,7 @@ order by EXTRACT(MONTH FROM "Fecha")');
     
     public function obtenerGestiones() {
         $consulta = $this->db->query('SELECT DISTINCT EXTRACT(YEAR FROM "Fecha") as gestion
-FROM "Reserva"');
+FROM "Reserva" order by EXTRACT(YEAR FROM "Fecha") asc');
         return $consulta->result();
     }
     
