@@ -11,6 +11,9 @@ XCode = {};
  */
 XCode.Datos = [];
 
+
+XCode.Gestion;
+
 /**
  * Los meses de la gestion
  * @type Array
@@ -84,6 +87,22 @@ XCode.traducirMes = function(mesNumero) {
     }
 } 
 
+XCode.Eventos = {
+    agregarEvento : function() {
+        $('#select_gestion').on('change', function () {
+            var gestion = this.value;
+            XCode.Funciones.peticionGanancias();
+            XCode.Funciones.peticionGananciasTabla();
+            console.log(gestion); 
+        });
+    },
+    obtenerGestion : function (){
+        return $('#select_gestion').val();
+    },
+    actualizarGestion : function (){
+        $('#etiqueta_gestion').text(this.obtenerGestion());
+    }
+}
 
 /**
  * Funciones necesarias para la renderizacion del grafico
@@ -104,7 +123,8 @@ XCode.Funciones = {
     procesarRespuesta: function (response) {
         var respuesta = JSON.parse(response);
         var ganancias = respuesta.reporteganancias;
-
+        console.log(response);
+        if(ganancias.length != 0) {
         var inicio = ganancias[0].mes;
         totalGanado = 0;
 
@@ -122,16 +142,38 @@ XCode.Funciones = {
         }, 100);
 
         $('#total').text(totalGanado + " Bs");
+        XCode.Eventos.actualizarGestion();} else {
+            $('#total').text(0 + " Bs");
+            graficoReporte.destroy();
+        }
     },
-    peticionGanancias: function peticionGanancias() {
+    peticionGanancias: function() {
         $.ajax({
-            data: 'id_campo_deportivo=' + 1,
+            data: 'gestion=' + XCode.Eventos.obtenerGestion(),
             url: "../ControladorReportes/procesarPeticionGanancias",
             type: 'post',
             beforeSend: function () {
 
             },
             success: this.procesarRespuesta,
+            error: function () {
+                console.log('Existen fallas en el servidor');
+            }
+        });
+    },
+    peticionGananciasTabla: function() {
+        $.ajax({
+            data: 'gestion=' + XCode.Eventos.obtenerGestion(),
+            url: "../ControladorReportes/procesarPeticionGananciasTabla",
+            type: 'post',
+            beforeSend: function () {
+
+            },
+            success: function (response) {
+                $('#tabla_reportes').html(response);
+                XCode.Funciones.reemplazarMes();
+                XCode.Eventos.actualizarGestion();
+            },
             error: function () {
                 console.log('Existen fallas en el servidor');
             }
@@ -150,8 +192,10 @@ XCode.Funciones = {
  * @returns void
  */
 function principal() {
+    XCode.Eventos.agregarEvento();
     XCode.Funciones.peticionGanancias();
-    setTimeout(XCode.Funciones.reemplazarMes(),300);
+    XCode.Funciones.peticionGananciasTabla();
+    //setTimeout(XCode.Funciones.reemplazarMes(),300);
 }
 
 /**

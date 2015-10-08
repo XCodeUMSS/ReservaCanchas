@@ -1,5 +1,5 @@
-<div class="col-md-12">
-    <h2>Reporte de Ganancias Gestion 2015</h2>
+
+    <h2>Reporte de Ganancias Gestion <strong id="etiqueta_gestion"></strong></h2>
     <div class="table-responsive">
         <table id="tabla_canchas" class="table table-bordered table-striped">
             <thead>
@@ -21,5 +21,5 @@
             </tbody>
         </table>
     </div>
-</div>
+
 
