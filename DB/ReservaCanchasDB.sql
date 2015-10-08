@@ -432,10 +432,6 @@ ALTER TABLE public."Recibo" OWNER TO postgres;
 ALTER TABLE ONLY "Recibo"
     ADD CONSTRAINT "idRecibo" PRIMARY KEY ("IdRecibo");
 
-    ALTER TABLE ONLY "Recibo"
-    ADD CONSTRAINT "Recibo-Reserva" FOREIGN KEY ("IdReserva") REFERENCES "Reserva"("IdReserva") ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
 --
 -- TOC entry 2050 (class 0 OID 42304)
 -- Dependencies: 185
