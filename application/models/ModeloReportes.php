@@ -12,17 +12,23 @@ class ModeloReportes extends CI_Model {
     }
     
     public function reportesGanancias($gestion) {
-        $consulta = $this->db->query('SELECT sum("Precio") as totalGanado, count("IdReserva") as numeroReservas,EXTRACT(MONTH FROM "Fecha") as mes
-FROM "Reserva"  
-where EXTRACT(YEAR FROM "Fecha") = '.$gestion.' AND "Confirmado" = true
+        $consulta = $this->db->query('SELECT sum("Precio") as totalGanado, sum("NumeroReservas") as numeroReservas,EXTRACT(MONTH FROM "Fecha") as mes
+FROM "Recibo"  
+where EXTRACT(YEAR FROM "Fecha") = '.$gestion.'
 group by EXTRACT(MONTH FROM "Fecha")
 order by EXTRACT(MONTH FROM "Fecha")');
         return $consulta->result();
     }
     
+    public function obtenerGestionesRecibo() {
+        $consulta = $this->db->query('SELECT DISTINCT EXTRACT(YEAR FROM "Fecha") as gestion
+FROM "Recibo" order by EXTRACT(YEAR FROM "Fecha") asc');
+        return $consulta->result();
+    }
+    
     public function obtenerGestiones() {
         $consulta = $this->db->query('SELECT DISTINCT EXTRACT(YEAR FROM "Fecha") as gestion
-FROM "Reserva" order by EXTRACT(YEAR FROM "Fecha") asc');
+FROM "Recibo" order by EXTRACT(YEAR FROM "Fecha") asc');
         return $consulta->result();
     }
     

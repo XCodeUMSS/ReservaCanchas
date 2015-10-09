@@ -229,13 +229,32 @@ INSERT INTO "Usuario" ("IdUsuario", "NombreUsuario", "Nombre", "Apellidos", "Tel
 -- Data for Name: Reserva; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "Reserva" VALUES (1, '2015-09-12', 1, '08:00:00', '09:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:08:50+02', false);
-INSERT INTO "Reserva" VALUES (2, '2015-09-12', 1, '09:00:00', '10:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:11:36+02', false);
-INSERT INTO "Reserva" VALUES (3, '2015-09-12', 1, '10:00:00', '11:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:12:22+02', false);
-INSERT INTO "Reserva" VALUES (4, '2015-09-12', 1, '07:00:00', '08:00:00', 20, 'Carlos', 70342315, false, NULL, NULL, true);
-INSERT INTO "Reserva" VALUES (5, '2015-09-14', 1, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
-INSERT INTO "Reserva" VALUES (6, '2015-09-12', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
-INSERT INTO "Reserva" VALUES (7, '2015-09-13', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true);
+INSERT INTO "Reserva" VALUES (1, '2015-09-12', 1, '08:00:00', '09:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:08:50+02', true, 1);
+INSERT INTO "Reserva" VALUES (2, '2015-09-12', 1, '09:00:00', '10:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:11:36+02', true, 2);
+INSERT INTO "Reserva" VALUES (3, '2015-09-12', 1, '10:00:00', '11:00:00', 20, 'Nosila', 4472104, false, '2015-09-13', '12:12:22+02', true, 3);
+INSERT INTO "Reserva" VALUES (4, '2015-09-12', 1, '07:00:00', '08:00:00', 20, 'Carlos', 70342315, false, NULL, NULL, true, 4);
+INSERT INTO "Reserva" VALUES (5, '2015-09-14', 1, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true, 5);
+INSERT INTO "Reserva" VALUES (6, '2015-09-12', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true, 6);
+INSERT INTO "Reserva" VALUES (7, '2015-09-13', 2, '08:00:00', '09:00:00', 20, 'Luis', 72745438, false, NULL, NULL, true, 7);
+INSERT INTO "Reserva" VALUES (8, '2014-02-03', 1, '08:00:00', '09:00:00', 20, 'Alison', 4472104, false, NULL, NULL, true, 8);
+INSERT INTO "Reserva" VALUES (9, '2014-02-04', 1, '08:00:00', '09:00:00', 20, 'Alison', 4472104, false, NULL, NULL, true, 8);
+INSERT INTO "Reserva" VALUES (10, '2014-02-05', 1, '08:00:00', '09:00:00', 20, 'Alison', 4472104, false, NULL, NULL, true, 8);
+
+--
+-- TOC entry 2005 (class 0 OID 91014)
+-- Dependencies: 193
+-- Data for Name: Recibo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+INSERT INTO "Recibo" VALUES (1, '2015-08-12', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (2, '2015-07-12', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (3, '2015-08-12', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (4, '2015-09-10', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (5, '2015-09-11', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (6, '2015-08-12', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (7, '2015-09-09', 20, 'Admi', 1);
+INSERT INTO "Recibo" VALUES (8, '2014-01-02', 60, 'Admi', 3);
 
 
 --
@@ -333,7 +352,15 @@ SELECT pg_catalog.setval('seqidusuario', 2, true);
 -- Name: seqidreserva; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('seqidreserva', 7, true);
+SELECT pg_catalog.setval('seqidreserva', 10, true);
+
+--
+-- TOC entry 2059 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: seqidrecibo; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seqidrecibo', 8, true);
 
 
 -- Completed on 2015-09-11 10:02:04
