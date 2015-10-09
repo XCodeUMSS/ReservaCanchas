@@ -75,7 +75,8 @@ class ControladorConfirmarPrereserva extends CI_Controller {
         $recibo = array(
             "Fecha" => $datetime,
             "Precio" => $datos['precio_total'],
-            "Administrador" => $_SESSION['usuario']
+            "Administrador" => $_SESSION['usuario'],
+            "NumeroReservas" => 1
         );
         return $this->Consultas->insertar_recibo($recibo);
     }

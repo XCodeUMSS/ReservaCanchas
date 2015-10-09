@@ -423,7 +423,9 @@ CREATE TABLE "Recibo" (
     "IdRecibo" integer DEFAULT nextval('seqidrecibo'::regclass) NOT NULL,
     "Fecha" date NOT NULL,
     "Precio" integer NOT NULL,
-    "Administrador" character varying NOT NULL
+    "Administrador" character varying NOT NULL,
+    "NumeroReservas" integer NOT NULL
+
 );
 
 

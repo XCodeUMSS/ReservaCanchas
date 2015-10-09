@@ -16,7 +16,7 @@ class ControladorReportes extends CI_Controller{
     public function ganancias() {
          
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
-        $datos['gestiones'] = $this->modeloReportes->obtenerGestiones();
+        $datos['gestiones'] = $this->modeloReportes->obtenerGestionesRecibo();
         //$datos['ganancias'] = $this->modeloReportes->reportesGanancias();
      
         $this->load->view('vista_reportes_ganancias', $datos);
@@ -35,7 +35,7 @@ class ControladorReportes extends CI_Controller{
     public function procesarPeticionGanancias() {
         $gestion = $this->input->post('gestion');
         
-        $datos['gestiones'] = $this->modeloReportes->obtenerGestiones();
+        $datos['gestiones'] = $this->modeloReportes->obtenerGestionesRecibo();
         $datos['reporteganancias'] = $this->modeloReportes->reportesGanancias($gestion);
         echo json_encode($datos);
     }

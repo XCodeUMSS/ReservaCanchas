@@ -94,7 +94,8 @@ class ControladorReserva extends CI_Controller {
         $recibo = array(
             "Fecha" => $datetime,
             "Precio" => $datos['precio_total'],
-            "Administrador" => $_SESSION['usuario']
+            "Administrador" => $_SESSION['usuario'],
+            "NumeroReservas" => count($this->reservas)
         );
         return $this->Consultas->insertar_recibo($recibo);
     }
