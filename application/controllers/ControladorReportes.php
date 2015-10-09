@@ -17,11 +17,10 @@ class ControladorReportes extends CI_Controller{
          
         $datos['menus'] = $this->consultas->menus($_SESSION['rol']);
         $datos['gestiones'] = $this->modeloReportes->obtenerGestionesRecibo();
-        //$datos['ganancias'] = $this->modeloReportes->reportesGanancias();
-     
+
         $this->load->view('vista_reportes_ganancias', $datos);
     }
-    
+
     public function canchasPopulares() {
         
         
