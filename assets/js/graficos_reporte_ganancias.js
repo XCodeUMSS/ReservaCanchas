@@ -91,6 +91,8 @@ XCode.Eventos = {
     agregarEvento : function() {
         $('#select_gestion').on('change', function () {
             var gestion = this.value;
+            graficoReporte.destroy();
+            
             XCode.Funciones.peticionGanancias();
             XCode.Funciones.peticionGananciasTabla();
             console.log(gestion); 
@@ -124,26 +126,35 @@ XCode.Funciones = {
         var respuesta = JSON.parse(response);
         var ganancias = respuesta.reporteganancias;
         console.log(response);
-        if(ganancias.length != 0) {
-        var inicio = ganancias[0].mes;
-        totalGanado = 0;
+        console.log("entra a la primera");
 
-        for (i = 0; i < inicio - 1; i++) {
-            XCode.Datos.push(0);
-        }
+        if (ganancias.length != 0) {
+            XCode.Datos = [];
+            
+            var inicio = ganancias[0].mes;
+            var totalGanado = 0;
 
-        for (e = 0; e < ganancias.length; e++) {
-            XCode.Datos.push(ganancias[e].totalganado);
-            var x = parseInt(ganancias[e].totalganado);
-            totalGanado = totalGanado + x;
-        }
-        setTimeout(function () {
-            XCode.Funciones.pintarGrafico();
-        }, 100);
+            for (i = 0; i < inicio - 1; i++) {
+                XCode.Datos.push(0);
+            }
 
-        $('#total').text(totalGanado + " Bs");
-        XCode.Eventos.actualizarGestion();} else {
+            for (e = 0; e < ganancias.length; e++) {
+                XCode.Datos.push(ganancias[e].totalganado);
+                var x = parseInt(ganancias[e].totalganado);
+                totalGanado = totalGanado + x;
+            }
+            
+            XCode.ConjuntoDatosGrafico.data = XCode.Datos;
+            setTimeout(function () {
+                XCode.Funciones.pintarGrafico();
+            }, 100);
+
+            $('#total').text(totalGanado + " Bs");
+            XCode.Eventos.actualizarGestion();
+            console.log(XCode.Datos);
+        } else {
             $('#total').text(0 + " Bs");
+            XCode.Eventos.actualizarGestion();
             graficoReporte.destroy();
         }
     },
