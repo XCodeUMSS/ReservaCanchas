@@ -111,6 +111,14 @@ XCode.Eventos = {
  * @type Object
  */
 XCode.Funciones = {
+    obtenerGananciaTotal: function (ganancias) {
+        var total = 0;
+        for (e = 0; e < ganancias.length; e++) {
+            var x = parseInt(ganancias[e].totalganado);
+            total = total + x;
+        }
+        return total;
+    },
     reemplazarMes : function() {
         var campos = $('td'); 
         if(campos) { 
@@ -126,22 +134,24 @@ XCode.Funciones = {
         var respuesta = JSON.parse(response);
         var ganancias = respuesta.reporteganancias;
         console.log(response);
-        console.log("entra a la primera");
 
         if (ganancias.length != 0) {
             XCode.Datos = [];
             
-            var inicio = ganancias[0].mes;
-            var totalGanado = 0;
-
-            for (i = 0; i < inicio - 1; i++) {
-                XCode.Datos.push(0);
-            }
-
-            for (e = 0; e < ganancias.length; e++) {
-                XCode.Datos.push(ganancias[e].totalganado);
-                var x = parseInt(ganancias[e].totalganado);
-                totalGanado = totalGanado + x;
+            var totalGanado = XCode.Funciones.obtenerGananciaTotal(ganancias);
+         
+            var pos = 0;
+            var max = ganancias.length;
+            for(t = 0;t < 12;t++) {
+                var nummes = ganancias[pos].mes;
+                if(nummes == (t + 1)) {
+                    XCode.Datos[t] = ganancias[pos].totalganado;
+                    if(pos < (max - 1)) {
+                        pos++;
+                    } 
+                } else {
+                    XCode.Datos[t] = 0;
+                }
             }
             
             XCode.ConjuntoDatosGrafico.data = XCode.Datos;
