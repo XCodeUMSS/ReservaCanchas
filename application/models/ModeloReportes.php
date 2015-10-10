@@ -22,13 +22,13 @@ order by EXTRACT(MONTH FROM "Fecha")');
     
     public function obtenerGestionesRecibo() {
         $consulta = $this->db->query('SELECT DISTINCT EXTRACT(YEAR FROM "Fecha") as gestion
-FROM "Recibo" order by EXTRACT(YEAR FROM "Fecha") asc');
+FROM "Recibo" order by EXTRACT(YEAR FROM "Fecha") desc');
         return $consulta->result();
     }
     
     public function obtenerGestiones() {
         $consulta = $this->db->query('SELECT DISTINCT EXTRACT(YEAR FROM "Fecha") as gestion
-FROM "Reserva" order by EXTRACT(YEAR FROM "Fecha") asc');
+FROM "Reserva" order by EXTRACT(YEAR FROM "Fecha") desc');
         return $consulta->result();
     }
     
